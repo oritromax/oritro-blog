@@ -9,7 +9,8 @@ const blogCollection = defineCollection({
     updatedDate: z.date().optional(),
     author: z.string().default('Anonymous'),
     image: z.string().optional(),
-    tags: z.array(z.string()).optional()
+    tags: z.array(z.string()).optional(),
+    category: z.string().optional().default('Uncategorized')
   })
 });
 
