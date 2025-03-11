@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const allPosts = await getCollection('blog');
+const categories = [...new Set(allPosts.map(post => post.data.category || 'Uncategorized'))];
+
+// Count the number of posts for each category
+const categoryCounts = categories.map(category => {
+  const count = allPosts.filter(post => post.data.category === category).length;
+  return { category, count };
+}).sort((a, b) => b.count - a.count);
+---
+
+<Layout title="All Categories">
+  <div class="max-w-3xl mx-auto py-8 px-4">
+    <h1 class="text-4xl font-bold mb-8">All Categories</h1>
+    
+    <ul class="space-y-4">
+      {categoryCounts.map(({ category, count }) => (
+        <li>
+          <a 
+            href={`/category/${category.toLowerCase()}`}
+            class="flex justify-between items-center p-4 border rounded-lg hover:bg-gray-50 transition"
+          >
+            <span class="text-xl font-medium">{category}</span>
+            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+              {count} post{count === 1 ? '' : 's'}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
