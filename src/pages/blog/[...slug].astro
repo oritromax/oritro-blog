@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+// Generate paths for all blog posts
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }));
+}
+
+// Get the entry directly from the prop
+const { entry } = Astro.props;
+
+// Render the content
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <div class="max-w-3xl mx-auto py-8 px-4">
+    <article class="prose lg:prose-xl max-w-none">
+      <h1>{entry.data.title}</h1>
+      
+      <div class="flex items-center space-x-2 mb-8 text-gray-600">
+        <time datetime={entry.data.pubDate.toISOString()}>
+          {new Date(entry.data.pubDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </time>
+        {entry.data.author && (
+          <>
+            <span>•</span>
+            <span>by {entry.data.author}</span>
+          </>
+        )}
+      </div>
+      
+      {entry.data.image && (
+        <img 
+          src={entry.data.image} 
+          alt={entry.data.title}
+          class="rounded-lg mb-8 w-full h-auto"
+        />
+      )}
+      
+      <Content />
+      
+      {entry.data.tags && (
+        <div class="mt-8 flex flex-wrap gap-2">
+          {entry.data.tags.map(tag => (
+            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </article>
+  </div>
+</Layout>
