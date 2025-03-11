@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const allPosts = await getCollection('blog');
+const tags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+
+// Count the number of posts for each tag
+const tagCounts = tags.map(tag => {
+  const count = allPosts.filter(post => post.data.tags?.includes(tag)).length;
+  return { tag, count };
+}).sort((a, b) => b.count - a.count);
+---
+
+<Layout title="All Tags">
+  <div class="max-w-3xl mx-auto py-8 px-4">
+    <h1 class="text-4xl font-bold mb-8">All Tags</h1>
+    
+    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {tagCounts.map(({ tag, count }) => (
+        <li>
+          <a 
+            href={`/tag/${tag}`}
+            class="flex justify-between items-center p-4 border rounded-lg hover:bg-gray-50 transition"
+          >
+            <span class="font-medium">{tag}</span>
+            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-sm">
+              {count}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
