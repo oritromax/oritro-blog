@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  
+  // Get all unique categories (and convert to lowercase for URL purposes)
+  const uniqueCategories = [...new Set(allPosts.map(post => 
+    post.data.category || 'uncategorized'
+  ))];
+  
+  // Create a path for each category
+  return uniqueCategories.map(category => {
+    // Filter posts that have this category
+    const filteredPosts = allPosts.filter(post => 
+      (post.data.category || 'uncategorized').toLowerCase() === category.toLowerCase()
+    );
+    
+    return {
+      params: { category: category.toLowerCase() },
+      props: { 
+        posts: filteredPosts.sort(
+          (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+        ),
+        category 
+      }
+    };
+  });
+}
+
+const { posts, category } = Astro.props;
+---
+
+<Layout title={`Category: ${category}`}>
+  <div class="max-w-4xl mx-auto py-8 px-4">
+    <h1 class="text-4xl font-bold mb-2">Category: {category}</h1>
+    <p class="text-gray-600 mb-8">{posts.length} post{posts.length === 1 ? '' : 's'}</p>
+    
+    <div class="space-y-8">
+      {posts.map(post => (
+        <article class="border rounded-lg p-6 shadow-sm hover:shadow-md transition">
+          <h2 class="text-2xl font-bold">
+            <a href={`/blog/${post.slug}`} class="hover:text-blue-600">
+              {post.data.title}
+            </a>
+          </h2>
+          <div class="flex items-center mt-2 text-gray-600">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+            {post.data.author && (
+              <>
+                <span class="mx-2">•</span>
+                <span>by {post.data.author}</span>
+              </>
+            )}
+          </div>
+          {post.data.description && (
+            <p class="mt-4">{post.data.description}</p>
+          )}
+          {post.data.tags && (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {post.data.tags.map(tag => (
+                <a 
+                  href={`/tag/${tag}`}
+                  class="px-2 py-1 bg-gray-100 text-sm rounded-md hover:bg-gray-200"
+                >
+                  {tag}
+                </a>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>

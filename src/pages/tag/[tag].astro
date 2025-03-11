@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  
+  // Get all unique tags
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+  
+  // Create a path for each tag
+  return uniqueTags.map(tag => {
+    // Filter posts that have this tag
+    const filteredPosts = allPosts.filter(post => 
+      post.data.tags?.includes(tag)
+    );
+    
+    return {
+      params: { tag },
+      props: { 
+        posts: filteredPosts.sort(
+          (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+        ),
+        tag 
+      }
+    };
+  });
+}
+
+const { posts, tag } = Astro.props;
+---
+
+<Layout title={`Posts tagged with ${tag}`}>
+  <div class="max-w-4xl mx-auto py-8 px-4">
+    <h1 class="text-4xl font-bold mb-2">Tag: {tag}</h1>
+    <p class="text-gray-600 mb-8">{posts.length} post{posts.length === 1 ? '' : 's'}</p>
+    
+    <div class="space-y-8">
+      {posts.map(post => (
+        <article class="border rounded-lg p-6 shadow-sm hover:shadow-md transition">
+          <h2 class="text-2xl font-bold">
+            <a href={`/blog/${post.slug}`} class="hover:text-blue-600">
+              {post.data.title}
+            </a>
+          </h2>
+          <div class="flex items-center mt-2 text-gray-600">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+            {post.data.author && (
+              <>
+                <span class="mx-2">•</span>
+                <span>by {post.data.author}</span>
+              </>
+            )}
+            {post.data.category && (
+              <>
+                <span class="mx-2">•</span>
+                <a href={`/category/${post.data.category.toLowerCase()}`} class="text-blue-600 hover:underline">
+                  {post.data.category}
+                </a>
+              </>
+            )}
+          </div>
+          {post.data.description && (
+            <p class="mt-4">{post.data.description}</p>
+          )}
+          {post.data.tags && (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {post.data.tags.map(tagName => (
+                <a 
+                  href={`/tag/${tagName}`}
+                  class={`px-2 py-1 text-sm rounded-md ${
+                    tagName === tag 
+                      ? 'bg-blue-100 text-blue-800' 
+                      : 'bg-gray-100 hover:bg-gray-200'
+                  }`}
+                >
+                  {tagName}
+                </a>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>
