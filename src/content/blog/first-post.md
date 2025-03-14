@@ -1,9 +1,12 @@
 ---
 title: 'My First Blog Post'
 description: 'This is my first blog post using Astro and markdown'
-pubDate: 2023-07-01
+date: 2023-07-01
 author: 'Your Name'
 tags: ['astro', 'blogging', 'markdown']
+categories: 
+    - blog
+    - test
 ---
 
 # Hello, Astro!
