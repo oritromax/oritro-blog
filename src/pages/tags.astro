@@ -1,35 +1,71 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import TimelinePost from '../components/TimelinePost.astro';
 
-const allPosts = await getCollection('blog');
-const tags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+  
+  return uniqueTags.map(tag => {
 
-// Count the number of posts for each tag
-const tagCounts = tags.map(tag => {
-  const count = allPosts.filter(post => post.data.tags?.includes(tag)).length;
-  return { tag, count };
-}).sort((a, b) => b.count - a.count);
+    const filteredPosts = allPosts.filter(post => 
+      post.data.tags?.includes(tag)
+    );
+    
+    return {
+      params: { tag: encodeURIComponent(tag) },
+      props: { 
+        posts: filteredPosts.sort(
+          (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+        ),
+        tag 
+      }
+    };
+  });
+}
+
+const { posts, tag } = Astro.props;
 ---
 
-<Layout title="All Tags">
-  <div class="max-w-3xl mx-auto py-8 px-4">
-    <h1 class="text-4xl font-bold mb-8">All Tags</h1>
+<Layout title={`Posts tagged with ${tag}`}>
+  <div class="max-w-4xl mx-auto py-8 px-4">
+    <div class="mb-8">
+      <div class="flex items-center gap-4 mb-4">
+        <a 
+          href="/" 
+          class="text-emerald-400 hover:text-emerald-300 transition-colors inline-flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m15 18-6-6 6-6"/></svg>
+          Home
+        </a>
+        <span class="text-gray-500">/</span>
+        <a 
+          href="/tags" 
+          class="text-emerald-400 hover:text-emerald-300 transition-colors inline-flex items-center gap-2"
+        >
+          All Tags
+        </a>
+      </div>
+      <h1 class="text-3xl font-bold flex items-center gap-2">
+        <span class="px-3 py-1 bg-emerald-400/10 text-emerald-400 rounded-full text-sm font-medium">#{tag}</span>
+        <span class="text-white">({posts.length})</span>
+      </h1>
+    </div>
     
-    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
-      {tagCounts.map(({ tag, count }) => (
-        <li>
-          <a 
-            href={`/tag/${tag}`}
-            class="flex justify-between items-center p-4 border rounded-lg hover:bg-gray-50 transition"
-          >
-            <span class="font-medium">{tag}</span>
-            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-sm">
-              {count}
-            </span>
-          </a>
-        </li>
+    <div class="space-y-8">
+      {posts.map(post => (
+        <TimelinePost post={post} />
       ))}
-    </ul>
+    </div>
+    
+    {posts.length === 0 && (
+      <div class="text-center py-12">
+        <div class="text-6xl mb-4">😢</div>
+        <h3 class="text-2xl font-bold mb-2">No posts found</h3>
+        <p class="text-gray-400">There are no posts with this tag yet.</p>
+      </div>
+    )}
   </div>
 </Layout>

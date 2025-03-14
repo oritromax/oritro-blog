@@ -1,6 +1,8 @@
 ---
+// src/pages/tag/[tag].astro
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import TimelinePost from '../../components/TimelinePost.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -19,7 +21,7 @@ export async function getStaticPaths() {
       params: { tag },
       props: { 
         posts: filteredPosts.sort(
-          (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+          (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
         ),
         tag 
       }
@@ -32,61 +34,41 @@ const { posts, tag } = Astro.props;
 
 <Layout title={`Posts tagged with ${tag}`}>
   <div class="max-w-4xl mx-auto py-8 px-4">
-    <h1 class="text-4xl font-bold mb-2">Tag: {tag}</h1>
-    <p class="text-gray-600 mb-8">{posts.length} post{posts.length === 1 ? '' : 's'}</p>
+    <div class="mb-8">
+      <div class="flex items-center gap-4 mb-4">
+        <a 
+          href="/" 
+          class="text-emerald-400 hover:text-emerald-300 transition-colors inline-flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m15 18-6-6 6-6"/></svg>
+          Home
+        </a>
+        <span class="text-gray-500">/</span>
+        <a 
+          href="/tags" 
+          class="text-emerald-400 hover:text-emerald-300 transition-colors inline-flex items-center gap-2"
+        >
+          All Tags
+        </a>
+      </div>
+      <h1 class="text-3xl font-bold flex items-center gap-2">
+        <span class="px-3 py-1 bg-emerald-400/10 text-emerald-400 rounded-full text-sm font-medium">#{tag}</span>
+        <span class="text-white">({posts.length})</span>
+      </h1>
+    </div>
     
     <div class="space-y-8">
       {posts.map(post => (
-        <article class="border rounded-lg p-6 shadow-sm hover:shadow-md transition">
-          <h2 class="text-2xl font-bold">
-            <a href={`/blog/${post.slug}`} class="hover:text-blue-600">
-              {post.data.title}
-            </a>
-          </h2>
-          <div class="flex items-center mt-2 text-gray-600">
-            <time datetime={post.data.pubDate.toISOString()}>
-              {new Date(post.data.pubDate).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-            {post.data.author && (
-              <>
-                <span class="mx-2">•</span>
-                <span>by {post.data.author}</span>
-              </>
-            )}
-            {post.data.category && (
-              <>
-                <span class="mx-2">•</span>
-                <a href={`/category/${post.data.category.toLowerCase()}`} class="text-blue-600 hover:underline">
-                  {post.data.category}
-                </a>
-              </>
-            )}
-          </div>
-          {post.data.description && (
-            <p class="mt-4">{post.data.description}</p>
-          )}
-          {post.data.tags && (
-            <div class="mt-4 flex flex-wrap gap-2">
-              {post.data.tags.map(tagName => (
-                <a 
-                  href={`/tag/${tagName}`}
-                  class={`px-2 py-1 text-sm rounded-md ${
-                    tagName === tag 
-                      ? 'bg-blue-100 text-blue-800' 
-                      : 'bg-gray-100 hover:bg-gray-200'
-                  }`}
-                >
-                  {tagName}
-                </a>
-              ))}
-            </div>
-          )}
-        </article>
+        <TimelinePost post={post} />
       ))}
     </div>
+    
+    {posts.length === 0 && (
+      <div class="text-center py-12">
+        <div class="text-6xl mb-4">😢</div>
+        <h3 class="text-2xl font-bold mb-2">No posts found</h3>
+        <p class="text-gray-400">There are no posts with this tag yet.</p>
+      </div>
+    )}
   </div>
 </Layout>
