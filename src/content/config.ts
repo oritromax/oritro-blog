@@ -4,13 +4,14 @@ const blogCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    description: z.string().optional(),
-    pubDate: z.date(),
-    updatedDate: z.date().optional(),
-    author: z.string().default('Anonymous'),
-    image: z.string().optional(),
+    author: z.string().default('Oritro Ahmed'),
+    type: z.string().default('post'),
+    date: z.date(),
+    url: z.string().optional(),
+    featured_image: z.string().optional(),
+    categories: z.array(z.string()).optional(),
     tags: z.array(z.string()).optional(),
-    category: z.string().optional().default('Uncategorized')
+    description: z.string().optional()
   })
 });
 
