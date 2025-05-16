@@ -6,7 +6,7 @@ date: 2016-09-24T09:32:00+00:00
 url: /679/urban-terror-no-sound-in-macos-sierra-10-12/
 featured_image: /wp-content/uploads/2016/09/Screen_Shot_2016-09-24_at_3_18_20_PM.png
 categories:
-  - Codebox
+  - codebox
   - Urban Terror
 tags:
   - MacOS Sierra

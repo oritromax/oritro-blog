@@ -6,8 +6,8 @@ date: 2016-11-12T16:46:07+00:00
 url: /694/nginx-config-wordpress/
 featured_image: /wp-content/uploads/2016/11/iMeZKzw.png
 categories:
-  - Codebox
-  - Wordpress
+  - codebox
+  - wordpress
 tags:
   - cache
   - Config

@@ -6,7 +6,7 @@ date: 2014-09-10T20:39:39+00:00
 url: /468/share-file-two-ubuntu-via-wifi/
 featured_image: /wp-content/uploads/http://res.cloudinary.com/clrshq/image/upload/v1410381332/Selection_079_urcxvr.png
 categories:
-  - Project Line
+  - selfhost
   - জাতীর উদ্দেশ্যে
 tags:
   - sharing

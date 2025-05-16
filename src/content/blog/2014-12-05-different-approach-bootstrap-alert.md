@@ -6,8 +6,7 @@ date: 2014-12-05T09:09:37+00:00
 url: /486/different-approach-bootstrap-alert/
 featured_image: /wp-content/uploads/2014/12/bootsnip.png
 categories:
-  - Code Twist
-  - Codebox
+  - codebox
 tags:
   - bootstrap
   - CSS3

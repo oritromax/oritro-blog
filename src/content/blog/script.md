@@ -5,10 +5,11 @@ tags:
     - plex
     - ubuntu
     - python
-    - selfhosted
+    - selfhosting
 categories: 
     - homelab 
     - ubuntu
+    - selfhost
 ---
 
 # Tilde ( ~ ) in ubuntu folder name and solution

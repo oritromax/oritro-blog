@@ -5,7 +5,7 @@ type: post
 date: 2014-01-10T23:52:27+00:00
 url: /385/youtube-responsive-video-এমবেড-শর্টকোড/
 categories:
-  - Codebox
+  - codebox
 tags:
   - shortcode
   - wordpress

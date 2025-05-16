@@ -8,6 +8,7 @@ tags:
 categories: 
   - homelab
   - plex
+  - selfhost
 type: post
 url: /2001/plex-opening-in-wrong-ghost-phantom-window
 ---

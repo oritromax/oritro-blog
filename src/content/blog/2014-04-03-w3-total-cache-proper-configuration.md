@@ -5,7 +5,7 @@ type: post
 date: 2014-04-03T11:20:03+00:00
 url: /429/w3-total-cache-proper-configuration/
 categories:
-  - Codebox
+  - codebox
 tags:
   - cache
   - Optimization

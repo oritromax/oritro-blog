@@ -6,7 +6,6 @@ date: 2015-09-08T19:48:25+00:00
 url: /596/useless-stupid-pointless-smartphone-apps/
 featured_image: /wp-content/uploads/2015/09/taxiholdem.jpg
 categories:
-  - Uncategorized
   - জাতীর উদ্দেশ্যে
 tags:
   - অ্যান্ড্রয়েড
