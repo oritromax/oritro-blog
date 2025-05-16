@@ -12,7 +12,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
 
 const allCategories = [...new Set(allPosts.flatMap(post => post.data.categories || ['Uncategorized']))];
 
-const postsPerPage = 5;
+const postsPerPage = 10;
 const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 const currentPage = 1; 
 const currentPosts = sortedPosts.slice(0, postsPerPage);
