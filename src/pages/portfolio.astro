@@ -60,16 +60,35 @@ const openSourceProjects = [
   <div class="max-w-4xl mx-auto p-4 lg:p-8">
     <!-- About Section -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">About Me</h2>
-      <div class="relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/20 rounded-xl -rotate-1"></div>
-        <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-        <div class="relative bg-gray-800/50 p-6 rounded-xl">
-          <p class="text-gray-300 leading-relaxed">
-            I'm a Software Engineer and Engineering Manager with over 13 years of experience in building scalable web applications. 
-            I specialize in developing robust backend systems and leading engineering teams to deliver high-quality software solutions. 
-            My passion lies in solving complex technical challenges and mentoring other developers.
-          </p>
+      <h2 class="text-2xl font-bold mb-8">About Me</h2>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Photo Column -->
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-2xl -rotate-2"></div>
+          <div class="absolute inset-0 border-2 border-white/10 rounded-2xl rotate-2"></div>
+          <img 
+            src="/portfolio-photo.jpg" 
+            alt="Nidal Siddique Oritro"
+            class="relative w-full h-full object-cover object-center rounded-2xl"
+          />
+        </div>
+        <!-- About Text Column -->
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/20 rounded-xl -rotate-1"></div>
+          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
+          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full flex items-center">
+            <div>
+              <p class="text-gray-300 leading-relaxed mb-4">
+                I'm a Software Engineer and Engineering Manager with over 13 years of experience in building scalable web applications.
+              </p>
+              <p class="text-gray-300 leading-relaxed mb-4">
+                I specialize in developing robust backend systems and leading engineering teams to deliver high-quality software solutions.
+              </p>
+              <p class="text-gray-300 leading-relaxed">
+                My passion lies in solving complex technical challenges and mentoring other developers.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
