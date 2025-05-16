@@ -9,7 +9,7 @@ export async function getStaticPaths() {
     (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
   );
   
-  const postsPerPage = 5;
+  const postsPerPage = 10;
   const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
   
   return Array.from({ length: totalPages }).map((_, i) => {
