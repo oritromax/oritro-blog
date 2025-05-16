@@ -101,6 +101,8 @@ const { title } = Astro.props;
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
               <a href="/portfolio" class={Astro.url.pathname === '/portfolio' ? 'text-white' : 'text-gray-400 hover:text-white transition-colors'}>Portfolio</a>
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
+              <a href="/consultation" class={Astro.url.pathname === '/consultation' ? 'text-white' : 'text-gray-400 hover:text-white transition-colors'}>Consultation</a>
+              <div class="w-[2px] h-4 bg-emerald-400/30"></div>
               <a href="/contact" class={Astro.url.pathname === '/contact' ? 'text-white' : 'text-gray-400 hover:text-white transition-colors'}>Contact</a>
             </div>
 
@@ -109,6 +111,7 @@ const { title } = Astro.props;
               <div class="flex flex-col items-center justify-center h-full space-y-8">
                 <a href="/" class="text-2xl font-medium text-white hover:text-emerald-400 transition-colors">Home</a>
                 <a href="/portfolio" class="text-2xl text-gray-400 hover:text-white transition-colors">Portfolio</a>
+                <a href="/consultation" class="text-2xl text-gray-400 hover:text-white transition-colors">Consultation</a>
                 <a href="/contact" class="text-2xl text-gray-400 hover:text-white transition-colors">Contact</a>
                 <a 
                   href="/contact"
