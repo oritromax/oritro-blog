@@ -4,7 +4,7 @@ author: Oritro Ahmed
 type: post
 date: 2015-09-08T19:48:25+00:00
 url: /596/useless-stupid-pointless-smartphone-apps/
-featured_image: /wp-content/uploads/2015/09/taxiholdem.jpg
+
 categories:
   - জাতীর উদ্দেশ্যে
 tags:

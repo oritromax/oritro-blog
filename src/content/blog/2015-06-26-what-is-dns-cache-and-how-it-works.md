@@ -4,7 +4,7 @@ author: Oritro Ahmed
 type: post
 date: 2015-06-25T22:09:55+00:00
 url: /560/what-is-dns-cache-and-how-it-works/
-featured_image: /wp-content/uploads/2015/06/DSC_4842-1-copy.jpg
+
 categories:
   - codebox
   - জাতীর উদ্দেশ্যে

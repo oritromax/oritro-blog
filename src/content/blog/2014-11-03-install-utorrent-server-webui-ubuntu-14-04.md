@@ -4,7 +4,6 @@ author: Oritro Ahmed
 type: post
 date: 2014-11-02T23:52:15+00:00
 url: /479/install-utorrent-server-webui-ubuntu-14-04/
-featured_image: /wp-content/uploads/2014/11/Selection_137.png
 categories:
   - selfhost
   - homelab

@@ -4,7 +4,7 @@ author: Oritro Ahmed
 type: post
 date: 2015-01-22T19:28:31+00:00
 url: /506/dont-make-website-free-cheap-stop-asking/
-featured_image: /wp-content/uploads/2015/01/Free.jpg
+
 categories:
   - Project Line
 tags:

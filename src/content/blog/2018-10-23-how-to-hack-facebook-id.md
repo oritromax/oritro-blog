@@ -4,7 +4,7 @@ author: Oritro Ahmed
 type: post
 date: 2018-10-23T16:45:24+00:00
 url: /815/how-to-hack-facebook-id/
-featured_image: /wp-content/uploads/2018/10/maxresdefault-3.jpg
+
 categories:
   - জাতীর উদ্দেশ্যে
 tags:

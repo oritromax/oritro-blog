@@ -4,7 +4,7 @@ author: Oritro Ahmed
 type: post
 date: 2016-02-15T22:53:28+00:00
 url: /660/are-aliens-real/
-featured_image: /wp-content/uploads/2016/02/maxresdefault.jpg
+
 categories:
   - Alien
 tags:
