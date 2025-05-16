@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    title: 'Project Management System',
+    description: 'A comprehensive project management solution built with React and Node.js, featuring real-time updates and team collaboration tools.',
+    tags: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
+    image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg'
+  },
+  {
+    title: 'E-commerce Platform',
+    description: 'Full-featured e-commerce platform with inventory management, payment processing, and analytics dashboard.',
+    tags: ['Vue.js', 'Laravel', 'MySQL', 'Stripe'],
+    image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg'
+  },
+  {
+    title: 'Healthcare Management System',
+    description: 'Electronic health records system with appointment scheduling and patient portal.',
+    tags: ['Angular', 'Spring Boot', 'PostgreSQL'],
+    image: 'https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg'
+  }
+];
+---
+
+<Layout title="Portfolio - Nidal Siddique Oritro">
+  <div class="p-4 lg:p-8">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-4">Portfolio</h1>
+      <p class="text-gray-400">A selection of my recent work and projects.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map(project => (
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-1"></div>
+          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
+          <div class="relative bg-gray-800/50 rounded-xl overflow-hidden">
+            <div class="h-48 overflow-hidden">
+              <img 
+                src={project.image} 
+                alt={project.title}
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-white group-hover:text-emerald-400 transition-colors">
+                {project.title}
+              </h3>
+              <p class="text-gray-400 mb-4 text-sm">
+                {project.description}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {project.tags.map(tag => (
+                  <span class="px-2 py-1 bg-gray-700 text-gray-300 rounded-full text-xs">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

@@ -56,9 +56,12 @@ const { title } = Astro.props;
           <div class="relative mt-6">
             <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
             <div class="absolute inset-0 border-2 border-white/10 rounded-xl rotate-1"></div>
-            <button class="relative w-full py-3 px-6 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02]">
+            <a 
+              href="/portfolio"
+              class="relative w-full py-3 px-6 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] block text-center"
+            >
               View Portfolio
-            </button>
+            </a>
           </div>
         </div>
 
@@ -96,7 +99,15 @@ const { title } = Astro.props;
             <div class="hidden lg:flex items-center gap-8">
               <a href="/" class="font-medium text-white">Home</a>
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a href="/portfolio" class="text-gray-400 hover:text-white transition-colors">Portfolio</a>
+              <a 
+                href="/portfolio" 
+                class={Astro.url.pathname === '/portfolio' 
+                  ? 'text-white' 
+                  : 'text-gray-400 hover:text-white transition-colors'
+                }
+              >
+                Portfolio
+              </a>
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
               <a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
             </div>
