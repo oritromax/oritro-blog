@@ -52,7 +52,7 @@ const year = post.data.date.getFullYear();
           {post.data.tags.map((tag: string) => (
             <a 
               href={`/tag/${encodeURIComponent(tag)}`}
-              class="px-2 py-0.5 bg-gray-800 text-gray-400 rounded-full text-xs hover:bg-gray-700 transition-colors"
+              class="px-2 py-0.5 bg-gray-800 text-gray-400 rounded-sm text-xs hover:bg-gray-700 transition-colors"
             >
               {tag}
             </a>

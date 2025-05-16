@@ -62,23 +62,25 @@ const formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
         )}
       </div>
 
-      <div class="relative h-[300px] lg:h-[400px] rounded-2xl overflow-hidden mb-8">
-        <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 -rotate-2"></div>
-        <div class="absolute inset-0 border-2 border-white/10 rotate-2"></div>
+
         {entry.data.featured_image ? (
+        <div class="relative h-[300px] lg:h-[400px] rounded-2xl overflow-hidden mb-8">
+          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 -rotate-2"></div>
+          <div class="absolute inset-0 border-2 border-white/10 rotate-2"></div>
           <img
             src={entry.data.featured_image}
             alt={entry.data.title}
             class="w-full h-full object-cover"
           />
+        </div>
         ) : (
-          <img
-            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80"
-            alt={entry.data.title}
-            class="w-full h-full object-cover"
-          />
+          // <img
+          //   src="#"
+          //   alt={entry.data.title}
+          //   class="w-full h-full object-cover"
+          // />
+          <span></span>
         )}
-      </div>
     </header>
 
     <!-- Alert Boxes Example -->
