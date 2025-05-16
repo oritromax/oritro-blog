@@ -1,0 +1,101 @@
+---
+---
+
+<section id="about" class="section">
+  <div class="about-container">
+    <div class="about-content">
+      <h2>About Me</h2>
+      <p>I'm a passionate developer with over 5 years of experience building modern, responsive websites and applications. My journey in web development started with a curiosity about how things work on the internet, and has evolved into a career focused on creating intuitive digital experiences.</p>
+      <p>I specialize in frontend development, with expertise in HTML, CSS, JavaScript, and frameworks like React and Vue. I'm also comfortable working with backend technologies when needed, particularly Node.js and Express.</p>
+      <div class="skills">
+        <div class="skill-category">
+          <h3>Development</h3>
+          <ul>
+            <li>HTML & CSS</li>
+            <li>JavaScript (ES6+)</li>
+            <li>TypeScript</li>
+            <li>React</li>
+            <li>Vue</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Design</h3>
+          <ul>
+            <li>Responsive Design</li>
+            <li>UI/UX Principles</li>
+            <li>Design Systems</li>
+            <li>Figma</li>
+            <li>Accessibility</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-container {
+    display: flex;
+    gap: var(--spacing-5);
+  }
+
+  .about-content {
+    max-width: 800px;
+  }
+
+  h2 {
+    position: relative;
+    display: inline-block;
+    margin-bottom: var(--spacing-4);
+  }
+
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-accent);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-2);
+    color: var(--color-accent);
+  }
+
+  .skills {
+    display: flex;
+    gap: var(--spacing-5);
+    margin-top: var(--spacing-4);
+  }
+
+  .skill-category {
+    flex: 1;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    margin-bottom: var(--spacing-1);
+    position: relative;
+    padding-left: var(--spacing-3);
+  }
+
+  li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .skills {
+      flex-direction: column;
+      gap: var(--spacing-3);
+    }
+  }
+</style>
