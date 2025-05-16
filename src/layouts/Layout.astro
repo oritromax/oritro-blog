@@ -99,17 +99,9 @@ const { title } = Astro.props;
             <div class="hidden lg:flex items-center gap-8">
               <a href="/" class="font-medium text-white">Home</a>
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a 
-                href="/portfolio" 
-                class={Astro.url.pathname === '/portfolio' 
-                  ? 'text-white' 
-                  : 'text-gray-400 hover:text-white transition-colors'
-                }
-              >
-                Portfolio
-              </a>
+              <a href="/portfolio" class={Astro.url.pathname === '/portfolio' ? 'text-white' : 'text-gray-400 hover:text-white transition-colors'}>Portfolio</a>
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+              <a href="/contact" class={Astro.url.pathname === '/contact' ? 'text-white' : 'text-gray-400 hover:text-white transition-colors'}>Contact</a>
             </div>
 
             <!-- Mobile menu overlay -->
@@ -118,9 +110,12 @@ const { title } = Astro.props;
                 <a href="/" class="text-2xl font-medium text-white hover:text-emerald-400 transition-colors">Home</a>
                 <a href="/portfolio" class="text-2xl text-gray-400 hover:text-white transition-colors">Portfolio</a>
                 <a href="/contact" class="text-2xl text-gray-400 hover:text-white transition-colors">Contact</a>
-                <button class="mt-4 py-3 px-8 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02]">
-                  Hire Me!
-                </button>
+                <a 
+                  href="/contact"
+                  class="mt-4 py-3 px-8 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] text-center"
+                >
+                  Consult Me
+                </a>
               </div>
             </div>
 
@@ -128,9 +123,12 @@ const { title } = Astro.props;
             <div class="relative hidden lg:block">
               <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
               <div class="absolute inset-0 border-2 border-white/10 rounded-xl rotate-1"></div>
-              <button class="relative py-3 px-8 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02]">
-                Hire Me!
-              </button>
+              <a
+                href="/contact"
+                class="relative py-3 px-8 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] inline-block"
+              >
+                Consult Me
+              </a>
             </div>
           </div>
         </nav>
