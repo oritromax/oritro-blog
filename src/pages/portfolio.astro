@@ -1,66 +1,162 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const projects = [
+const experience = [
   {
-    title: 'Project Management System',
-    description: 'A comprehensive project management solution built with React and Node.js, featuring real-time updates and team collaboration tools.',
-    tags: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
-    image: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg'
+    period: '2020 - Present',
+    role: 'Senior Software Engineer / Engineering Manager',
+    company: 'Fintech Company',
+    description: 'Leading a team of 12 engineers, architecting scalable financial solutions, and implementing CI/CD pipelines.'
   },
   {
-    title: 'E-commerce Platform',
-    description: 'Full-featured e-commerce platform with inventory management, payment processing, and analytics dashboard.',
-    tags: ['Vue.js', 'Laravel', 'MySQL', 'Stripe'],
-    image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg'
+    period: '2017 - 2020',
+    role: 'Software Engineer',
+    company: 'Healthcare Tech',
+    description: 'Developed patient management systems and integrated with various healthcare APIs.'
   },
   {
-    title: 'Healthcare Management System',
-    description: 'Electronic health records system with appointment scheduling and patient portal.',
-    tags: ['Angular', 'Spring Boot', 'PostgreSQL'],
-    image: 'https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg'
+    period: '2014 - 2017',
+    role: 'Full Stack Developer',
+    company: 'E-commerce Platform',
+    description: 'Built and maintained large-scale e-commerce applications using PHP and JavaScript.'
+  },
+  {
+    period: '2010 - 2014',
+    role: 'Web Developer',
+    company: 'Digital Agency',
+    description: 'Created custom websites and web applications for various clients.'
+  }
+];
+
+const openSourceProjects = [
+  {
+    title: 'Homelab Dashboard',
+    description: 'A modern dashboard for managing self-hosted services and monitoring system resources.',
+    tech: ['Go', 'React', 'Docker'],
+    stars: 245,
+    forks: 45,
+    link: 'https://github.com/username/homelab-dashboard'
+  },
+  {
+    title: 'DNS Cache Manager',
+    description: 'CLI tool for managing DNS cache with support for multiple providers.',
+    tech: ['Go', 'CLI'],
+    stars: 156,
+    forks: 23,
+    link: 'https://github.com/username/dns-cache-manager'
+  },
+  {
+    title: 'React Component Library',
+    description: 'A collection of reusable React components with Tailwind CSS.',
+    tech: ['React', 'TypeScript', 'Tailwind'],
+    stars: 189,
+    forks: 34,
+    link: 'https://github.com/username/react-components'
   }
 ];
 ---
 
 <Layout title="Portfolio - Nidal Siddique Oritro">
-  <div class="p-4 lg:p-8">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-4">Portfolio</h1>
-      <p class="text-gray-400">A selection of my recent work and projects.</p>
-    </div>
+  <div class="max-w-4xl mx-auto p-4 lg:p-8">
+    <!-- About Section -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">About Me</h2>
+      <div class="relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/20 rounded-xl -rotate-1"></div>
+        <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
+        <div class="relative bg-gray-800/50 p-6 rounded-xl">
+          <p class="text-gray-300 leading-relaxed">
+            I'm a Software Engineer and Engineering Manager with over 13 years of experience in building scalable web applications. 
+            I specialize in developing robust backend systems and leading engineering teams to deliver high-quality software solutions. 
+            My passion lies in solving complex technical challenges and mentoring other developers.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.map(project => (
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 rounded-xl overflow-hidden">
-            <div class="h-48 overflow-hidden">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2 text-white group-hover:text-emerald-400 transition-colors">
-                {project.title}
-              </h3>
-              <p class="text-gray-400 mb-4 text-sm">
-                {project.description}
-              </p>
-              <div class="flex flex-wrap gap-2">
-                {project.tags.map(tag => (
-                  <span class="px-2 py-1 bg-gray-700 text-gray-300 rounded-full text-xs">
-                    {tag}
-                  </span>
-                ))}
+    <!-- Experience Timeline -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Experience</h2>
+      <div class="relative">
+        <div class="absolute left-4 top-0 h-full w-0.5 bg-gray-800"></div>
+        {experience.map((job, index) => (
+          <div class="relative pl-12 pb-8">
+            <div class="absolute left-2 -translate-x-1/2 w-6 h-6 rounded-full border-4 border-gray-800 bg-emerald-400"></div>
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-0.5"></div>
+              <div class="absolute inset-0 border border-white/10 rounded-xl rotate-0.5"></div>
+              <div class="relative bg-gray-800/50 p-6 rounded-xl">
+                <span class="text-emerald-400 text-sm font-medium">{job.period}</span>
+                <h3 class="text-xl font-semibold mt-1">{job.role}</h3>
+                <p class="text-gray-400 text-sm mt-1">{job.company}</p>
+                <p class="text-gray-300 mt-3">{job.description}</p>
               </div>
             </div>
           </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Tech Stack</h2>
+      <div class="relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/20 rounded-xl -rotate-1"></div>
+        <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
+        <div class="relative bg-gray-800/50 p-6 rounded-xl">
+          <p class="text-gray-300 leading-relaxed">
+            My primary tech stack includes <span class="font-bold text-emerald-400">Go</span>, 
+            <span class="font-bold text-emerald-400">JavaScript/TypeScript</span>, and 
+            <span class="font-bold text-emerald-400">PHP</span> for backend development. 
+            For frontend, I work with <span class="font-bold text-emerald-400">React</span>, 
+            <span class="font-bold text-emerald-400">Vue</span>, and 
+            <span class="font-bold text-emerald-400">Tailwind CSS</span>. 
+            I have extensive experience with <span class="font-bold text-emerald-400">Docker</span>, 
+            <span class="font-bold text-emerald-400">Kubernetes</span>, and 
+            <span class="font-bold text-emerald-400">AWS</span> for deployment and infrastructure.
+          </p>
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
+
+    <!-- Open Source Projects -->
+    <section>
+      <h2 class="text-2xl font-bold mb-6">Open Source Projects</h2>
+      <div class="grid gap-6">
+        {openSourceProjects.map(project => (
+          <div class="group relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-1"></div>
+            <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
+            <a href={project.link} target="_blank" rel="noopener noreferrer" 
+              class="relative block bg-gray-800/50 rounded-xl p-6 hover:bg-gray-800/80 transition-colors"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-semibold group-hover:text-emerald-400 transition-colors">
+                  {project.title}
+                </h3>
+                <div class="flex items-center gap-4 text-gray-400">
+                  <span class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    {project.stars}
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M7 7 C7 7 7 5 9 3c2 -2 6 -2 8 0s2 4 0 6c-2 2 -4 1 -4 1"/><path d="M3 21c-2 -2 -2 -6 0 -8s4 -2 6 0s1 4 1 4"/><path d="M21 21c2 -2 2 -6 0 -8s-4 -2 -6 0s-1 4 -1 4"/></svg>
+                    {project.forks}
+                  </span>
+                </div>
+              </div>
+              <p class="text-gray-300 mb-4">{project.description}</p>
+              <div class="flex flex-wrap gap-2">
+                {project.tech.map(tech => (
+                  <span class="px-2 py-1 bg-gray-700 text-gray-300 rounded-full text-xs">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
   </div>
 </Layout>
