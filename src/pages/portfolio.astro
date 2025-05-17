@@ -3,55 +3,73 @@ import Layout from '../layouts/Layout.astro';
 
 const experience = [
   {
-    period: '2020 - Present',
-    role: 'Senior Software Engineer / Engineering Manager',
-    company: 'Fintech Company',
-    description: 'Leading a team of 12 engineers, architecting scalable financial solutions, and implementing CI/CD pipelines.'
+    period: 'Jan 2025 - Present',
+    role: 'Engineering Manager',
+    company: 'Cheq, A Cantaloupe Platform',
+    description: 'Leading some of best software minds to build highly scalable and extremely resilient software solutions serving millions of customers.'
   },
   {
-    period: '2017 - 2020',
-    role: 'Software Engineer',
-    company: 'Healthcare Tech',
-    description: 'Developed patient management systems and integrated with various healthcare APIs.'
+    period: 'Jan 2021 - Dec 2024',
+    role: 'Lead Software Engineer',
+    company: 'Montex Marketing LLC',
+    description: 'Lead a team of engineers to build and maintain CRM, eCommerce Logistics Solution for wide range of eCommerce verticals.'
   },
   {
-    period: '2014 - 2017',
-    role: 'Full Stack Developer',
-    company: 'E-commerce Platform',
-    description: 'Built and maintained large-scale e-commerce applications using PHP and JavaScript.'
+    period: 'Feb 2020 - Sep 2020',
+    role: 'Engineering Solution Consultant',
+    company: 'ResponseCRM',
+    description: 'Consulted and Actively perticipated in the development of 3D Secure Payment Gateway and PCI Compliance for ResponseCRMs 200K+ customers.'
   },
   {
-    period: '2010 - 2014',
-    role: 'Web Developer',
-    company: 'Digital Agency',
-    description: 'Created custom websites and web applications for various clients.'
+    period: 'March 2019 -  Feb 2020',
+    role: 'Senior Software Engineer',
+    company: 'MonsterAds',
+    description: 'Developed a custom CRM for affiliate marketing and lead generation with advanced reporting and analytics features.'
+  },
+  {
+    period: 'Dec 2015 - Dec 2018',
+    role: 'Head of Development Operation',
+    company: 'United States Transit Funding, Inc',
+    description: 'Lead the team to developed a neural network based solution for fleet optimization, cost management, market analysis and route optimization.'
+  },
+  {
+    period: 'Jan 2014 - Dec 2015',
+    role: 'Senior Software Engineer',
+    company: 'United States Transit Funding, Inc',
+    description: 'Developed fleet data integration and reporting systems for large scale fleet management.'
+  },
+  {
+    period: 'Feb 2013 - January 2014',
+    role: 'Junior Software Engineer',
+    company: 'United States Transit Funding, Inc',
+    description: 'Helped developed a large scale fleet tracking system with fuel management and route optimization.'
   }
 ];
 
 const openSourceProjects = [
   {
-    title: 'Homelab Dashboard',
-    description: 'A modern dashboard for managing self-hosted services and monitoring system resources.',
-    tech: ['Go', 'React', 'Docker'],
-    stars: 245,
-    forks: 45,
-    link: 'https://github.com/username/homelab-dashboard'
+    title: 'React Portfolio',
+    description: 'A modern react portfolio for those engineers who could not find time to build one.',
+    tech: ['React', 'Tailwind'],
+    stars: 13,
+    forks: 7,
+    link: 'https://github.com/oritromax/react-portfolio'
   },
   {
-    title: 'DNS Cache Manager',
-    description: 'CLI tool for managing DNS cache with support for multiple providers.',
-    tech: ['Go', 'CLI'],
-    stars: 156,
-    forks: 23,
-    link: 'https://github.com/username/dns-cache-manager'
+    title: 'Folder 2 Text',
+    description: 'A cli tool to turn your project into disgestable context for LLMs',
+    tech: ['NodeJS','Javascript', 'CLI'],
+    stars: 4,
+    forks: 2,
+    link: 'https://github.com/oritromax/folder2text'
   },
   {
-    title: 'React Component Library',
-    description: 'A collection of reusable React components with Tailwind CSS.',
-    tech: ['React', 'TypeScript', 'Tailwind'],
-    stars: 189,
-    forks: 34,
-    link: 'https://github.com/username/react-components'
+    title: 'Discord Antispam Bot',
+    description: 'A extremely low resource consuming discord bot to protect your server from spam and malicious users',
+    tech: ['Go', 'Discord'],
+    stars: 3,
+    forks: 1,
+    link: 'https://github.com/oritromax/antispam-bot'
   }
 ];
 ---
@@ -60,7 +78,7 @@ const openSourceProjects = [
   <div class="max-w-4xl mx-auto p-4 lg:p-8">
     <!-- About Section -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-8">About Me</h2>
+      <h2 class="text-2xl font-bold mb-8">Nidal Siddique Oritro</h2>
       <div class="grid lg:grid-cols-2 gap-8">
         <!-- Photo Column -->
         <div class="relative">
@@ -79,13 +97,13 @@ const openSourceProjects = [
           <div class="relative bg-gray-800/50 p-6 rounded-xl h-full flex items-center">
             <div>
               <p class="text-gray-300 leading-relaxed mb-4">
-                I'm a Software Engineer and Engineering Manager with over 13 years of experience in building scalable web applications.
+                 Senior Software Engineer with a focus on planning and defining projects. I have worked with companies all over the world to build highly scalable and maintainable system to serve millions of customers. I thrive on challenges and i especially enjoy a project that gives me the opportunity to learn new things. 
               </p>
               <p class="text-gray-300 leading-relaxed mb-4">
-                I specialize in developing robust backend systems and leading engineering teams to deliver high-quality software solutions.
+                I am specialized in managing small to medium-size development teams from project inception to complete delivery.
               </p>
               <p class="text-gray-300 leading-relaxed">
-                My passion lies in solving complex technical challenges and mentoring other developers.
+                On a personal level, i love DIY stuff. Own a 3D Printer, Building my own workshop. 
               </p>
             </div>
           </div>
@@ -107,19 +125,6 @@ const openSourceProjects = [
             </div>
             <h3 class="text-lg font-semibold mb-2">Transportation</h3>
             <p class="text-gray-400 text-sm">Fleet management and logistics optimization systems</p>
-          </div>
-        </div>
-
-        <!-- Healthcare -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Healthcare</h3>
-            <p class="text-gray-400 text-sm">Patient management and medical record systems</p>
           </div>
         </div>
 
@@ -145,7 +150,7 @@ const openSourceProjects = [
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Fintech</h3>
-            <p class="text-gray-400 text-sm">Payment processing and financial management</p>
+            <p class="text-gray-400 text-sm">Payment processing and financial management, Accounting Solutions</p>
           </div>
         </div>
 
@@ -162,31 +167,6 @@ const openSourceProjects = [
           </div>
         </div>
 
-        <!-- Real Estate -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Real Estate</h3>
-            <p class="text-gray-400 text-sm">Property management and listing platforms</p>
-          </div>
-        </div>
-
-        <!-- Manufacturing -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7-7H4a2 2 0 0 0-2 2v17Z"/><path d="M15 8V1"/><path d="M2 8h20"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Manufacturing</h3>
-            <p class="text-gray-400 text-sm">Inventory and production management</p>
-          </div>
-        </div>
 
         <!-- Retail -->
         <div class="group relative">
@@ -200,7 +180,21 @@ const openSourceProjects = [
             <p class="text-gray-400 text-sm">Point of sale and inventory systems</p>
           </div>
         </div>
+        <!-- CRM -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
+          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
+          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
+            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.5-2.5 4 2.5 4.5-2.5 4 2.5L23 5v13l-4 2-4-2-4 2-4-2-4 2-3-1.5V7Z"/><path d="M2 17v-3"/><path d="M19 17v-3"/></svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">CRM</h3>
+            <p class="text-gray-400 text-sm">Developing cutting edge CRM Solutions</p>
+          </div>
+        </div>
       </div>
+      </div>
+
     </section>
 
     <!-- Experience Timeline -->
