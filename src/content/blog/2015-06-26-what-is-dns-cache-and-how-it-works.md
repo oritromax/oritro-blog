@@ -28,7 +28,7 @@ tags:
 
 আপনারা যদি ওয়েব ডেভেলপমেন্ট এর সাথে সম্পৃক্ত থাকেন, তাহলে নতুন কোন ডোমেইন নিয়ে কাজ করার সময় নেম সার্ভার সেটিংস এ অনেক সময় এই জিনিসটা দেখে থাকবেন। TTL মানে হল, যখন আপনি প্রথমবারের মতো ডি এন এস রেকর্ড সেট করছেন, তার ঠিক কতো সময় পর পর অথোরেটেটিভ নেম সার্ভার রেকর্ডটা চেঞ্জ হয়েছে কিনা সেটা চেক করবে।<figure id="attachment_561" aria-describedby="caption-attachment-561" style="width: 560px" class="wp-caption alignnone">
 
-<img class="size-full wp-post-560 wp-image-561" src="http://ioritro.com/wp-content/uploads/2015/06/dnszoneedit12.jpg" alt="TTL - Time to live - DNS Cache" width="560" height="300" srcset="https://ioritro.com/wp-content/uploads/2015/06/dnszoneedit12.jpg 560w, https://ioritro.com/wp-content/uploads/2015/06/dnszoneedit12-300x161.jpg 300w" sizes="(max-width: 560px) 100vw, 560px" /> <figcaption id="caption-attachment-561" class="wp-caption-text">TTL &#8211; Time to live &#8211; DNS Cache</figcaption></figure> 
+<img class="size-full wp-post-560 wp-image-561" src="https://ioritro.com/static/2015/06/dnszoneedit12.jpg" alt="TTL - Time to live - DNS Cache" width="560" height="300" srcset="https://ioritro.com/static/2015/06/dnszoneedit12.jpg 560w, https://ioritro.com/static/2015/06/dnszoneedit12-300x161.jpg 300w" sizes="(max-width: 560px) 100vw, 560px" /> <figcaption id="caption-attachment-561" class="wp-caption-text">TTL &#8211; Time to live &#8211; DNS Cache</figcaption></figure> 
 
 এই প্রসেসটা আরেকটু জটিল ভাবে হয়। ধরুন আপনি TTL দিয়েছেন ৩৬০০। মানে হল ১ ঘণ্টা। আপনি প্রথম যখন সাইটে প্রবেশ করবেন, তখন অথরেটেটিভ নেম সার্ভার আপনার রিসলভার কে জানিয়েঃ
 
