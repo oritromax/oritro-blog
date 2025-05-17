@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -8,74 +8,156 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Blog and portfolio of Nidal Siddique Oritro - Software Engineer, Manager" />
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-gray-900 text-white">
     <div class="min-h-screen flex flex-col lg:flex-row">
       <!-- Left Sidebar -->
-      <div class="lg:w-[400px] border-b lg:border-b-0 lg:border-r border-gray-800 p-4 lg:p-8 flex flex-col">
+      <div
+        class="lg:w-[400px] border-b lg:border-b-0 lg:border-r border-gray-800 p-4 lg:p-8 flex flex-col"
+      >
         <div class="flex items-center gap-2 mb-4 lg:mb-8">
-          <div class="w-6 h-6 rounded-full border-2 border-white rotate-45"></div>
-          <span class="font-medium text-sm lg:text-base">NIDAL SIDDIQUE ORITRO</span>
+          <div class="w-6 h-6 rounded-full border-2 border-white rotate-45">
+          </div>
+          <span class="font-medium text-sm lg:text-base"
+            >NIDAL SIDDIQUE ORITRO</span
+          >
         </div>
-        
-        <div class="relative mb-4 lg:mb-8 aspect-square w-[200px] lg:w-[250px] mx-auto">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-2xl -rotate-2"></div>
-          <div class="absolute inset-0 border-2 border-white/10 rounded-2xl rotate-2"></div>
-          <img 
-            src="/blog-avatar-finalized.jpg" 
+
+        <div
+          class="relative mb-4 lg:mb-8 aspect-square w-[200px] lg:w-[250px] mx-auto"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-2xl -rotate-2"
+          >
+          </div>
+          <div
+            class="absolute inset-0 border-2 border-white/10 rounded-2xl rotate-2"
+          >
+          </div>
+          <img
+            src="/blog-avatar-finalized.jpg"
             alt="Nidal Siddique Oritro"
             class="relative w-full h-full object-cover object-center rounded-2xl"
           />
-          <div class="absolute bottom-3 right-3 w-3 h-3 bg-emerald-400 rounded-full">
-            <div class="absolute inset-0 bg-emerald-400 rounded-full animate-ping"></div>
+          <div
+            class="absolute bottom-3 right-3 w-3 h-3 bg-emerald-400 rounded-full"
+          >
+            <div
+              class="absolute inset-0 bg-emerald-400 rounded-full animate-ping"
+            >
+            </div>
           </div>
         </div>
-        
+
         <div class="mb-4 lg:mb-8 text-center lg:text-left">
-          <h1 class="text-xl lg:text-2xl font-bold mb-2 lg:mb-4">Software Engineer / Manager</h1>
+          <h1 class="text-xl lg:text-2xl font-bold mb-2 lg:mb-4">
+            Software Engineer / Manager
+          </h1>
           <p class="text-gray-400">
-            Software Engineer turned into Engineering Manager, helping teams to build better software and solve complex problems. I am passionate about building high-performing teams and creating a culture of continuous improvement.
+            Software Engineer turned into Engineering Manager, helping teams to
+            build better software and solve complex problems. I am passionate
+            about building high-performing teams and creating a culture of
+            continuous improvement.
           </p>
         </div>
 
         <div class="mb-4 lg:mb-8 text-center lg:text-left">
           <h2 class="text-lg font-semibold mb-2 lg:mb-4">Who Am i?</h2>
           <p class="text-gray-400 text-sm">
-            I started writing code as a profession early 2013 and i never stopped. My 13+ years of industry experience is helping me bring structure and value to my team. My 2025 goal is to build digital automation that helps team work more effortlessly. <br><br>
+            I started writing code as a profession early 2013 and i never
+            stopped. My 13+ years of industry experience is helping me bring
+            structure and value to my team. My 2025 goal is to build digital
+            automation that helps team work more effortlessly. <br /><br />
 
-            This is my personal blog, portfolio, whatever floats your boat. I write about software engineering, homelab, self hosting, my journey into becoming a manager, my experience in helping teams build a better software and my experience in building high-performing teams.<br><br>
+            This is my personal blog, portfolio, whatever floats your boat. I
+            write about software engineering, homelab, self hosting, my journey
+            into becoming a manager, my experience in helping teams build a
+            better software and my experience in building high-performing teams.<br
+            /><br />
 
-            I am a novice 3d model desiger, love 3d printing, creating complex homelab server ( that i probably don't need), working with LLM and AI models.
+            I am a novice 3d model desiger, love 3d printing, creating complex
+            homelab server ( that i probably don't need), working with LLM and
+            AI models.
           </p>
           <div class="relative mt-6">
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-            <div class="absolute inset-0 border-2 border-white/10 rounded-xl rotate-1"></div>
-            <a 
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"
+            >
+            </div>
+            <div
+              class="absolute inset-0 border-2 border-white/10 rounded-xl rotate-1"
+            >
+            </div>
+            <a
               href="/portfolio"
               class="relative w-full py-3 px-6 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] block text-center"
+              aria-label="View Portfolio"
             >
               View Portfolio
             </a>
           </div>
-          
-          <div class="flex items-center gap-4 justify-center lg:justify-start mt-6">
-            <a href="https://www.linkedin.com/in/oritromax/" class="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-500 transition-colors" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+
+          <div
+            class="flex items-center gap-4 justify-center lg:justify-start mt-6"
+          >
+            <a
+              href="https://www.linkedin.com/in/oritromax/"
+              class="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-500 transition-colors"
+              target="_blank"
+              aria-label="LinkedIn Profile"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-5 h-5"
+                ><path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                ></path><rect x="2" y="9" width="4" height="12"></rect><circle
+                  cx="4"
+                  cy="4"
+                  r="2"></circle></svg
+              >
             </a>
-            <a href="https://github.com/oritromax" class="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-500 transition-colors" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            <a
+              href="https://github.com/oritromax"
+              class="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-500 transition-colors"
+              target="_blank"
+              aria-label="GitHub"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-5 h-5"
+                ><path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                ></path></svg
+              >
             </a>
           </div>
         </div>
-
       </div>
 
       <!-- Main Content -->
@@ -87,32 +169,110 @@ const { title } = Astro.props;
             <button
               id="mobile-menu-button"
               class="lg:hidden relative z-50 text-white hover:text-emerald-400 transition-colors"
+              aria-label="Mobile Menu"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 hidden"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="menu-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-6 h-6"
+                ><line x1="4" x2="20" y1="12" y2="12"></line><line
+                  x1="4"
+                  x2="20"
+                  y1="6"
+                  y2="6"></line><line x1="4" x2="20" y1="18" y2="18"
+                ></line></svg
+              >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="close-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-6 h-6 hidden"
+                ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+              >
             </button>
 
             <!-- Desktop menu -->
             <div class="hidden lg:flex items-center gap-8">
-              <a href="/" class="font-medium text-white">Home</a>
+              <a href="/" class="font-medium text-white" aria-label="Homepage">Home</a>
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a href="/portfolio" class={Astro.url.pathname === '/portfolio' ? 'text-white' : 'text-gray-400 hover:text-white transition-colors'}>Portfolio</a>
+              <a
+                href="/portfolio"
+                class={Astro.url.pathname === "/portfolio"
+                  ? "text-white"
+                  : "text-gray-400 hover:text-white transition-colors"}
+                aria-label="Portfolio Page"
+                >Portfolio</a
+              >
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a href="/consultation" class={Astro.url.pathname === '/consultation' ? 'text-white' : 'text-gray-400 hover:text-white transition-colors'}>Consultation</a>
+              <a
+                href="/consultation"
+                class={Astro.url.pathname === "/consultation"
+                  ? "text-white"
+                  : "text-gray-400 hover:text-white transition-colors"}
+                aria-label="Consultation Page"
+                >Consultation</a
+              >
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a href="/contact" class={Astro.url.pathname === '/contact' ? 'text-white' : 'text-gray-400 hover:text-white transition-colors'}>Contact</a>
+              <a
+                href="/contact"
+                class={Astro.url.pathname === "/contact"
+                  ? "text-white"
+                  : "text-gray-400 hover:text-white transition-colors"}
+                aria-label="Contact Page"
+                >Contact</a
+              >
             </div>
 
             <!-- Mobile menu overlay -->
-            <div id="mobile-menu" class="fixed inset-0 bg-gray-900/95 z-40 lg:hidden transform -translate-x-full transition-transform duration-300">
-              <div class="flex flex-col items-center justify-center h-full space-y-8">
-                <a href="/" class="text-2xl font-medium text-white hover:text-emerald-400 transition-colors">Home</a>
-                <a href="/portfolio" class="text-2xl text-gray-400 hover:text-white transition-colors">Portfolio</a>
-                <a href="/consultation" class="text-2xl text-gray-400 hover:text-white transition-colors">Consultation</a>
-                <a href="/contact" class="text-2xl text-gray-400 hover:text-white transition-colors">Contact</a>
-                <a 
+            <div
+              id="mobile-menu"
+              class="fixed inset-0 bg-gray-900/95 z-40 lg:hidden transform -translate-x-full transition-transform duration-300"
+            >
+              <div
+                class="flex flex-col items-center justify-center h-full space-y-8"
+              >
+                <a
+                  href="/"
+                  class="text-2xl font-medium text-white hover:text-emerald-400 transition-colors"
+                  >Home</a
+                >
+                <a
+                  href="/portfolio"
+                  class="text-2xl text-gray-400 hover:text-white transition-colors"
+                  aria-label="Portfolio Page"
+                  >Portfolio</a
+                >
+                <a
+                  href="/consultation"
+                  class="text-2xl text-gray-400 hover:text-white transition-colors"
+                  aria-label="Consultation Page"
+                  >Consultation</a
+                >
+                <a
+                  href="/contact"
+                  class="text-2xl text-gray-400 hover:text-white transition-colors"
+                  aria-label="Contact Page"
+                  >Contact</a
+                >
+                <a
                   href="/consultation"
                   class="mt-4 py-3 px-8 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] text-center"
+                  aria-label="Schedule a consultation"
                 >
                   Consult Me
                 </a>
@@ -121,27 +281,43 @@ const { title } = Astro.props;
 
             <!-- Hire Me button (desktop) -->
             <div class="relative hidden lg:block">
-              <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-              <div class="absolute inset-0 border-2 border-white/10 rounded-xl rotate-1"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"
+              >
+              </div>
+              <div
+                class="absolute inset-0 border-2 border-white/10 rounded-xl rotate-1"
+              >
+              </div>
               <a
                 href="/consultation"
                 class="relative py-3 px-8 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] inline-block"
+                aria-label="Schedule a consultation"
               >
                 Consult Me
               </a>
             </div>
           </div>
         </nav>
-        
+
         <main>
           <slot />
         </main>
-        
+
         <footer class="py-8 px-4 border-t border-gray-800 mt-auto">
-          <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
-            <p class="text-gray-400 text-sm">&copy; 2013 - {new Date().getFullYear()} Nidal Siddique Oritro. Built with Astro.</p>
+          <div
+            class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center"
+          >
+            <p class="text-gray-400 text-sm">
+              &copy; 2013 - {new Date().getFullYear()} Nidal Siddique Oritro. Built
+              with Astro.
+            </p>
             <div class="flex space-x-4 mt-4 md:mt-0">
-              <a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+              <a
+                href="/contact"
+                class="text-gray-400 hover:text-white transition-colors"
+                aria-label="Contact Page">Contact</a
+              >
             </div>
           </div>
         </footer>
@@ -150,16 +326,16 @@ const { title } = Astro.props;
 
     <script>
       // Mobile menu toggle
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuIcon = document.getElementById('menu-icon');
-      const closeIcon = document.getElementById('close-icon');
-      
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
+      const closeIcon = document.getElementById("close-icon");
+
       if (mobileMenuButton && mobileMenu && menuIcon && closeIcon) {
-        mobileMenuButton.addEventListener('click', () => {
-          mobileMenu.classList.toggle('-translate-x-full');
-          menuIcon.classList.toggle('hidden');
-          closeIcon.classList.toggle('hidden');
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("-translate-x-full");
+          menuIcon.classList.toggle("hidden");
+          closeIcon.classList.toggle("hidden");
         });
       }
     </script>

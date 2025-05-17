@@ -30,6 +30,7 @@ const year = post.data.date.getFullYear();
     <a 
       href={`/blog/${post.slug}`} 
       class="block text-lg lg:text-xl font-semibold text-white group-hover:text-emerald-300 transition-colors"
+      aria-label={`Read more about ${post.data.title}`}
     >
       {post.data.title}
     </a>
@@ -41,6 +42,7 @@ const year = post.data.date.getFullYear();
             <a 
               href={`/category/${encodeURIComponent(category)}`}
               class="px-3 py-1 bg-emerald-400/10 text-emerald-400 rounded-full text-sm font-medium hover:bg-emerald-400/20 transition-colors"
+              aria-label={`View all posts in ${category}`}
             >
               {category}
             </a>
@@ -53,6 +55,7 @@ const year = post.data.date.getFullYear();
             <a 
               href={`/tag/${encodeURIComponent(tag)}`}
               class="px-2 py-0.5 bg-gray-800 text-gray-400 rounded-sm text-xs hover:bg-gray-700 transition-colors"
+              aria-label={`View all posts tagged with ${tag}`}
             >
               {tag}
             </a>
