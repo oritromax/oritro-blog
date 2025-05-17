@@ -118,7 +118,7 @@ import Layout from '../layouts/Layout.astro';
 
       try {
         const formData = new FormData(form);
-        const response = await fetch('YOUR_API_ENDPOINT', {
+        const response = await fetch('https://n8n.homelab.ioritro.com/webhook/ac4d77f7-cdd0-41b3-904c-3a61d4840be7', {
           method: 'POST',
           body: JSON.stringify(Object.fromEntries(formData)),
           headers: {
