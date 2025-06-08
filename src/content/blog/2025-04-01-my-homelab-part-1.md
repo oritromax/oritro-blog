@@ -1,15 +1,19 @@
 ---
-title: Building a Decade of Homelab Infrastructure: A Four-Part Journey
-date: 2025-04-01 14:43:11
+title: Building a Decade of Homelab Infrastructure - Part 1
+date: 2025-06-02 14:43:11
 tags:
     - homelab
+    - docker
     - server
+    - self-hosted
     - nas
 categories: 
-    - homelab
+    - homelab 
+description: This post is a part of 3 posts sharing my experience in building my own homelab ecosystem. 
 
 ---
-# Building a Decade of Homelab Infrastructure: A Three-Part Journey
+
+# Building a Decade of Homelab Infrastructure: Part 1 - The Service Ecosystem
 
 Homelab has exploded in popularity since the pandemic hit, with people becoming increasingly interested in cutting the cord and keeping everything within their own network as much as possible. The current homelab ecosystem ranges from simply running a few basic services to almost industrial-looking setups, with everything imaginable in between.
 
@@ -69,7 +73,7 @@ After a decade of experimentation, my homelab has settled into running a diverse
 | **Development** | Open WebUI | AI Chat Interface | Local ChatGPT alternative |
 | | Atuin | Shell History Sync | Command history across devices |
 | **Gaming** | PufferPanel | Game Server Management | Minecraft and friends |
-| ***arr Stack** | *arr Stack | Media Collection | Managing thousands of Movies and TV Shows |
+| **Media Management** | *arr Stack | Automated Media Collection | Managing thousands of movies and TV shows |
 
 The beauty of this setup isn't just in the individual services, but in how they work together. Overseerr talks to the media services, Home Assistant triggers N8N workflows, and everything shares the same authentication system. It's become less of a collection of tools and more of an integrated digital ecosystem.
 
@@ -79,8 +83,8 @@ In this first part, we'll explore how these services complement each other and w
 
 This series will unfold across three detailed posts:
 
-1. **Part 2: The Service Ecosystem** (This post) - Understanding what runs and why
-2. **Part 3: Foundation Architecture** - Networking, security, and service discovery 
-3. **Part 4: Advanced Operations** - Scaling, monitoring, and maintenance
+1. **Part 1: The Service Ecosystem** (This post) - Understanding what runs and why
+2. **Part 2: Foundation Architecture** - Networking, security, and service discovery 
+3. **Part 3: Advanced Operations** - Scaling, monitoring, and maintenance
 
 Let's dive into the world of self-hosted services and see what a decade of iteration has taught me about building resilient home infrastructure.
