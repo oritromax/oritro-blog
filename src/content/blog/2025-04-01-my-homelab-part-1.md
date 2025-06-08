@@ -1,5 +1,5 @@
 ---
-title: Building a Decade of Homelab Infrastructure - Part 1
+title: Building a Homelab - Part 1 - Decade long journey
 date: 2025-06-02 14:43:11
 tags:
     - homelab
