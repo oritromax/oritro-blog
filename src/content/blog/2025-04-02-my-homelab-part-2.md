@@ -1,6 +1,6 @@
 ---
 title: Building a Homelab - Part 2 - Foundation Architecture
-date: 2025-06-02 14:43:11
+date: 2025-04-02 14:43:11
 tags:
     - homelab
     - docker
