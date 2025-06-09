@@ -416,3 +416,5 @@ This series will unfold across three detailed posts:
 1. [**Part 1: The Service Ecosystem**](https://ioritro.com/blog/2025-04-01-my-homelab-part-1/)  - Understanding what runs and why
 2. [**Part 2: Foundation Architecture**](https://ioritro.com/blog/2025-04-02-my-homelab-part-2/)  - Networking, security, and service discovery 
 3. **Part 3: Advanced Operations** (This post) - Scaling, monitoring, and maintenance
+
+> Special Thanks to [ Sarim Khan ](https://github.com/sarim) for his uncounted number of helps during the development of my homelab. 
