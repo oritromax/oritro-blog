@@ -1,5 +1,5 @@
 ---
-title: A hunt for a Youtube short
+title: A Hunt for a YouTube Short
 date: 2025-06-07 14:43:11
 tags:
     - youtube
@@ -7,112 +7,120 @@ tags:
     - AI
 categories: 
     - ai 
-description: This so called hunt gave me a different perspective on how hyped up AI is and how data poisoning is obscuring the results
-
+description: This so-called hunt gave me a different perspective on how hyped up AI is and how data poisoning is obscuring the results
 ---
 
-I am a big fan of everything mystry, dectective and crime drama. Been for a while and in my off time, i am always watching or looking for the next one. 
+I am a big fan of everything mystery, detective, and crime drama. Have been for a while. In my off time, I'm always watching or looking for the next one. 
 
-I have watched hundreds of trailers of shows in that genre and obviously youtube have a pretty good idea what i like and don't like.
+I've watched hundreds of trailers of shows in that genre, and obviously, YouTube has a pretty good idea of what I like and don't like.
 
-### Where it started 
+### Where It Started 
 
-So i was just browsing through youtube shorts while taking a coffee break and came across a youtube short, a clip from a movie or tv show.
+I was just browsing through YouTube Shorts while taking a coffee break and came across a short, an intriguing clip from a movie or TV show.
 
 ![Preview of the short](/static/2025/06/short-preview.jpeg)
 
-If you look at the image, you can see a few things that indicates this is a view farming account, where the uploader themselves have zero idea what this show or movie this is from. They probably found is in other youtube short or tiktok and uploaded it on youtube with AI voiceoever and annoying middle screen subtitle for that voiceover. 
+If you look at the image, you can see a few things that indicate this is a view-farming account. The uploader likely has no idea what show or movie this is from. They probably found it on another YouTube Short or TikTok and uploaded it with an AI voiceover and an annoying middle-screen subtitle to match.
 
 ### Story 
 
-> A soldier comes home to find his house has been occupied by some party people and they claim the soldier isn't the owner of the house, a women from the party claims it belongs to her boyfriend. Finally police is called and they confirm the house is legally owned by the soldier. While searching, they find the deadbody of the so called _Boyfriend_ in the basement. The dead boyfriend had a fake identity and claimed this house belonged to him. 
+> A soldier comes home to find his house has been occupied by some party people. They claim the soldier isn't the owner of the house. A woman from the party claims it belongs to her boyfriend. Finally, the police are called and confirm the house is legally owned by the soldier. While searching, they find the dead body of the so-called _boyfriend_ in the basement. The dead boyfriend had a fake identity and claimed this house belonged to him. 
 
-Thats it, where where the shorts end. Now being a fan of murder mystry, i was intrigued. Wanted to see where the story ends. But as you can see on the short, there is no mention of where its from. The comments were disabled so that didn't help. 
+That's it. That’s where the short ends. Being a fan of murder mysteries, I was intrigued. I wanted to see where the story goes. But as you can see from the short, there's no mention of where it's from. The comments were disabled, so that didn’t help either. 
 
-### The hunt
+### The Hunt
 
-In this day of overwhelming connectivity, AI and massive data collection, how hard could it be to find one series? 
+In this day of overwhelming connectivity, AI, and massive data collection, how hard could it be to find one series? 
 
-Boy i was wrong. So here was my initial approach, i took a screenshot and went to google image search, the same image you can see up there. Thinking, google image definately at least can tell me who the actor in the image is. 
+Boy, was I wrong. Here's how I initially approached it: I took a screenshot and went to Google Image Search—the same image you can see above. I figured Google would at least be able to identify the actor.
 
-***It Couldn't***
+***It Couldn't.***
 
 ![Google Search Result](https://img.shost.vip/i/625d7e43-41e2-43b4-b79c-f068b6114f92.png)
 
-It found the same short upload by a few other people, and all those had the same issue, comment disabled, annoying AI subtitle and no clue where this episode came from. 
+It found the same short uploaded by a few other people—all with the same issues: comments disabled, annoying AI subtitles, and no clue about the source.
 
 **Gemini**
 
-Surely, Gemini could help, it has the knowledge base of the entire google search engine ( _or so i thought_ ). 
+Surely Gemini could help. It has the knowledge base of the entire Google search engine (_or so I thought_).
 
-First i tried to give Gemini the exact context i saw in the short, written description of the video. 
+First, I gave Gemini the exact context I saw in the short—a written description.
 
 ![Gemini with written story description](https://img.shost.vip/i/cd55ed6e-5d99-47f5-a69b-e49eabc49d54.png)
 
-I intentionally kept it vague, trying to see if gemini could pick it up. 
+I intentionally kept it vague to see if Gemini could pick it up.
 
 **Warrior?**
 
-It picked a movie called warrior, and that was hillarious. I am a big fan of tom hardy and watched everything he ever have been. I saw the Warrior movie and it has absolutely nothing to do with it. 
+It picked a movie called *Warrior*, which was hilarious. I'm a big fan of Tom Hardy and have watched everything he’s ever done. I saw *Warrior*, and it has absolutely nothing to do with this. 
 
-But i admit, my prompt was definately Vague. So i tried again. 
+But I admit, my prompt was definitely vague. So I tried again.
 
 ![Gemini with broader text description of the story](https://img.shost.vip/i/84e147b5-2aef-4984-9d8a-c1f2a043efb3.png)
 
-_this was a voice prompt, so a few words got mangled_
+_This was a voice prompt, so a few words got mangled._
 
-It failed misrably again, the answer it came up with, again, completely wrong. 
+It failed miserably again. The answer it came up with was, again, completely wrong.
 
 **ChatGPT**
 
-So lets try the OG. ChatGPT. 
+So I tried the OG—ChatGPT.
 
 ![ChatGPT with story description as prompt](https://img.shost.vip/i/01443060-e8a8-4eba-87fa-681a8249954b.png)
 
-Again i first went with the description of the story and something interesting happened. In the screenshot above you can see it mentioned two links. 
+I first went with the description of the story, and something interesting happened. In the screenshot above, you can see it mentioned two links. 
 
-In a very wrong way, its correct, those are the clip where this story unfolds. The youtube link is the exact clip i saw which drove me in this rabbithole.
+In a very wrong way, it's correct—those are the clips where this story unfolds. The YouTube link is the exact clip I saw that drove me down this rabbit hole.
 
-But it failed to reference which movie or tv show this clip is from. Not good. 
+But it failed to reference which movie or TV show the clip is from. Not great.
 
-> But keep this ChatGPT answer in mind, it will be important later. 
+> But keep this ChatGPT answer in mind—it will be important later. 
 
 ---
-At this point, after the AI failure, i wanted to do some manual investigation. 
+
+At this point, after the AI failure, I decided to do some manual investigation.
 
 ### The Manual Hunt
 
-In the clip, i noticed an actor i have seen before in many places. He played the father of __Sarah Walker__ in __Chuck__. 
+In the clip, I recognized an actor I’ve seen before in many places. He played the father of __Sarah Walker__ in __Chuck__.
 
-> Don't care about what anyone says, chuck is one of the best series i have ever seen from a comedic perspective with a slight hint of thriller and spy-esc. <https://en.wikipedia.org/wiki/Chuck_(TV_series)>
+> Don’t care what anyone says—*Chuck* is one of the best series I’ve ever seen from a comedic perspective with a slight hint of thriller and spy-genre. <https://en.wikipedia.org/wiki/Chuck_(TV_series)>
 
-After jumping into IMDB, i found the actors name is __Gary Cole__. 
+After checking IMDb, I found the actor’s name is __Gary Cole__.
 
-Looking into his IMDB list of Credits, i immediately noticed NCIS. 
+Looking into his IMDb list of credits, I immediately noticed *NCIS*.
 
-Few things clicked in my mind. 
+A few things clicked:
 
-- Military Man
-- Murder Investigation 
-- People Dressed in Blue windbreaker in the video
+- Military man
+- Murder investigation 
+- People dressed in blue windbreakers in the video
 
-Anyone who have ever watches a good procedural investigation fiction show, knows NCIS. 
+Anyone who has ever watched a good procedural investigation fiction show knows *NCIS*.
 
-So i tried a second time with Gemini, this time i had a more restricted query for __Gemini__. 
+So I tried again with Gemini, this time using a more restricted query.
 
 ![Second attempt with Gemini, with restricted prompt](https://img.shost.vip/i/2105678b-96db-4b53-b60d-4f8f9b8e0bc6.png)
 
-It immediately finds the episode of the show. Two things to note here, 
+It immediately found the episode.
 
-- The AI narrator of the short mistakenly said the name of the fake owner is harry, its HAL
-- My prompt was very narrow, but it worked because of the restrictive nature of it
+Two things to note here:
 
-### AI knowledge poisoning
+- The AI narrator of the short mistakenly said the fake owner's name is Harry—it’s *Hal*.
+- My prompt was very narrow, but it worked because of how specific it was.
 
-I mentioned the word AI poisoning, some might wonder why. Its not exactly the right term. And it should be LLM knowledge poisoning, but i digress. 
+### AI Knowledge Poisoning
 
-What happened here, especially with ChatGPT, is what commonly known in the internet as Circle Jerk. I am asking it to find information about something, while its referencing the same clip where i got the question from. Because of the number of times this clip has been uploaded without referencing the actual show, it somewhat have a heavier weight when it comes to search and it became the defacto source of truth. Instead of looking for a movie or show with a similar story line, it kept going back to the same group of videos cause it had the right caption mentioning the exact same scenario. 
+I mentioned the term "AI poisoning." Some might wonder why. It's not exactly the right term—it should be "LLM knowledge poisoning," but I digress.
 
-__What happened with Gemini__: I have no idea, why it kept showing me movies that sometimes have zero soldiers in it or stories have no resemblences with it. 
+What happened here, especially with ChatGPT, is what’s commonly known online as a circle jerk. I asked it to find information about something, and it kept referencing the same clip I saw, because of how many times that clip has been uploaded without attribution. This gave it a heavier weight in search results, making it the de facto source of truth.
 
-And this comes the end of my saga. Is this important? Nope. I just had to document this for the sake of history, how reuploading the same video with same shitty caption generation and AI subtitle could potentially give it a higher weight in search result, obscuring the actual result. NCIS is a popular enough show that it shouldv'e been the first result, even if i gave it the wrong name of the person. It didn't. Something to think about, isn't it? 
+Instead of looking for a movie or show with a similar storyline, it kept going back to those same videos because they had the “right” caption. 
+
+__What happened with Gemini?__ I have no idea. It kept suggesting movies with zero soldiers or relevance to the story.
+
+And that brings us to the end of this saga. Is this important? Nope. But I had to document this for the sake of history—how re-uploading the same video with low-effort AI-generated subtitles can elevate misinformation to the top, obscuring the actual truth.
+
+*NCIS* is popular enough that it should’ve been the first result—even if I had the name slightly wrong. It wasn’t.
+
+Something to think about, isn’t it?
