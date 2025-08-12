@@ -226,15 +226,6 @@ const { title } = Astro.props;
               >
               <div class="w-[2px] h-4 bg-emerald-400/30"></div>
               <a
-                href="/consultation"
-                class={Astro.url.pathname === "/consultation"
-                  ? "font-medium text-white"
-                  : "text-gray-400 hover:text-white transition-colors"}
-                aria-label="Consultation Page"
-                >Consultation</a
-              >
-              <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a
                 href="/contact"
                 class={Astro.url.pathname === "/contact"
                   ? "font-medium text-white"
@@ -268,14 +259,6 @@ const { title } = Astro.props;
                   >Portfolio</a
                 >
                 <a
-                  href="/consultation"
-                  class={Astro.url.pathname === "/consultation"
-                    ? "text-2xl font-medium text-white"
-                    : "text-2xl text-gray-400 hover:text-white transition-colors"}
-                  aria-label="Consultation Page"
-                  >Consultation</a
-                >
-                <a
                   href="/contact"
                   class={Astro.url.pathname === "/contact"
                     ? "text-2xl font-medium text-white"
@@ -283,34 +266,9 @@ const { title } = Astro.props;
                   aria-label="Contact Page"
                   >Contact</a
                 >
-                <a
-                  href="/consultation"
-                  class="mt-4 py-3 px-8 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] text-center"
-                  aria-label="Schedule a consultation"
-                >
-                  Consult Me
-                </a>
               </div>
             </div>
 
-            <!-- Hire Me button (desktop) -->
-            <div class="relative hidden lg:block">
-              <div
-                class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"
-              >
-              </div>
-              <div
-                class="absolute inset-0 border-2 border-white/10 rounded-xl rotate-1"
-              >
-              </div>
-              <a
-                href="/consultation"
-                class="relative py-3 px-8 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] inline-block"
-                aria-label="Schedule a consultation"
-              >
-                Consult Me
-              </a>
-            </div>
           </div>
         </nav>
 
