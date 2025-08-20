@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import Giscus from '../../components/Giscus.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -114,5 +115,8 @@ const formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
         </div>
       </div>
     )}
+
+    <!-- Comments Section -->
+    <Giscus />
   </article>
 </Layout>
