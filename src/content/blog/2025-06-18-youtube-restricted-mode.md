@@ -12,7 +12,7 @@ categories:
 
 So a very weird thing was happening to me. I suddenly noticed, whatever youtube video i am watching, the comments were disabled. Initially, i was watching a kid friendly channel and i assumed the channel owner disabled the comment. Yes, my fault for not reading the message properly. Then I kept seeing it everywhere. So i decided to look at the message properly for the first time, 
 
-![Youtube comment disabled](https://img.shost.vip/i/887a57ad-038f-4885-bc5f-7c260867a6d0.png) 
+![Youtube comment disabled](/static/2025/06/chrome_r6EACvBqJH.png) 
 
 __Now What the hell is restricted mode?__
 
@@ -20,7 +20,7 @@ I honestly didn't know youtube has a restricted mode. I was aware of parental co
 
 So i looked through the settings and i noticed there is a big setting right on the desktop dropdown list, 
 
-![Restricted Mode Settings](https://img.shost.vip/i/29404865-7856-466c-bbd2-d9b2775f5657.png)
+![Restricted Mode Settings](/static/2025/06/chrome_CeWGC57Igp.png)
 
 __Problem is, its activated and i can't change it__
 
@@ -37,7 +37,7 @@ I know they are not filtering anything cause it literally says in their document
 
 So i was looking through Adguard home's Settings and noticed this. 
 
-![Adguard Safe Search Settings](https://img.shost.vip/i/ae979aee-b58a-4f88-aa70-babec33e041f.png)
+![Adguard Safe Search Settings](/static/2025/06/chrome_EO0IE15VCo.png)
 
 Somehow, my __Use Safe Search__ settings were on, after the latest update, which i personally unchecked when i installed Adguard Home on a dedicated __Orange Pi__. 
 
