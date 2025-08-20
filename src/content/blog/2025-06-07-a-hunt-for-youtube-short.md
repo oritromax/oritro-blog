@@ -36,7 +36,7 @@ Boy, was I wrong. Here's how I initially approached it: I took a screenshot and 
 
 ***It Couldn't.***
 
-![Google Search Result](https://img.shost.vip/i/625d7e43-41e2-43b4-b79c-f068b6114f92.png)
+![Google Search Result](/static/2025/06/chrome_FdoDt0SFxf.png)
 
 It found the same short uploaded by a few other people—all with the same issues: comments disabled, annoying AI subtitles, and no clue about the source.
 
@@ -46,7 +46,7 @@ Surely Gemini could help. It has the knowledge base of the entire Google search 
 
 First, I gave Gemini the exact context I saw in the short—a written description.
 
-![Gemini with written story description](https://img.shost.vip/i/cd55ed6e-5d99-47f5-a69b-e49eabc49d54.png)
+![Gemini with written story description](/static/2025/06/chrome_wTJp1ivW5V.png)
 
 I intentionally kept it vague to see if Gemini could pick it up.
 
@@ -56,7 +56,7 @@ It picked a movie called *Warrior*, which was hilarious. I'm a big fan of Tom Ha
 
 But I admit, my prompt was definitely vague. So I tried again.
 
-![Gemini with broader text description of the story](https://img.shost.vip/i/84e147b5-2aef-4984-9d8a-c1f2a043efb3.png)
+![Gemini with broader text description of the story](/static/2025/06/chrome_Ri9nyzB4nZ.png)
 
 _This was a voice prompt, so a few words got mangled._
 
@@ -66,7 +66,7 @@ It failed miserably again. The answer it came up with was, again, completely wro
 
 So I tried the OG—ChatGPT.
 
-![ChatGPT with story description as prompt](https://img.shost.vip/i/01443060-e8a8-4eba-87fa-681a8249954b.png)
+![ChatGPT with story description as prompt](/static/2025/06/chrome_YpKr58j79h.png)
 
 I first went with the description of the story, and something interesting happened. In the screenshot above, you can see it mentioned two links. 
 
@@ -100,7 +100,7 @@ Anyone who has ever watched a good procedural investigation fiction show knows *
 
 So I tried again with Gemini, this time using a more restricted query.
 
-![Second attempt with Gemini, with restricted prompt](https://img.shost.vip/i/2105678b-96db-4b53-b60d-4f8f9b8e0bc6.png)
+![Second attempt with Gemini, with restricted prompt](/static/2025/06/chrome_43E9jheRZo.png)
 
 It immediately found the episode.
 
