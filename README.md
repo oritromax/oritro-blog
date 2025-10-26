@@ -18,6 +18,8 @@ This is my personal blog where I write about software engineering, web developme
 ## Blog Posts
 
 ### 2025
+- **Frigate 0.16.1 TensorRT ONNX Model Proper Ingestion** - September 11, 2025
+- **Mikrotik - Disable Remote Request on your DNS** - August 18, 2025
 - **Youtube restricted mode - Adguard Home** - June 18, 2025
 - **A Hunt for a YouTube Short** - June 7, 2025
 - **Bias in Hiring - A retrospective** - June 2, 2025
