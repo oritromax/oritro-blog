@@ -47,7 +47,7 @@
   }
   
   .prose img {
-    @apply rounded-lg my-6 w-full h-auto;
+    @apply rounded-lg my-6 w-full h-auto border border-white/30 p-[5px] bg-gray-800/80 box-border;
   }
   
   .prose table {

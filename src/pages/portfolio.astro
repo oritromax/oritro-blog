@@ -6,22 +6,22 @@ const experience = [
     period: 'Jan 2025 - Present',
     role: 'Senior Engineering Manager',
     company: 'Cheq, A Cantaloupe Platform',
-    description: 'Leading some of best software minds to build highly scalable and extremely resilient software solutions serving millions of customers.'
+    description: 'Leading some of the best software minds to build highly scalable and extremely resilient software solutions serving millions of customers.'
   },
   {
     period: 'Jan 2021 - Dec 2024',
     role: 'Lead Software Engineer',
     company: 'Montex Marketing LLC',
-    description: 'Lead a team of engineers to build and maintain CRM, eCommerce Logistics Solution for wide range of eCommerce verticals.'
+    description: 'Led a team of engineers to build and maintain CRM and eCommerce logistics solutions for a wide range of eCommerce verticals.',
   },
   {
     period: 'Feb 2020 - Sep 2020',
     role: 'Engineering Solution Consultant',
     company: 'ResponseCRM',
-    description: 'Consulted and Actively perticipated in the development of 3D Secure Payment Gateway and PCI Compliance for ResponseCRMs 200K+ customers.'
+    description: "Consulted and actively participated in the development of 3D Secure Payment Gateway and PCI Compliance for ResponseCRM's 200K+ customers."
   },
   {
-    period: 'March 2019 -  Feb 2020',
+    period: 'Mar 2019 - Feb 2020',
     role: 'Senior Software Engineer',
     company: 'MonsterAds',
     description: 'Developed a custom CRM for affiliate marketing and lead generation with advanced reporting and analytics features.'
@@ -30,7 +30,7 @@ const experience = [
     period: 'Dec 2015 - Dec 2018',
     role: 'Head of Development Operation',
     company: 'United States Transit Funding, Inc',
-    description: 'Lead the team to developed a neural network based solution for fleet optimization, cost management, market analysis and route optimization.'
+    description: 'Led the team to develop a neural network based solution for fleet optimization, cost management, market analysis and route optimization.'
   },
   {
     period: 'Jan 2014 - Dec 2015',
@@ -39,10 +39,27 @@ const experience = [
     description: 'Developed fleet data integration and reporting systems for large scale fleet management.'
   },
   {
-    period: 'Feb 2013 - January 2014',
+    period: 'Feb 2013 - Jan 2014',
     role: 'Junior Software Engineer',
     company: 'United States Transit Funding, Inc',
-    description: 'Helped developed a large scale fleet tracking system with fuel management and route optimization.'
+    description: 'Helped develop a large scale fleet tracking system with fuel management and route optimization.'
+  }
+];
+
+const learningAndDevelopment = [
+  {
+    title: 'AI for enhanced efficiency',
+    provider: 'Varendra University',
+    date: '2025-06-28',
+    description: 'A lecture on how to use AI to enhance efficiency in the workplace.',
+    link: '/blog/2025-06-28-lecture-ai-for-enhanced-efficiency-varendra-university/' // optional: URL to full details (blog post or external page)
+  },
+  {
+    title: 'Understanding AI - Deep dive behind the curtain',
+    provider: 'Cheq, A Cantaloupe Platform',
+    date: '2025-11-05',
+    description: 'A lecture on how to understand AI better and how it works.',
+    link: '/blog/2025-11-05-understanding-ai-deep-dive-behind-the-curtain/'
   }
 ];
 
@@ -51,13 +68,13 @@ const openSourceProjects = [
     title: 'React Portfolio',
     description: 'A modern react portfolio for those engineers who could not find time to build one.',
     tech: ['React', 'Tailwind'],
-    stars: 13,
+    stars: 15,
     forks: 7,
     link: 'https://github.com/oritromax/react-portfolio'
   },
   {
     title: 'Folder 2 Text',
-    description: 'A cli tool to turn your project into disgestable context for LLMs',
+    description: 'A CLI tool to turn your project into digestible context for LLMs',
     tech: ['NodeJS','Javascript', 'CLI'],
     stars: 4,
     forks: 2,
@@ -65,7 +82,7 @@ const openSourceProjects = [
   },
   {
     title: 'Discord Antispam Bot',
-    description: 'A extremely low resource consuming discord bot to protect your server from spam and malicious users',
+    description: 'An extremely resource-efficient Discord bot to protect your server from spam and malicious users',
     tech: ['Go', 'Discord'],
     stars: 3,
     forks: 1,
@@ -78,7 +95,8 @@ const openSourceProjects = [
   <div class="max-w-4xl mx-auto p-4 lg:p-8">
     <!-- About Section -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-8">Nidal Siddique Oritro</h2>
+      <h2 class="text-2xl font-bold mb-2">Nidal Siddique Oritro</h2>
+      <p class="text-gray-400 text-lg mb-8">Senior Engineering Manager · Scalable systems &amp; team leadership</p>
       <div class="grid lg:grid-cols-2 gap-8">
         <!-- Photo Column -->
         <div class="relative">
@@ -97,13 +115,13 @@ const openSourceProjects = [
           <div class="relative bg-gray-800/50 p-6 rounded-xl h-full flex items-center">
             <div>
               <p class="text-gray-300 leading-relaxed mb-4">
-                 Senior Software Engineer with a focus on planning and defining projects. I have worked with companies all over the world to build highly scalable and maintainable system to serve millions of customers. I thrive on challenges and i especially enjoy a project that gives me the opportunity to learn new things. 
+                 Software engineering leader with a focus on planning and defining projects. I have worked with companies all over the world to build highly scalable and maintainable systems to serve millions of customers. I thrive on challenges and I especially enjoy a project that gives me the opportunity to learn new things.
               </p>
               <p class="text-gray-300 leading-relaxed mb-4">
                 I am specialized in managing small to medium-size development teams from project inception to complete delivery.
               </p>
               <p class="text-gray-300 leading-relaxed">
-                On a personal level, i love DIY stuff. Own a 3D Printer, Building my own workshop. 
+                On a personal level, I love DIY projects—I have a 3D printer and I'm building out my own workshop.
               </p>
             </div>
           </div>
@@ -238,6 +256,38 @@ const openSourceProjects = [
             <span class="font-bold text-emerald-400">AWS</span> for deployment and infrastructure.
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- Learning & Development (lectures, seminars, workshops) -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Learning &amp; Development</h2>
+      <div class="grid gap-6">
+        {learningAndDevelopment.map((item) => (
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-0.5"></div>
+            <div class="absolute inset-0 border border-white/10 rounded-xl rotate-0.5"></div>
+            <div class="relative bg-gray-800/50 p-6 rounded-xl">
+              <span class="text-emerald-400 text-sm font-medium">{item.date}</span>
+              <h3 class="text-xl font-semibold mt-1">{item.title}</h3>
+              <p class="text-gray-400 text-sm mt-1">{item.provider}</p>
+              {item.description && (
+                <p class="text-gray-300 mt-3">{item.description}</p>
+              )}
+              {item.link && (
+                <a
+                  href={item.link}
+                  class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
+                  target={item.link.startsWith('http') ? '_blank' : undefined}
+                  rel={item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
+                  View details
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
 
