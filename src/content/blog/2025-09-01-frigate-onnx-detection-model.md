@@ -153,6 +153,8 @@ model:
   input_dtype: float
 ```
 
+I actually built the base models into a github repo: [YOLOv9 Base Models](https://github.com/oritromax/YOLOv9-onnx). Its ready for plug and play if the base model works for you.
+
 > Update: Feb 17, 2026
 
 ### NumPy version error
