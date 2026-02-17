@@ -153,6 +153,23 @@ model:
   input_dtype: float
 ```
 
+> Update: Feb 17, 2026
+
+### NumPy version error
+
+If you face this issue while running the build command
+
+```
+6.356 RuntimeError: NumPy was built with baseline optimizations:
+6.356 (X86_V2) but your machine doesn't support:
+```
+
+You need to pin your NumPy version. 
+
+Update the install command with this
+
+`RUN uv pip install --system -r requirements.txt "numpy<2"`
+
 
 
 ## Conclusion
