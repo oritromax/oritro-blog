@@ -3,9 +3,20 @@ import "../styles/global.css";
 
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  noindex?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, description = "Blog and portfolio of Nidal Siddique Oritro — Software Engineer, Engineering Manager. Writing about software, homelab, and building teams.", image, canonicalUrl, type = "website", publishedTime, noindex = false } = Astro.props;
+
+const site = import.meta.env.SITE || "https://ioritro.com";
+const url = canonicalUrl || new URL(Astro.url.pathname, site).href;
+const ogImage = image?.startsWith("http") ? image : image ? new URL(image, site).href : `${site}/blog-avatar-finalized.jpg`;
+const metaDescription = description.slice(0, 160);
 ---
 
 <!doctype html>
@@ -13,11 +24,31 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="description" content="Blog and portfolio of Nidal Siddique Oritro - Software Engineer, Manager" />
+    <!-- Primary meta -->
     <title>{title}</title>
+    <meta name="description" content={metaDescription} />
+    <meta name="author" content="Nidal Siddique Oritro" />
+    <link rel="canonical" href={url} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#111827" />
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="Oritro's Blog" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    {type === "article" && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:creator" content="@oritromax" />
   </head>
   <body class="min-h-screen bg-gray-900 text-white">
     <div class="min-h-screen flex flex-col lg:flex-row">
