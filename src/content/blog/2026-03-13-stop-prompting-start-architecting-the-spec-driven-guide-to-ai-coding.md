@@ -1,5 +1,5 @@
 ---
-title: Stop Prompting, Start Architecting: The "Spec-Driven" Guide to AI Coding
+title: 'Stop Prompting, Start Architecting: The "Spec-Driven" Guide to AI Coding'
 date: 2026-03-13 10:53:59
 tags:
     - llm
