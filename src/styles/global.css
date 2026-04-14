@@ -6,61 +6,69 @@
     @apply antialiased;
   }
 
-  .prose h1 {
-    @apply text-3xl font-bold mb-4 text-white;
-  }
-  
-  .prose h2 {
-    @apply text-2xl font-bold my-6 text-white;
-  }
-  
-  .prose h3 {
-    @apply text-xl font-semibold my-4 text-white;
-  }
-  
   .prose p {
     @apply text-gray-300 mb-4 leading-relaxed;
   }
-  
+
   .prose ul, .prose ol {
     @apply my-4 pl-5 text-gray-300;
   }
-  
+
   .prose li {
     @apply mb-2;
   }
-  
+
   .prose a {
     @apply text-emerald-400 hover:text-emerald-300 transition-colors;
   }
-  
+
   .prose blockquote {
-    @apply border-l-4 border-emerald-400 pl-4 py-2 my-4 text-gray-300 italic;
+    @apply border-l-4 pl-4 py-2 my-4 text-gray-300 italic;
   }
-  
+
   .prose pre {
     @apply bg-gray-800 rounded-lg p-4 my-4 overflow-auto;
   }
-  
+
   .prose code {
     @apply bg-gray-800 px-1.5 py-0.5 rounded text-sm text-emerald-300;
   }
-  
+
   .prose img {
     @apply rounded-lg my-6 w-full h-auto border border-white/30 p-[5px] bg-gray-800/80 box-border;
   }
-  
+
   .prose table {
     @apply w-full border-collapse my-6;
   }
-  
+
   .prose th {
     @apply py-3 px-4 text-left bg-gray-800/30 border-b border-gray-800;
   }
-  
+
   .prose td {
     @apply py-3 px-4 border-b border-gray-800;
   }
+}
+
+/* Outside @layer so these beat prose-invert utility styles */
+.prose h1,
+.prose h2 {
+  color: #34d399;
+}
+
+.prose h3,
+.prose h4 {
+  color: #6ee7b7;
+}
+
+.prose blockquote {
+  border-left-color: #34d399;
+}
+
+.prose ul li::marker,
+.prose ol li::marker {
+  color: #34d399;
 }
 
 @keyframes ping {
