@@ -15,7 +15,7 @@ featured_image: https://img.sglab.ioritro.com/i/1uZkJnnt
 
 ## The Problem
 
-The modern software engineering and the corporate industry that relies on that, is built on a few key components. People, lots of coffee, Jira ( or other task management tool, if you hate how slow Jira is ) and lots and lots of documentation. 
+The modern software engineering and the corporate industry that relies on that, is built on a few key components. People, __lots of coffee__, Jira ( or other task management tool, if you hate how slow Jira is ) and lots and lots of documentation. 
 
 At first, it all seems to fit nicely in a well-oiled machine. Everyone is working together, building a system from the ground up, solving problems, writing tickets and specs. It goes well for the honeymoon period. 
 
