@@ -9,7 +9,8 @@ tags:
     - mcp
 categories:
     - ai
-description: Before you think this as another TechBro pitching his new AI Startup, it's not. I am gonna go into a lot of technical details, so if that's your thing, read on. 
+description: Before you think this as another TechBro pitching his new AI Startup, it's not. I am gonna go into a lot of technical details, so if that's your thing, read on. Believe it or not, this post is 100% hand written, no AI was involved in a post about AI. The cover photo is AI generated, obviously.
+featured_image: https://img.sglab.ioritro.com/i/1uZkJnnt
 ---
 
 ## The Problem
@@ -250,6 +251,6 @@ So to recap, a fine-tuned 1B model plans the query, decides if and what tools ne
 
 ## Conclusion
 
-After reading this, you might have the impression there are a few things I glossed over. That's intentional. This is an internal tool. What it does, with what data and how, is something I don't want to write explicitly. Instead, I wrote the blueprint. Some might ask for some code examples. This post explains things well enough that you can put this in any self-respecting AI model and it should be able to generate the code for you. 
+After reading this, you might have the impression there are a few things I glossed over. That's intentional. This is an internal tool. What it does, with what data and how, is something I don't want to write explicitly. Instead, I wrote the blueprint. Some might ask for some code examples. This post explains things well enough that you can put this in any self-respecting AI model and it should be able to generate the code for you. This is a guide, not a instruction set, treat it as such. You might wanna do things differently or you might find someting better, more power to you. You know what, leave me a comment, let me know what you would've done differently and i will learn something from it.
 
 My goal was to explain what I did, what I did differently and how you could follow through. I did change the base model later on — onto what, let's keep that a secret.
