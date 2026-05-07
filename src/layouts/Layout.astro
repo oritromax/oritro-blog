@@ -11,7 +11,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description = "Blog and portfolio of Nidal Siddique Oritro — Software Engineer, Engineering Manager. Writing about software, homelab, and building teams.", image, canonicalUrl, type = "website", publishedTime, noindex = false } = Astro.props;
+const { title, description = "Blog and portfolio of Nidal Siddique Oritro — Software Engineer, Engineering Manager. Writing about software, homelab, and building teams and training and Using AI", image, canonicalUrl, type = "website", publishedTime, noindex = false } = Astro.props;
 
 const site = import.meta.env.SITE || "https://ioritro.com";
 const url = canonicalUrl || new URL(Astro.url.pathname, site).href;
