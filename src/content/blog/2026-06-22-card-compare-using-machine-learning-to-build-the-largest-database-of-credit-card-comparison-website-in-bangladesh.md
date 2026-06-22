@@ -12,7 +12,7 @@ categories:
 description: I build a machine learning pipeline that captures, analyze and compares different credit card providers in Bangladesh on a massive scale. 
 ---
 
-# How I Turned 49 Banks' Fee PDFs Into One Clean Credit-Card Comparison
+![cardcompare.bd](https://img.sglab.ioritro.com/i/XcO4fgmX)
 
 Picking a credit card in Bangladesh is weirdly hard. Not because there aren't options — there are **257 of them across 49 banks** — but because the information you need to choose well is scattered across dozens of "Schedule of Charges" PDFs, each formatted differently, half of them scanned, some of them mixing Bengali and English in the same table.
 
@@ -22,19 +22,19 @@ I decided to collect all of it, clean it, and put it in one place — **[cardcom
 
 Every bank publishes a **Schedule of Charges (SOC)** — the legal document listing every fee, rate, and benefit for each card. That document is the only thing I trust. Not blog posts, not aggregators, not marketing pages. If a number can't be traced back to a bank's own SOC, it doesn't go in.
 
-So the pipeline starts with a search — using DuckDuckGo, scoped to each bank's own domain — to locate that official document. A hit only counts if it's on the bank's domain, actually covers credit cards, and shows an effective date. Some banks turned out to issue no credit card at all; I record that and move on rather than inventing data.
+So the pipeline starts with a search — using DuckDuckGo, scoped to each bank's own domain — to locate that official document. A hit only counts if it's on the bank's domain, actually covers credit cards, and shows an effective date. Some banks turned out to issue no credit card at all; They are noted in the system and removed from the upcoming pipeline. 
 
 ## Step 2: Capture everything into a secure folder
 
-Once a source is found, I download it — PDF, web page, or image — into a controlled folder. This matters more than it sounds. Sources move, get replaced, or vanish behind bot-walls (more on that later). Snapshotting the exact bytes I read means every number I publish can be re-checked against the precise document it came from.
+Once a source is found, I download it — PDF, web page, or image — into a controlled folder. This matters more than it sounds. Sources move, get replaced, or vanish behind bot-walls (more on that later). Snapshotting the exact bytes I read means every number I publish can be re-checked against the precise document it came from. This also keeps a record of where i sourced my data vs what exists in the website now. Each Document goes through a hash-check as well. **SHA1**, i know, not secure enough but for this case, thats okay. 
 
 ## Step 3: Read it — and the format dictates the tool
 
 This is where one size very much does not fit all, because banks publish in three completely different ways:
 
-- **Text PDFs** → run through **Microsoft's MarkItDown** to convert the document (and its tables) into clean Markdown.
+- **Text PDFs** → run through **[Microsoft's MarkItDown](https://github.com/microsoft/markitdown)** to convert the document (and its tables) into clean Markdown.
 - **Scanned/image PDFs** → there's no text to extract, just pixels. These go to a **vision-capable model** that *reads* the page the way a person would.
-- **Web pages** → rendered with **Playwright** (a headless browser) and extracted to text, because half the data lives in JavaScript-driven tables that a simple fetch never sees.
+- **Web pages** → rendered with **Playwright** (a headless browser) and extracted to text, because the important data sometimes lives in JavaScript-driven tables that a simple fetch never sees.
 
 The output of all three paths is the same: **raw data in a human-readable Markdown file**. One messy input format in, one consistent format out.
 
@@ -42,9 +42,9 @@ The output of all three paths is the same: **raw data in a human-readable Markdo
 
 ## Step 4: Verify the raw data against the source
 
-Here's the part most people skip, and it's the part that makes the whole thing trustworthy.
+Here's the part that i initially skipped, and it's the part that makes the whole thing trustworthy.
 
-Before any cleaning happens, **smaller agent models re-check the extracted Markdown against the original document** — field by field, row by row — looking for anything missing, swapped, or misread. Only data that survives this pass moves forward.
+Before any cleaning happens, **smaller agent models re-check the extracted Markdown against the original document** — field by field, row by row — looking for anything missing, swapped, or misread. Only data that survives this pass moves forward. Anything that doesn't, goes back for reprocessing. 
 
 Why be this paranoid? Because "official" does not mean "easy to read correctly."
 
@@ -85,7 +85,11 @@ Then it ships — live at **[cardcompare.bd](https://cardcompare.bd)**.
 
 ## Step 9: Keep it alive
 
-A dataset like this is only as good as its freshness — fees change, new cards launch, old ones retire. So the final piece is a **monitoring pipeline that periodically re-checks each bank's site** for changes. When something moves, it runs the entire flow above automatically: find, capture, read, verify, clean, structure, reconcile, rebuild. The comparison stays current without a human babysitting it.
+A dataset like this is only as good as its freshness — fees change, new cards launch, old ones retire. So the final piece is a **monitoring pipeline that periodically re-checks each bank's site** for changes. When something moves, it runs the entire flow above automatically: find, capture, read, verify, clean, structure, reconcile, rebuild. The comparison stays current without a human babysitting it. But once it finds something got changed somewhere, it asks me for final confirmation as a PR to review. Once i merge the PR, the new data is in. 
+
+## Full Flow Diagram
+
+![Card Compare full flow diagram](https://img.sglab.ioritro.com/i/K9yZKlmt)
 
 ## Why this was worth doing
 
