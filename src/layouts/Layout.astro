@@ -52,11 +52,92 @@ const metaDescription = description.slice(0, 160);
   </head>
   <body class="min-h-screen bg-gray-900 text-white">
     <div class="min-h-screen flex flex-col lg:flex-row">
+      <!-- Mobile top bar -->
+      <div
+        class="lg:hidden flex items-center justify-between border-b border-gray-800 px-4 py-4"
+      >
+        <a href="/" class="flex items-center gap-2" aria-label="Home">
+          <div class="w-6 h-6 rounded-full border-2 border-white rotate-45"></div>
+          <span class="font-medium text-sm">NIDAL SIDDIQUE ORITRO</span>
+        </a>
+        <button
+          id="mobile-menu-button"
+          class="relative z-50 text-white hover:text-emerald-400 transition-colors"
+          aria-label="Mobile Menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="menu-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-6 h-6"
+            ><line x1="4" x2="20" y1="12" y2="12"></line><line
+              x1="4"
+              x2="20"
+              y1="6"
+              y2="6"></line><line x1="4" x2="20" y1="18" y2="18"
+            ></line></svg
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="close-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-6 h-6 hidden"
+            ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+          >
+        </button>
+      </div>
+
+      <!-- Mobile menu overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-gray-900/95 z-40 lg:hidden transform -translate-x-full transition-transform duration-300"
+      >
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+          <a
+            href="/"
+            class={Astro.url.pathname === "/" || Astro.url.pathname.startsWith("/page/") || Astro.url.pathname.startsWith("/blog/") || Astro.url.pathname.startsWith("/category/") || Astro.url.pathname.startsWith("/tag/")
+              ? "text-2xl font-medium text-white"
+              : "text-2xl text-gray-400 hover:text-white transition-colors"}
+            >Home</a
+          >
+          <a
+            href="/portfolio"
+            class={Astro.url.pathname === "/portfolio"
+              ? "text-2xl font-medium text-white"
+              : "text-2xl text-gray-400 hover:text-white transition-colors"}
+            aria-label="Portfolio Page"
+            >Portfolio</a
+          >
+          <a
+            href="/contact"
+            class={Astro.url.pathname === "/contact"
+              ? "text-2xl font-medium text-white"
+              : "text-2xl text-gray-400 hover:text-white transition-colors"}
+            aria-label="Contact Page"
+            >Contact</a
+          >
+        </div>
+      </div>
+
       <!-- Left Sidebar -->
       <div
         class="lg:w-[400px] border-b lg:border-b-0 lg:border-r border-gray-800 p-4 lg:p-8 flex flex-col"
       >
-        <div class="flex items-center gap-2 mb-4 lg:mb-8">
+        <div class="hidden lg:flex items-center gap-2 mb-4 lg:mb-8">
           <div class="w-6 h-6 rounded-full border-2 border-white rotate-45">
           </div>
           <span class="font-medium text-sm lg:text-base"
@@ -194,50 +275,9 @@ const metaDescription = description.slice(0, 160);
 
       <!-- Main Content -->
       <div class="flex-1">
-        <!-- Navigation -->
-        <nav class="border-b border-gray-800 px-4 lg:px-8 py-4 lg:py-6">
+        <!-- Navigation (desktop) -->
+        <nav class="hidden lg:block border-b border-gray-800 px-4 lg:px-8 py-4 lg:py-6">
           <div class="flex items-center justify-between mx-auto">
-            <!-- Mobile menu button -->
-            <button
-              id="mobile-menu-button"
-              class="lg:hidden relative z-50 text-white hover:text-emerald-400 transition-colors"
-              aria-label="Mobile Menu"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                id="menu-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-6 h-6"
-                ><line x1="4" x2="20" y1="12" y2="12"></line><line
-                  x1="4"
-                  x2="20"
-                  y1="6"
-                  y2="6"></line><line x1="4" x2="20" y1="18" y2="18"
-                ></line></svg
-              >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                id="close-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-6 h-6 hidden"
-                ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
-              >
-            </button>
-
             <!-- Desktop menu -->
             <div class="hidden lg:flex items-center gap-8">
               <a
@@ -265,41 +305,6 @@ const metaDescription = description.slice(0, 160);
                 >Contact</a
               >
             </div>
-
-            <!-- Mobile menu overlay -->
-            <div
-              id="mobile-menu"
-              class="fixed inset-0 bg-gray-900/95 z-40 lg:hidden transform -translate-x-full transition-transform duration-300"
-            >
-              <div
-                class="flex flex-col items-center justify-center h-full space-y-8"
-              >
-                <a
-                  href="/"
-                  class={Astro.url.pathname === "/" || Astro.url.pathname.startsWith("/page/") || Astro.url.pathname.startsWith("/blog/") || Astro.url.pathname.startsWith("/category/") || Astro.url.pathname.startsWith("/tag/")
-                    ? "text-2xl font-medium text-white"
-                    : "text-2xl text-gray-400 hover:text-white transition-colors"}
-                  >Home</a
-                >
-                <a
-                  href="/portfolio"
-                  class={Astro.url.pathname === "/portfolio"
-                    ? "text-2xl font-medium text-white"
-                    : "text-2xl text-gray-400 hover:text-white transition-colors"}
-                  aria-label="Portfolio Page"
-                  >Portfolio</a
-                >
-                <a
-                  href="/contact"
-                  class={Astro.url.pathname === "/contact"
-                    ? "text-2xl font-medium text-white"
-                    : "text-2xl text-gray-400 hover:text-white transition-colors"}
-                  aria-label="Contact Page"
-                  >Contact</a
-                >
-              </div>
-            </div>
-
           </div>
         </nav>
 
