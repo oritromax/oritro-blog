@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import remarkDirective from 'remark-directive';
 import remarkAside from './src/lib/remark-aside.mjs';
 import rehypeCode from './src/lib/rehype-code.mjs';
+import shikiTheme from './src/lib/shiki-theme.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,8 +25,8 @@ export default defineConfig({
   site: 'https://ioritro.com',
   integrations: [sitemap()],
   markdown: {
-    // code surfaces stay dark in both themes — deliberate
-    shikiConfig: { theme: 'github-dark' },
+    // code surfaces stay dark in both themes — custom theme matches tokens.css
+    shikiConfig: { theme: shikiTheme },
     remarkPlugins: [remarkDirective, remarkAside],
     rehypePlugins: [rehypeCode]
   }

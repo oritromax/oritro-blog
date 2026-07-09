@@ -15,10 +15,15 @@ function isCodePre(node) {
 }
 
 function langOf(pre) {
-  if (pre.properties?.dataLanguage) return String(pre.properties.dataLanguage);
-  const cls = codeChild(pre)?.properties?.className || [];
-  const lang = cls.find((c) => String(c).startsWith('language-'));
-  return lang ? String(lang).slice('language-'.length) : 'code';
+  let lang = 'code';
+  if (pre.properties?.dataLanguage) {
+    lang = String(pre.properties.dataLanguage);
+  } else {
+    const cls = codeChild(pre)?.properties?.className || [];
+    const found = cls.find((c) => String(c).startsWith('language-'));
+    if (found) lang = String(found).slice('language-'.length);
+  }
+  return lang === 'plaintext' ? 'text' : lang;
 }
 
 function wrap(pre) {
