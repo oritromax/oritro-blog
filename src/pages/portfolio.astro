@@ -3,56 +3,57 @@ import Layout from '../layouts/Layout.astro';
 
 const experience = [
   {
-    period: 'Jan 2025 - Present',
+    period: 'Jan 2025 — Now',
     role: 'Senior Engineering Manager',
     company: 'Cheq, A 365 Retail Market platform',
-    description: 'Leading some of the best software minds to build highly scalable and extremely resilient software solutions serving millions of customers.'
+    description: 'Leading some of the best software minds to build highly scalable and extremely resilient software solutions serving millions of customers.',
+    current: true
   },
   {
-    period: 'Jan 2021 - Dec 2024',
+    period: 'Jan 2021 — Dec 2024',
     role: 'Lead Software Engineer',
     company: 'Montex Marketing LLC',
     description: 'Led a team of engineers to build and maintain CRM and eCommerce logistics solutions for a wide range of eCommerce verticals.',
   },
   {
-    period: 'Feb 2020 - Sep 2020',
+    period: 'Feb 2020 — Sep 2020',
     role: 'Engineering Solution Consultant',
     company: 'ResponseCRM',
     description: "Consulted and actively participated in the development of 3D Secure Payment Gateway and PCI Compliance for ResponseCRM's 200K+ customers."
   },
   {
-    period: 'Mar 2019 - Feb 2020',
+    period: 'Mar 2019 — Feb 2020',
     role: 'Senior Software Engineer',
     company: 'MonsterAds',
     description: 'Developed a custom CRM for affiliate marketing and lead generation with advanced reporting and analytics features.'
   },
   {
-    period: 'Dec 2015 - Dec 2018',
+    period: 'Dec 2015 — Dec 2018',
     role: 'Head of Development Operation',
     company: 'United States Transit Funding, Inc',
     description: 'Led the team to develop a neural network based solution for fleet optimization, cost management, market analysis and route optimization.'
   },
   {
-    period: 'Jan 2014 - Dec 2015',
+    period: 'Jan 2014 — Dec 2015',
     role: 'Senior Software Engineer',
     company: 'United States Transit Funding, Inc',
     description: 'Developed fleet data integration and reporting systems for large scale fleet management.'
   },
   {
-    period: 'Feb 2013 - Jan 2014',
+    period: 'Feb 2013 — Jan 2014',
     role: 'Junior Software Engineer',
     company: 'United States Transit Funding, Inc',
     description: 'Helped develop a large scale fleet tracking system with fuel management and route optimization.'
   }
 ];
 
-const learningAndDevelopment = [
+const talks = [
   {
     title: 'AI for enhanced efficiency',
     provider: 'Varendra University',
     date: '2025-06-28',
     description: 'A lecture on how to use AI to enhance efficiency in the workplace.',
-    link: '/blog/2025-06-28-lecture-ai-for-enhanced-efficiency-varendra-university/' // optional: URL to full details (blog post or external page)
+    link: '/blog/2025-06-28-lecture-ai-for-enhanced-efficiency-varendra-university/'
   },
   {
     title: 'Understanding AI - Deep dive behind the curtain',
@@ -61,7 +62,7 @@ const learningAndDevelopment = [
     description: 'A lecture on how to understand AI better and how it works.',
     link: '/blog/2025-11-05-understanding-ai-deep-dive-behind-the-curtain/'
   }
-];
+].sort((a, b) => b.date.localeCompare(a.date));
 
 const openSourceProjects = [
   {
@@ -75,7 +76,7 @@ const openSourceProjects = [
   {
     title: 'Folder 2 Text',
     description: 'A CLI tool to turn your project into digestible context for LLMs',
-    tech: ['NodeJS','Javascript', 'CLI'],
+    tech: ['NodeJS', 'Javascript', 'CLI'],
     stars: 4,
     forks: 2,
     link: 'https://github.com/oritromax/folder2text'
@@ -89,336 +90,480 @@ const openSourceProjects = [
     link: 'https://github.com/oritromax/antispam-bot'
   }
 ];
+
+const industries = [
+  { name: 'Transportation', blurb: 'Fleet management and logistics optimization systems' },
+  { name: 'E-commerce', blurb: 'Scalable online retail and marketplace solutions' },
+  { name: 'Fintech', blurb: 'Payment processing, financial management, accounting solutions' },
+  { name: 'Education', blurb: 'Learning management and student tracking' },
+  { name: 'Retail', blurb: 'Point of sale and inventory systems' },
+  { name: 'CRM', blurb: 'Developing cutting edge CRM solutions' },
+  { name: 'AI Usage', blurb: 'LLM-powered products, RAG pipelines, and MCP-driven internal tools' },
+  { name: 'AI Model Training', blurb: 'Fine-tuning detection & language models for domain-specific use' },
+];
+
+const stats = [
+  { value: '15+', label: 'Years in engineering' },
+  { value: '7+', label: 'Years leading teams' },
+  { value: '8', label: 'Industries served' },
+  { value: 'Millions', label: 'Customers served' },
+];
+
+const techStack = [
+  { group: 'Backend', cat: 'var(--c-codebox)', items: ['Go', 'TypeScript / JavaScript', 'PHP (Symfony, Laravel)', 'Node.js'] },
+  { group: 'Frontend', cat: 'var(--c-selfhost)', items: ['React', 'Vue', 'Tailwind CSS', 'Astro'] },
+  { group: 'Infrastructure & Observability', cat: 'var(--c-homelab)', items: ['Docker', 'Kubernetes', 'Podman', 'AWS', 'Grafana', 'Loki'] },
+  { group: 'AI & Data', cat: 'var(--c-ai)', items: ['LLMs', 'RAG', 'MCP', 'Fine-tuning', 'ONNX'] },
+];
+
+const now = [
+  { html: 'Leading engineering at <strong>Cheq, A 365 Retail Market platform</strong> — building scalable systems that serve millions of customers.' },
+  { html: 'Running a <a href="/blog/2025-12-29-i-am-mentoring-engineers/">free mentorship program</a> for early-career engineers — covering judgment, context, and the work around the code.' },
+  { html: 'Founded the <a href="/blog/2026-03-06-i-founded-rajshahi-professionals-network/">Rajshahi Professionals Network</a> — a community of technology professionals in Rajshahi.' },
+  { html: 'Building internal AI knowledge systems with <strong>RAG and MCP</strong> — making organizational knowledge actually retrievable.' },
+  { html: 'Speaking and writing on practical AI engineering — spec-driven workflows over prompt-fishing.' },
+];
 ---
 
 <Layout title="Portfolio - Nidal Siddique Oritro">
-  <div class="max-w-4xl mx-auto p-4 lg:p-8">
-    <!-- About Section -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-2">Nidal Siddique Oritro</h2>
-      <p class="text-gray-400 text-lg mb-8">Senior Engineering Manager · Scalable systems &amp; team leadership</p>
-      <div class="grid lg:grid-cols-2 gap-8">
-        <!-- Photo Column -->
-        <div class="relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-2xl -rotate-2"></div>
-          <div class="absolute inset-0 border-2 border-white/10 rounded-2xl rotate-2"></div>
-          <img 
-            src="/hero.jpg" 
-            alt="Nidal Siddique Oritro"
-            class="relative w-full h-full object-cover object-center rounded-2xl"
-          />
-        </div>
-        <!-- About Text Column -->
-        <div class="relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full flex items-center">
-            <div>
-              <p class="text-gray-300 leading-relaxed mb-4">
-                Software engineering leader with ~15 years building highly scalable, maintainable systems that serve millions of customers. Currently leading engineering at Cheq, A 365 Retail Market platform — taking small to medium-size teams from project inception to complete delivery. I thrive on challenges and projects that give me the opportunity to learn new things.
-              </p>
-              <p class="text-gray-300 leading-relaxed mb-4">
-                My current focus is AI engineering — LLM-powered products, RAG pipelines, MCP-driven internal tools, and fine-tuning detection and language models for domain-specific use. I also write and speak on practical, spec-driven AI workflows.
-              </p>
-              <p class="text-gray-300 leading-relaxed mb-4">
-                Outside the day job, I run a free mentorship program for early-career engineers and founded the Rajshahi Professionals Network.
-              </p>
-              <p class="text-gray-300 leading-relaxed">
-                On a personal level, I love DIY projects—I have a 3D printer and I'm building out my own workshop.
-              </p>
-            </div>
-          </div>
+  <div class="pf-shell">
+    <!-- Hero -->
+    <section class="pf-hero">
+      <div class="pf-hero-text">
+        <span class="eyebrow eyebrow-accent">Portfolio</span>
+        <h1>Nidal Siddique Oritro</h1>
+        <p class="pf-hero-sub">Senior Engineering Manager · Scalable systems &amp; team leadership</p>
+        <p>
+          Software engineering leader with ~15 years building highly scalable, maintainable systems that serve millions of customers. Currently leading engineering at Cheq, A 365 Retail Market platform — taking small to medium-size teams from project inception to complete delivery. I thrive on challenges and projects that give me the opportunity to learn new things.
+        </p>
+        <p>
+          My current focus is AI engineering — LLM-powered products, RAG pipelines, MCP-driven internal tools, and fine-tuning detection and language models for domain-specific use. I also write and speak on practical, spec-driven AI workflows.
+        </p>
+        <p>
+          Outside the day job, I run a free mentorship program for early-career engineers and founded the Rajshahi Professionals Network.
+        </p>
+        <p>
+          On a personal level, I love DIY projects — I have a 3D printer and I'm building out my own workshop.
+        </p>
+      </div>
+      <div class="pf-hero-side">
+        <img src="/hero.jpg" alt="Nidal Siddique Oritro" class="avatar pf-hero-avatar" />
+        <div class="pf-hero-social">
+          <a href="https://www.linkedin.com/in/oritromax/" class="icon-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a href="https://github.com/oritromax" class="icon-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          </a>
+          <a href="/contact" class="icon-btn" aria-label="Contact page">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Quick Stats -->
-    <section class="mb-12">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { value: '15+', label: 'Years in engineering' },
-          { value: '7+', label: 'Years leading teams' },
-          { value: '7', label: 'Industries served' },
-          { value: 'Millions', label: 'Customers served' },
-        ].map(stat => (
-          <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/15 to-purple-400/15 rounded-xl -rotate-1"></div>
-            <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-            <div class="relative bg-gray-800/50 p-5 rounded-xl text-center">
-              <div class="text-3xl md:text-4xl font-bold text-emerald-400">{stat.value}</div>
-              <div class="text-gray-400 text-sm mt-1">{stat.label}</div>
-            </div>
-          </div>
-        ))}
-      </div>
+    <!-- Stats strip -->
+    <section class="stats" aria-label="Career statistics">
+      {stats.map((stat) => (
+        <div class="stat">
+          <span class="stat-value">{stat.value}</span>
+          <span class="stat-label">{stat.label}</span>
+        </div>
+      ))}
     </section>
 
     <!-- Now -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-2">Now</h2>
-      <p class="text-gray-400 text-sm mb-6">What I'm focused on these days</p>
-      <div class="relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/20 rounded-xl -rotate-0.5"></div>
-        <div class="absolute inset-0 border border-white/10 rounded-xl rotate-0.5"></div>
-        <div class="relative bg-gray-800/50 p-6 rounded-xl">
-          <ul class="space-y-4">
-            <li class="flex gap-3 text-gray-300 leading-relaxed">
-              <span class="mt-2 w-2 h-2 rounded-full bg-emerald-400 flex-none"></span>
-              <span>Leading engineering at <span class="text-emerald-400 font-medium">Cheq, A 365 Retail Market platform</span> — building scalable systems that serve millions of customers.</span>
-            </li>
-            <li class="flex gap-3 text-gray-300 leading-relaxed">
-              <span class="mt-2 w-2 h-2 rounded-full bg-emerald-400 flex-none"></span>
-              <span>Running a <a href="/blog/2025-12-29-i-am-mentoring-engineers/" class="text-emerald-400 hover:text-emerald-300 underline-offset-4 hover:underline">free mentorship program</a> for early-career engineers — covering judgment, context, and the work around the code.</span>
-            </li>
-            <li class="flex gap-3 text-gray-300 leading-relaxed">
-              <span class="mt-2 w-2 h-2 rounded-full bg-emerald-400 flex-none"></span>
-              <span>Founded the <a href="/blog/2026-03-06-i-founded-rajshahi-professionals-network/" class="text-emerald-400 hover:text-emerald-300 underline-offset-4 hover:underline">Rajshahi Professionals Network</a> — a community of technology professionals in Rajshahi.</span>
-            </li>
-            <li class="flex gap-3 text-gray-300 leading-relaxed">
-              <span class="mt-2 w-2 h-2 rounded-full bg-emerald-400 flex-none"></span>
-              <span>Building internal AI knowledge systems with <span class="text-emerald-400 font-medium">RAG and MCP</span> — making organizational knowledge actually retrievable.</span>
-            </li>
-            <li class="flex gap-3 text-gray-300 leading-relaxed">
-              <span class="mt-2 w-2 h-2 rounded-full bg-emerald-400 flex-none"></span>
-              <span>Speaking and writing on practical AI engineering — spec-driven workflows over prompt-fishing.</span>
-            </li>
-          </ul>
-        </div>
+    <section class="pf-section">
+      <div class="section-head">
+        <h2>Now</h2>
+        <span class="eyebrow">What I'm focused on these days</span>
+      </div>
+      <ul class="now-list">
+        {now.map((item) => (
+          <li set:html={item.html} />
+        ))}
+      </ul>
+    </section>
+
+    <!-- Industries -->
+    <section class="pf-section">
+      <div class="section-head">
+        <h2>Industry experience</h2>
+        <span class="eyebrow">{industries.length} industries</span>
+      </div>
+      <div class="industries">
+        {industries.map((ind) => (
+          <div class="industry">
+            <h3>{ind.name}</h3>
+            <p>{ind.blurb}</p>
+          </div>
+        ))}
       </div>
     </section>
 
-    <!-- Industry Experience -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">Industry Experience</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Transportation -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5a1 1 0 0 0-1 1v8h3"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Transportation</h3>
-            <p class="text-gray-400 text-sm">Fleet management and logistics optimization systems</p>
-          </div>
-        </div>
-
-        <!-- E-commerce -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">E-commerce</h3>
-            <p class="text-gray-400 text-sm">Scalable online retail and marketplace solutions</p>
-          </div>
-        </div>
-
-        <!-- Fintech -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Fintech</h3>
-            <p class="text-gray-400 text-sm">Payment processing and financial management, Accounting Solutions</p>
-          </div>
-        </div>
-
-        <!-- Education -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Education</h3>
-            <p class="text-gray-400 text-sm">Learning management and student tracking</p>
-          </div>
-        </div>
-
-
-        <!-- Retail -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.5-2.5 4 2.5 4.5-2.5 4 2.5L23 5v13l-4 2-4-2-4 2-4-2-4 2-3-1.5V7Z"/><path d="M2 17v-3"/><path d="M19 17v-3"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Retail</h3>
-            <p class="text-gray-400 text-sm">Point of sale and inventory systems</p>
-          </div>
-        </div>
-        <!-- CRM -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.5-2.5 4 2.5 4.5-2.5 4 2.5L23 5v13l-4 2-4-2-4 2-4-2-4 2-3-1.5V7Z"/><path d="M2 17v-3"/><path d="M19 17v-3"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">CRM</h3>
-            <p class="text-gray-400 text-sm">Developing cutting edge CRM Solutions</p>
-          </div>
-        </div>
-
-        <!-- AI Usage -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">AI Usage</h3>
-            <p class="text-gray-400 text-sm">LLM-powered products, RAG pipelines, and MCP-driven internal tools</p>
-          </div>
-        </div>
-
-        <!-- AI Model Training -->
-        <div class="group relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-          <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-            <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">AI Model Training</h3>
-            <p class="text-gray-400 text-sm">Fine-tuning and training detection &amp; language models for domain-specific use</p>
-          </div>
-        </div>
+    <!-- Experience timeline -->
+    <section class="pf-section">
+      <div class="section-head">
+        <h2>Experience</h2>
       </div>
-
+      <div class="timeline">
+        {experience.map((job) => (
+          <div class:list={["role", { current: job.current }]}>
+            <span class="role-date">{job.period}</span>
+            <h3 class="role-title">
+              {job.role}
+              {job.current && <span class="chip">Now</span>}
+            </h3>
+            <p class="role-org">{job.company}</p>
+            <p class="role-desc">{job.description}</p>
+          </div>
+        ))}
+      </div>
     </section>
 
-    <!-- Experience Timeline -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">Experience</h2>
-      <div class="relative">
-        <div class="absolute left-4 top-0 h-full w-0.5 bg-gray-800"></div>
-        {experience.map((job, index) => (
-          <div class="relative pl-12 pb-8">
-            <div class="absolute left-2 -translate-x-1/2 w-6 h-6 rounded-full border-4 border-gray-800 bg-emerald-400"></div>
-            <div class="relative">
-              <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-0.5"></div>
-              <div class="absolute inset-0 border border-white/10 rounded-xl rotate-0.5"></div>
-              <div class="relative bg-gray-800/50 p-6 rounded-xl">
-                <span class="text-emerald-400 text-sm font-medium">{job.period}</span>
-                <h3 class="text-xl font-semibold mt-1">{job.role}</h3>
-                <p class="text-gray-400 text-sm mt-1">{job.company}</p>
-                <p class="text-gray-300 mt-3">{job.description}</p>
-              </div>
+    <!-- Tech stack -->
+    <section class="pf-section">
+      <div class="section-head">
+        <h2>Tech stack</h2>
+      </div>
+      <div class="stack">
+        {techStack.map((group) => (
+          <div class="stack-group" style={`--cat: ${group.cat}`}>
+            <h3>{group.group}</h3>
+            <div class="token-row">
+              {group.items.map((item) => (
+                <span class="tag">{item}</span>
+              ))}
             </div>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Tech Stack -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">Tech Stack</h2>
-      <div class="relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/20 rounded-xl -rotate-1"></div>
-        <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-        <div class="relative bg-gray-800/50 p-6 rounded-xl">
-          <div class="grid sm:grid-cols-2 gap-6">
-            {[
-              { group: 'Backend', items: ['Go', 'TypeScript / JavaScript', 'PHP (Symfony, Laravel)', 'Node.js'] },
-              { group: 'Frontend', items: ['React', 'Vue', 'Tailwind CSS', 'Astro'] },
-              { group: 'Infrastructure & Observability', items: ['Docker', 'Kubernetes', 'Podman', 'AWS', 'Grafana', 'Loki'] },
-              { group: 'AI & Data', items: ['LLMs', 'RAG', 'MCP', 'Fine-tuning', 'ONNX'] },
-            ].map(category => (
-              <div>
-                <h3 class="text-emerald-400 text-sm font-semibold uppercase tracking-wider mb-3">{category.group}</h3>
-                <div class="flex flex-wrap gap-2">
-                  {category.items.map(item => (
-                    <span class="px-3 py-1 bg-gray-700/70 text-gray-200 rounded-full text-sm">{item}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+    <!-- Talks -->
+    <section class="pf-section">
+      <div class="section-head">
+        <h2>Talks &amp; lectures</h2>
       </div>
-    </section>
-
-    <!-- Learning & Development (lectures, seminars, workshops) -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">Learning &amp; Development</h2>
-      <div class="grid gap-6">
-        {learningAndDevelopment.map((item) => (
-          <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-0.5"></div>
-            <div class="absolute inset-0 border border-white/10 rounded-xl rotate-0.5"></div>
-            <div class="relative bg-gray-800/50 p-6 rounded-xl">
-              <span class="text-emerald-400 text-sm font-medium">{item.date}</span>
-              <h3 class="text-xl font-semibold mt-1">{item.title}</h3>
-              <p class="text-gray-400 text-sm mt-1">{item.provider}</p>
-              {item.description && (
-                <p class="text-gray-300 mt-3">{item.description}</p>
-              )}
-              {item.link && (
-                <a
-                  href={item.link}
-                  class="inline-flex items-center gap-1.5 mt-4 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
-                  target={item.link.startsWith('http') ? '_blank' : undefined}
-                  rel={item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                >
-                  View details
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                </a>
-              )}
-            </div>
+      {talks.map((talk) => (
+        <div class="talk">
+          <span class="mono-meta">{talk.date}</span>
+          <div>
+            <h3 class="talk-title">{talk.title}</h3>
+            <p class="talk-provider">{talk.provider}</p>
+            {talk.description && <p class="talk-desc">{talk.description}</p>}
           </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Open Source Projects -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">Open Source Projects</h2>
-      <div class="grid gap-6">
-        {openSourceProjects.map(project => (
-          <div class="group relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-1"></div>
-            <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-            <a href={project.link} target="_blank" rel="noopener noreferrer" 
-              class="relative block bg-gray-800/50 rounded-xl p-6 hover:bg-gray-800/80 transition-colors"
-            >
-              <div class="flex justify-between items-start mb-4">
-                <h3 class="text-xl font-semibold group-hover:text-emerald-400 transition-colors">
-                  {project.title}
-                </h3>
-                <div class="flex items-center gap-4 text-gray-400">
-                  <span class="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    {project.stars}
-                  </span>
-                  <span class="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M7 7 C7 7 7 5 9 3c2 -2 6 -2 8 0s2 4 0 6c-2 2 -4 1 -4 1"/><path d="M3 21c-2 -2 -2 -6 0 -8s4 -2 6 0s1 4 1 4"/><path d="M21 21c2 -2 2 -6 0 -8s-4 -2 -6 0s-1 4 -1 4"/></svg>
-                    {project.forks}
-                  </span>
-                </div>
-              </div>
-              <p class="text-gray-300 mb-4">{project.description}</p>
-              <div class="flex flex-wrap gap-2">
-                {project.tech.map(tech => (
-                  <span class="px-2 py-1 bg-gray-700 text-gray-300 rounded-full text-xs">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+          {talk.link && (
+            <a href={talk.link} class="btn" target={talk.link.startsWith('http') ? '_blank' : undefined} rel={talk.link.startsWith('http') ? 'noopener noreferrer' : undefined}>
+              Details
             </a>
-          </div>
+          )}
+        </div>
+      ))}
+    </section>
+
+    <!-- Open source -->
+    <section class="pf-section">
+      <div class="section-head">
+        <h2>Open source</h2>
+      </div>
+      <div class="repos">
+        {openSourceProjects.map((project) => (
+          <a href={project.link} target="_blank" rel="noopener noreferrer" class="card card-link repo">
+            <div class="repo-head">
+              <h3>{project.title}</h3>
+              <span class="mono-meta">★ {project.stars} · ⑂ {project.forks}</span>
+            </div>
+            <p>{project.description}</p>
+            <div class="token-row">
+              {project.tech.map((tech) => (
+                <span class="chip">{tech}</span>
+              ))}
+            </div>
+          </a>
         ))}
       </div>
     </section>
   </div>
 </Layout>
+
+<style>
+  .pf-shell {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding: var(--sp-6) var(--sp-5) 0;
+  }
+  .pf-section {
+    border-top: 1px solid var(--border);
+    padding-top: var(--sp-6);
+    margin-top: var(--sp-6);
+  }
+
+  /* hero */
+  .pf-hero {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--sp-7);
+    align-items: start;
+  }
+  .pf-hero-text h1 {
+    font-size: clamp(28px, 4vw, 38px);
+    margin-top: var(--sp-2);
+  }
+  .pf-hero-sub {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 6px 0 var(--sp-5);
+  }
+  .pf-hero-text p { margin: 0 0 14px; max-width: 62ch; }
+  .pf-hero-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+  .pf-hero-avatar {
+    width: 100%;
+    aspect-ratio: 1;
+  }
+  .pf-hero-social { display: flex; gap: var(--sp-2); }
+
+  /* stats strip: hairlines top+bottom, hairline dividers between cells */
+  .stats {
+    margin-top: var(--sp-6);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat {
+    padding: var(--sp-5);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat + .stat { border-left: 1px solid var(--border); }
+  .stat-value {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: -.015em;
+    color: var(--text);
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* now */
+  .now-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 72ch;
+  }
+  .now-list li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 12px;
+    line-height: 1.65;
+  }
+  .now-list li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: var(--r-full);
+    background: var(--accent);
+  }
+  .now-list :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2.5px;
+  }
+  .now-list :global(strong) { color: var(--text); font-weight: 600; }
+
+  /* industries: gap-1px trick so the border color bleeds through as dividers */
+  .industries {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .industry {
+    background: var(--surface);
+    padding: var(--sp-5);
+  }
+  .industry h3 { font-size: 16px; }
+  .industry p {
+    margin: 6px 0 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  /* timeline — the signature element of this page */
+  .timeline {
+    position: relative;
+    padding-left: 132px;
+    max-width: 780px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 108px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+  .role {
+    position: relative;
+    padding-bottom: var(--sp-6);
+  }
+  .role:last-child { padding-bottom: var(--sp-2); }
+  .role-date {
+    position: absolute;
+    left: -132px;
+    top: 2px;
+    width: 108px;
+    text-align: right;
+    padding-right: var(--sp-5);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
+  }
+  .role::before {
+    content: "";
+    position: absolute;
+    left: -29px;
+    top: 7px;
+    width: 9px;
+    height: 9px;
+    border-radius: var(--r-full);
+    background: var(--bg);
+    border: 2px solid var(--border-strong);
+  }
+  .role.current::before {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+  .role-title {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .role-org {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: var(--accent);
+  }
+  .role-desc {
+    margin: 8px 0 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    max-width: 58ch;
+  }
+
+  /* tech stack */
+  .stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-6);
+  }
+  .stack-group h3 {
+    font-size: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--sp-3);
+  }
+
+  /* talks: hairline rows */
+  .talk {
+    display: grid;
+    grid-template-columns: 96px 1fr auto;
+    gap: var(--sp-4);
+    align-items: start;
+    padding: var(--sp-5) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .talk:last-child { border-bottom: none; }
+  .talk .mono-meta { padding-top: 4px; }
+  .talk-title { font-size: 17px; }
+  .talk-provider {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+  .talk-desc {
+    margin: 8px 0 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  /* open source */
+  .repos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-6);
+  }
+  .repo-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-3);
+  }
+  .repo-head h3 { font-size: 16px; }
+  .repo p {
+    margin: 10px 0 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  @media (max-width: 899px) {
+    .pf-hero { grid-template-columns: 1fr; }
+    .pf-hero-side {
+      flex-direction: row;
+      align-items: center;
+    }
+    .pf-hero-avatar { width: 120px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3) { border-left: none; }
+    .stat:nth-child(n + 3) { border-top: 1px solid var(--border); }
+    .industries { grid-template-columns: repeat(2, 1fr); }
+    .repos { grid-template-columns: 1fr; }
+    .stack { grid-template-columns: 1fr; }
+  }
+
+  /* timeline collapses below 680px: dates inline, spine to the left edge */
+  @media (max-width: 680px) {
+    .timeline { padding-left: 24px; }
+    .timeline::before { left: 0; }
+    .role-date {
+      position: static;
+      display: block;
+      width: auto;
+      text-align: left;
+      padding: 0 0 4px;
+    }
+    .role::before { left: -28px; }
+    .talk { grid-template-columns: 1fr; gap: var(--sp-2); }
+  }
+
+  @media (max-width: 480px) {
+    .industries { grid-template-columns: 1fr; }
+  }
+</style>

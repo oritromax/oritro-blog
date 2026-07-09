@@ -1,87 +1,535 @@
+/* ── self-hosted fonts */
+@import "@fontsource/fraunces/400-italic.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/fraunces/600-italic.css";
+@import "@fontsource/fraunces/700.css";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+/* ── design tokens: the single source of truth for every color */
+@import "./tokens.css";
+
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
+
+/* dark mode is driven by data-theme, not media query */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* semantic Tailwind names mapped onto the tokens */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-ink: var(--text);
+  --color-ink-body: var(--text-body);
+  --color-ink-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-cat: var(--cat);
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-full: var(--r-full);
+  --container-shell: var(--shell);
+  --container-measure: var(--measure);
+}
+
+/* ─────────────────────────── base ─────────────────────────── */
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--topbar) + 24px);
+  }
+
   body {
-    @apply antialiased;
+    background: var(--bg);
+    color: var(--text-body);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .prose p {
-    @apply text-gray-300 mb-4 leading-relaxed;
+  h1, h2, h3, h4 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -.015em;
   }
 
-  .prose ul, .prose ol {
-    @apply my-4 pl-5 text-gray-300;
+  h1 { text-wrap: balance; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--r-sm);
   }
 
-  .prose li {
-    @apply mb-2;
-  }
-
-  .prose a {
-    @apply text-emerald-400 hover:text-emerald-300 transition-colors;
-  }
-
-  .prose blockquote {
-    @apply border-l-4 pl-4 py-2 my-4 text-gray-300 italic;
-  }
-
-  .prose pre {
-    @apply bg-gray-800 rounded-lg p-4 my-4 overflow-auto;
-  }
-
-  .prose code {
-    @apply bg-gray-800 px-1.5 py-0.5 rounded text-sm text-emerald-300;
-  }
-
-  .prose img {
-    @apply rounded-lg my-6 w-full h-auto border border-white/30 p-[5px] bg-gray-800/80 box-border;
-  }
-
-  .prose table {
-    @apply w-full border-collapse my-6;
-  }
-
-  .prose th {
-    @apply py-3 px-4 text-left bg-gray-800/30 border-b border-gray-800;
-  }
-
-  .prose td {
-    @apply py-3 px-4 border-b border-gray-800;
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+    html { scroll-behavior: auto; }
   }
 }
 
-/* Outside @layer so these beat prose-invert utility styles */
-.prose h1,
+/* ──────────────────── component vocabulary ──────────────────── */
+
+/* .eyebrow — the small-caps label used everywhere */
+.eyebrow {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.eyebrow-accent { color: var(--accent); }
+
+/* .chip — carries a category color; reads --cat */
+.chip {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  color: var(--cat);
+  background: color-mix(in srgb, var(--cat) 11%, transparent);
+  transition: background var(--t-fast);
+}
+[data-theme="dark"] .chip {
+  background: color-mix(in srgb, var(--cat) 16%, transparent);
+}
+a.chip:hover { background: color-mix(in srgb, var(--cat) 20%, transparent); }
+
+/* variant: on a saturated background (the post hero band) */
+.chip-inverse { color: #fff; background: rgba(255, 255, 255, .2); }
+a.chip-inverse:hover, .chip-inverse:hover { background: rgba(255, 255, 255, .3); }
+
+/* .tag — neutral, outlined */
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1.5;
+  padding: 3px 7px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: transparent;
+  transition: border-color var(--t-fast), color var(--t-fast);
+}
+a.tag:hover { border-color: var(--cat); color: var(--cat); }
+
+.token-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+}
+.token-sep {
+  width: 1px;
+  height: 12px;
+  background: var(--border);
+}
+
+/* .btn */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-body);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+}
+.btn:hover { border-color: var(--cat); color: var(--cat); }
+.btn-solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+[data-theme="dark"] .btn-solid { color: #0B1D17; }
+.btn-solid:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+}
+[data-theme="dark"] .btn-solid:hover { color: #0B1D17; }
+.btn-block { display: flex; width: 100%; }
+.btn[disabled], .btn[aria-disabled="true"] {
+  opacity: .45;
+  pointer-events: none;
+}
+
+/* .icon-btn — the ONLY interactive element permitted --r-full */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color var(--t-fast), color var(--t-fast);
+}
+.icon-btn:hover { border-color: var(--cat); color: var(--cat); }
+.icon-btn-sm { width: 30px; height: 30px; }
+.icon-btn-inverse {
+  border-color: rgba(255, 255, 255, .3);
+  color: #fff;
+}
+.icon-btn-inverse:hover { border-color: #fff; color: #fff; }
+
+/* .card */
+.card {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: var(--sp-5);
+}
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--t-fast), transform var(--t-fast);
+}
+.card-link:hover {
+  border-color: var(--cat);
+  transform: translateY(-2px);
+}
+
+/* .section-head */
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-4);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--sp-5);
+}
+.section-head.bare { border-bottom: none; padding-bottom: 0; }
+.section-head h2 { font-size: 22px; }
+
+/* avatar + status */
+.avatar {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  object-fit: cover;
+  background: var(--surface-alt);
+}
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  border: 2px solid var(--bg);
+}
+
+/* .author — article footer box */
+.author {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: center;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: var(--sp-4) var(--sp-5);
+}
+
+/* .summary — post summary card */
+.summary {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: var(--sp-4) var(--sp-5);
+  margin-bottom: var(--sp-6);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-body);
+}
+.summary .eyebrow { display: block; margin-bottom: 6px; }
+
+/* pagination number squares */
+.page-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: border-color var(--t-fast), color var(--t-fast);
+}
+.page-num:hover { border-color: var(--accent); color: var(--accent); }
+.page-num.current {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+}
+
+/* ─────────────────────── prose / article body ─────────────────────── */
+
+.prose {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+.prose > p { margin: 0 0 22px; }
+
+.prose .lede {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -.01em;
+  margin-bottom: 34px;
+}
+
+/* h2 gets a full-width hairline beneath — the magazine move */
 .prose h2 {
-  color: #34d399;
+  font-size: 26px;
+  margin: 52px 0 6px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: calc(var(--topbar) + var(--sp-5));
+}
+.prose h2 + p { margin-top: 18px; }
+
+.prose h3 {
+  font-size: 19px;
+  margin: 36px 0 12px;
+  scroll-margin-top: calc(var(--topbar) + var(--sp-5));
 }
 
-.prose h3,
+/* h4 is DEMOTED to a sans-serif eyebrow: in this content h4s are section
+   markers inside h3s — labels, not headings */
 .prose h4 {
-  color: #6ee7b7;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 30px 0 10px;
 }
 
-.prose blockquote {
-  border-left-color: #34d399;
+/* links pick up the category color */
+.prose a:not(.btn):not(.chip):not(.tag) {
+  color: var(--cat);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2.5px;
+  text-decoration-color: color-mix(in srgb, var(--cat) 35%, transparent);
+  transition: text-decoration-color var(--t-fast);
+}
+.prose a:not(.btn):not(.chip):not(.tag):hover { text-decoration-color: var(--cat); }
+
+/* custom bullets, tinted by category */
+.prose ul { margin: 0 0 22px; padding-left: 0; list-style: none; }
+.prose ul li { position: relative; padding-left: 22px; margin-bottom: 9px; }
+.prose ul li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 11px;
+  width: 5px;
+  height: 5px;
+  border-radius: var(--r-full);
+  background: var(--cat);
+  opacity: .55;
 }
 
-.prose ul li::marker,
+.prose ol { margin: 0 0 22px; padding-left: 24px; }
+.prose ol li { margin-bottom: 9px; padding-left: 4px; }
 .prose ol li::marker {
-  color: #34d399;
+  font-family: var(--font-mono);
+  font-size: .85em;
+  color: var(--cat);
 }
 
-@keyframes ping {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+.prose strong { color: var(--text); font-weight: 600; }
+
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: .86em;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  padding: 1.5px 5px;
+  border-radius: var(--r-sm);
+  color: var(--text);
 }
 
-.animate-ping {
-  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 28px auto;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+
+.prose figure { margin: 28px 0; }
+.prose figcaption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 28px 0;
+  font-size: 14px;
+}
+.prose th {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-strong);
+}
+.prose td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ────────────────────────── .aside ──────────────────────────
+   The signature component: the author interrupting himself.
+   Bare blockquotes in legacy posts get the same treatment,
+   minus the label, until the editorial pass adds labels. */
+
+.aside,
+.prose blockquote {
+  position: relative;
+  margin: 30px 0;
+  padding: 18px 20px 18px 22px;
+  border-left: 2px solid var(--cat);
+  background: color-mix(in srgb, var(--cat) 5%, transparent);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-body);
+  font-style: normal;
+}
+[data-theme="dark"] .aside,
+[data-theme="dark"] .prose blockquote {
+  background: color-mix(in srgb, var(--cat) 9%, transparent);
+}
+.aside-label {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cat);
+  margin-bottom: 7px;
+}
+.aside p, .prose blockquote p { margin: 0; }
+.aside p + p, .prose blockquote p + p { margin-top: 10px; }
+
+/* ───────────────────────── code blocks ─────────────────────────
+   Dark in both themes. Non-negotiable. */
+
+.code {
+  margin: 28px 0;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid var(--code-border);
+}
+.code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: color-mix(in srgb, var(--code-bg) 92%, #fff);
+  border-bottom: 1px solid var(--code-border);
+  padding: 7px 14px;
+}
+.code-lang {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--code-dim);
+}
+.code-copy {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--code-dim);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color var(--t-fast);
+}
+.code-copy:hover { color: var(--code-text); }
+.code pre {
+  margin: 0;
+  background: var(--code-bg) !important;
+  color: var(--code-text);
+  padding: 16px 18px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+/* mono meta text everywhere: dates, counts, repo stats */
+.mono-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
 }

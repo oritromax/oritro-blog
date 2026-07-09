@@ -4,6 +4,9 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
+import remarkDirective from 'remark-directive';
+import remarkAside from './src/lib/remark-aside.mjs';
+import rehypeCode from './src/lib/rehype-code.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,5 +22,11 @@ export default defineConfig({
     }
   },
   site: 'https://ioritro.com',
-  integrations: [sitemap()]
+  integrations: [sitemap()],
+  markdown: {
+    // code surfaces stay dark in both themes — deliberate
+    shikiConfig: { theme: 'github-dark' },
+    remarkPlugins: [remarkDirective, remarkAside],
+    rehypePlugins: [rehypeCode]
+  }
 });

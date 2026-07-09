@@ -15,7 +15,7 @@ const consultationTypes = [
   {
     title: 'Digital Automation',
     description: 'Automate manual processes and improve efficiency through tailored automation solutions, futureproofing your engineering workflows.',
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><line x1="6" y1="9" x2="6" y2="15"/><line x1="9" y1="6" x2="15" y2="6"/><line x1="9" y1="18" x2="15" y2="18"/><line x1="18" y1="9" x2="18" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>'
+    icon: '<circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><line x1="6" y1="9" x2="6" y2="15"/><line x1="9" y1="6" x2="15" y2="6"/><line x1="9" y1="18" x2="15" y2="18"/><line x1="18" y1="9" x2="18" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>'
   },
   {
     title: 'Developing Team Management',
@@ -28,113 +28,183 @@ const consultationProcess = [
   {
     title: 'Initial Discussion',
     description: 'A 30-minute scheduled call to understand your needs and challenges. I will generate a problem statement and action report based on this discussion, detailing how i can help',
-    icon: '<path d="M22 2H2v16h20V2z"/><path d="M22 22H2"/><path d="M12 18v4"/><path d="m9 11 3-3 3 3"/><path d="M12 12v4"/>'
   },
   {
     title: 'Problem Analysis',
     description: 'I will deep dive into the problem or challenge you are facing, analyzing the root causes and potential solutions. I will provide a detailed report with my findings.',
-    icon: '<circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>'
   },
   {
     title: 'Solution Planning',
     description: 'I will develop a solution plan tailored to your needs, including timelines, resources, and potential risks. This plan will be presented in a follow-up meeting.',
-    icon: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'
   },
   {
     title: 'Implementation Support',
     description: 'I will provide needed support during the implementation phase, ensuring that the solution is executed effectively and efficiently following the plan.',
-    icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>'
   }
 ];
 ---
 
 <Layout title="Consultation - Nidal Siddique Oritro">
-  <div class="max-w-4xl mx-auto p-4 lg:p-8">
-    <!-- Hero Section -->
-    <div class="text-center mb-12">
-      <h1 class="text-3xl lg:text-4xl font-bold mb-4">Expert Software Engineering Consultation</h1>
-      <p class="text-gray-400 max-w-2xl mx-auto">
-        Leverage my 13+ years of experience to solve your technical challenges and build stronger engineering teams.
+  <div class="consult-shell">
+    <!-- Hero -->
+    <div class="consult-head">
+      <span class="eyebrow eyebrow-accent">Consultation</span>
+      <h1>Expert software engineering consultation</h1>
+      <p>
+        Leverage my 15+ years of experience to solve your technical challenges and build stronger engineering teams.
       </p>
-      <div class="mt-8">
-        <a 
-          href="/contact"
-          class="relative inline-block group"
-        >
-          <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1 group-hover:rotate-0 transition-all duration-300"></div>
-          <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1 group-hover:rotate-0 transition-all duration-300"></div>
-          <div class="relative px-6 py-3 bg-gray-800 rounded-xl group-hover:bg-gray-700 transition-colors">
-            Schedule a Consultation
-          </div>
-        </a>
-      </div>
+      <a href="/contact" class="btn btn-solid">Schedule a consultation</a>
     </div>
 
     <!-- What I Consult About -->
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold mb-8">What I Consult About</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section class="consult-section">
+      <div class="section-head">
+        <h2>What I consult about</h2>
+      </div>
+      <div class="consult-grid">
         {consultationTypes.map(type => (
-          <div class="group relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"></div>
-            <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-            <div class="relative bg-gray-800/50 p-6 rounded-xl h-full hover:bg-gray-800/80 transition-colors">
-              <div class="flex items-center gap-4 mb-4">
-                <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-400/10 text-emerald-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={type.icon}></svg>
-                </div>
-                <h3 class="text-xl font-semibold">{type.title}</h3>
-              </div>
-              <p class="text-gray-400">{type.description}</p>
+          <div class="card consult-card">
+            <div class="consult-card-head">
+              <span class="consult-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={type.icon}></svg>
+              </span>
+              <h3>{type.title}</h3>
             </div>
+            <p>{type.description}</p>
           </div>
         ))}
       </div>
     </section>
 
     <!-- How I Consult -->
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold mb-8">How I Consult</h2>
-      <div class="relative">
-        <div class="absolute left-8 top-8 h-[calc(100%-4rem)] w-0.5 bg-gray-800"></div>
-        <div class="space-y-8">
-          {consultationProcess.map((step, index) => (
-            <div class="relative pl-16">
-              <div class="absolute left-[1.8rem] -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 text-emerald-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={step.icon}></svg>
-              </div>
-              <div class="relative">
-                <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/10 rounded-xl -rotate-0.5"></div>
-                <div class="absolute inset-0 border border-white/10 rounded-xl rotate-0.5"></div>
-                <div class="relative bg-gray-800/50 p-6 rounded-xl">
-                  <h3 class="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p class="text-gray-400">{step.description}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <section class="consult-section">
+      <div class="section-head">
+        <h2>How I consult</h2>
       </div>
+      <ol class="process">
+        {consultationProcess.map((step, index) => (
+          <li class="process-step">
+            <span class="process-num mono-meta">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
 
-    <!-- CTA Section -->
-    <section>
-      <div class="relative">
-        <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/10 to-purple-400/20 rounded-xl -rotate-1"></div>
-        <div class="absolute inset-0 border border-white/10 rounded-xl rotate-1"></div>
-        <div class="relative bg-gray-800/50 p-8 rounded-xl text-center">
-          <h2 class="text-2xl font-bold mb-4">Ready to Transform Your Engineering Team?</h2>
-          <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
-            Let's work together to solve your technical challenges and build a stronger engineering organization.
-          </p>
-          <a 
-            href="/contact"
-            class="inline-block py-3 px-8 bg-emerald-400/10 text-emerald-400 rounded-xl font-medium hover:bg-emerald-400/20 transition-colors"
-          >
-            Get Started
-          </a>
-        </div>
+    <!-- CTA -->
+    <section class="consult-section">
+      <div class="card consult-cta">
+        <h2>Ready to transform your engineering team?</h2>
+        <p>
+          Let's work together to solve your technical challenges and build a stronger engineering organization.
+        </p>
+        <a href="/contact" class="btn btn-solid">Get started</a>
       </div>
     </section>
   </div>
 </Layout>
+
+<style>
+  .consult-shell {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: var(--sp-6) var(--sp-5);
+  }
+  .consult-head {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-7);
+  }
+  .consult-head h1 {
+    font-size: clamp(26px, 4vw, 34px);
+    max-width: 22ch;
+  }
+  .consult-head p {
+    margin: 0;
+    max-width: 52ch;
+    color: var(--text-muted);
+  }
+
+  .consult-section {
+    border-top: 1px solid var(--border);
+    padding-top: var(--sp-6);
+    margin-top: var(--sp-6);
+  }
+  .consult-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-4);
+  }
+  .consult-card-head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-3);
+  }
+  .consult-card-head h3 { font-size: 16px; }
+  .consult-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex: none;
+    border-radius: var(--r-md);
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .consult-card p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  .process {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .process-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: var(--sp-4);
+    padding: var(--sp-5) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .process-step:last-child { border-bottom: none; }
+  .process-num { font-size: 15px; padding-top: 3px; }
+  .process-step h3 { font-size: 17px; }
+  .process-step p {
+    margin: 7px 0 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-body);
+    max-width: 62ch;
+  }
+
+  .consult-cta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-6);
+  }
+  .consult-cta h2 { font-size: 24px; max-width: 24ch; }
+  .consult-cta p {
+    margin: 0;
+    max-width: 48ch;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .consult-grid { grid-template-columns: 1fr; }
+  }
+</style>

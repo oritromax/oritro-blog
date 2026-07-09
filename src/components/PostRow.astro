@@ -1,0 +1,100 @@
+---
+import { categoryVar, postCatVar } from '../lib/category';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const date = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+});
+const categories = (post.data.categories ?? []).map((c) => c.trim());
+const tags = post.data.tags ?? [];
+---
+
+<article class="post-row" style={`--cat: ${postCatVar(post.data.categories)}`}>
+  <time class="post-row-date mono-meta" datetime={post.data.date.toISOString()}>{date}</time>
+  <div class="post-row-body">
+    <h2 class="post-row-title">
+      <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+    </h2>
+    {post.data.description && <p class="post-row-excerpt">{post.data.description}</p>}
+    {(categories.length > 0 || tags.length > 0) && (
+      <div class="token-row">
+        {categories.map((category) => (
+          <a href={`/category/${encodeURIComponent(category)}`} class="chip" style={`--cat: ${categoryVar(category)}`} aria-label={`View all posts in ${category}`}>
+            {category}
+          </a>
+        ))}
+        {categories.length > 0 && tags.length > 0 && <span class="token-sep"></span>}
+        {tags.map((tag) => (
+          <a href={`/tag/${encodeURIComponent(tag)}`} class="tag" aria-label={`View all posts tagged with ${tag}`}>
+            {tag}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .post-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: var(--sp-4);
+    padding: 26px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-row::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 26px;
+    bottom: 26px;
+    width: 2px;
+    background: var(--cat);
+    opacity: 0;
+    transition: opacity var(--t-fast);
+  }
+  .post-row:hover::before { opacity: 1; }
+
+  .post-row-date { padding-top: 5px; }
+
+  .post-row-title {
+    font-size: 19px;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .post-row-title a {
+    text-decoration: none;
+    color: var(--text);
+    transition: color var(--t-fast);
+  }
+  .post-row:hover .post-row-title a { color: var(--cat); }
+
+  .post-row-excerpt {
+    margin: 7px 0 0;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .post-row .token-row { margin-top: 12px; }
+
+  @media (max-width: 560px) {
+    .post-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 22px 0;
+    }
+    .post-row::before { left: -12px; }
+  }
+</style>

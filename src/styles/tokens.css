@@ -1,0 +1,95 @@
+:root {
+  /* ── neutrals (light) */
+  --bg:            #F5F4EF;  /* warm cream page background — NOT white */
+  --surface:       #FFFFFF;  /* cards, elevated panels */
+  --surface-alt:   #EFEEE8;  /* footer band, avatar wells, inline code bg */
+  --border:        #E4E2DA;  /* every hairline */
+  --border-strong: #D6D3C9;  /* hover state for hairlines, timeline nodes */
+  --text:          #1A1A1E;  /* headings */
+  --text-body:     #3A3A42;  /* body copy */
+  --text-muted:    #8A8A93;  /* meta, captions, breadcrumbs, counts */
+
+  /* ── accent (site identity) */
+  --accent:        #0F9D6E;
+  --accent-hover:  #0B7D57;
+  --accent-soft:   #E6F4EF;
+
+  /* ── category taxonomy */
+  --c-ai:       #7C5CFF;
+  --c-llm:      #A855D6;
+  --c-homelab:  #E08A2E;
+  --c-selfhost: #4A7DD6;
+  --c-codebox:  #2BB3C0;
+  --c-linux:    #E05252;
+  --c-work:     #0F9D6E;
+  --c-lecture:  #3DAF8F;
+  --c-life:     #8A8A93;  /* also the fallback for uncategorized */
+
+  /* ── code surface (dark in BOTH themes, deliberately) */
+  --code-bg:     #1B1E26;
+  --code-border: #2C3039;
+  --code-text:   #D8D6D0;
+  --code-dim:    #8B909C;
+
+  /* ── type */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body:    "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── radius (this scale is load-bearing) */
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:  12px;
+  --r-full: 999px;
+
+  /* ── space */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 22px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+
+  /* ── layout */
+  --shell:   1180px;  /* max page width */
+  --measure:  680px;  /* article text column */
+  --topbar:    64px;
+
+  /* ── motion */
+  --t-fast: .15s ease;
+  --t-med:  .25s ease;
+
+  /* ── hero band: text is always white; every saturated band mixes toward
+     --band-dark so white passes 4.5:1 against all nine category colors in
+     both themes */
+  --hero-ink:  #FFFFFF;
+  --band-dark: #14151A;
+
+  /* ── the category channel. Default = accent. Overridden per element/page. */
+  --cat: var(--accent);
+}
+
+[data-theme="dark"] {
+  --bg:            #14151A;
+  --surface:       #1D1F26;
+  --surface-alt:   #191B21;
+  --border:        #2C2F38;
+  --border-strong: #3A3E49;
+  --text:          #E8E6E0;
+  --text-body:     #B8B7B2;
+  --text-muted:    #7E828E;
+
+  --accent:        #34D6A0;
+  --accent-hover:  #5FE3B8;
+  --accent-soft:   rgba(52, 214, 160, .12);
+
+  /* category colors get MORE luminous in dark, not inverted */
+  --c-ai:       #9B85FF;
+  --c-llm:      #C27DE8;
+  --c-homelab:  #F0A94F;
+  --c-selfhost: #6E9CE8;
+  --c-codebox:  #45CBD8;
+  --c-linux:    #F06B6B;
+  --c-work:     #34D6A0;
+  --c-lecture:  #58C7A6;
+  --c-life:     #9096A3;
+
+  --code-bg:     #12141A;
+  --code-border: #282C34;
+}

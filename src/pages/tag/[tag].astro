@@ -1,28 +1,25 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import TimelinePost from '../../components/TimelinePost.astro';
+import PostRow from '../../components/PostRow.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
-  
-  // Get all unique tags
+
   const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
-  
-  // Create a path for each tag
+
   return uniqueTags.map(tag => {
-    // Filter posts that have this tag
-    const filteredPosts = allPosts.filter(post => 
+    const filteredPosts = allPosts.filter(post =>
       post.data.tags?.includes(tag)
     );
-    
+
     return {
       params: { tag },
-      props: { 
+      props: {
         posts: filteredPosts.sort(
           (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
         ),
-        tag 
+        tag
       }
     };
   });
@@ -32,36 +29,46 @@ const { posts, tag } = Astro.props;
 ---
 
 <Layout title={`Posts tagged with ${tag}`}>
-  <div class="max-w-4xl mx-auto py-8 px-4">
-    <div class="mb-8">
-      <div class="flex items-center gap-4 mb-4">
-        <a 
-          href="/" 
-          class="text-emerald-400 hover:text-emerald-300 transition-colors inline-flex items-center gap-2"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m15 18-6-6 6-6"/></svg>
-          Home
-        </a>
-        <span class="text-gray-500">/</span>
-      </div>
-      <h1 class="text-3xl font-bold flex items-center gap-2">
-        <span class="px-3 py-1 bg-emerald-400/10 text-emerald-400 rounded-full text-sm font-medium">#{tag}</span>
-        <span class="text-white">({posts.length})</span>
-      </h1>
+  <div class="listing-shell">
+    <nav class="listing-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span>Tags</span>
+    </nav>
+    <div class="section-head">
+      <h1 class="listing-title"><span class="tag">{tag}</span></h1>
+      <span class="eyebrow">{posts.length} post{posts.length === 1 ? '' : 's'}</span>
     </div>
-    
-    <div class="space-y-8">
-      {posts.map(post => (
-        <TimelinePost post={post} />
-      ))}
-    </div>
-    
-    {posts.length === 0 && (
-      <div class="text-center py-12">
-        <div class="text-6xl mb-4">😢</div>
-        <h3 class="text-2xl font-bold mb-2">No posts found</h3>
-        <p class="text-gray-400">There are no posts with this tag yet.</p>
-      </div>
-    )}
+    {posts.map((post) => <PostRow post={post} />)}
   </div>
 </Layout>
+
+<style is:global>
+  .listing-shell {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: var(--sp-6) var(--sp-5);
+  }
+  .listing-crumbs {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--sp-4);
+  }
+  .listing-crumbs a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--t-fast);
+  }
+  .listing-crumbs a:hover { color: var(--accent); }
+  .listing-title {
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .listing-title .tag { font-size: 14px; padding: 5px 10px; }
+</style>

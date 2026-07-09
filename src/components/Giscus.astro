@@ -14,29 +14,60 @@ const {
 } = Astro.props;
 ---
 
-<div class="giscus-container mt-16 pt-8 border-t border-gray-700">
-  <h3 class="text-xl font-semibold mb-6">Comments</h3>
-  <script
-    src="https://giscus.app/client.js"
+<div class="giscus-container">
+  <h3>Comments</h3>
+  <div id="giscus-slot"
     data-repo={repo}
     data-repo-id={repoId}
     data-category={category}
     data-category-id={categoryId}
-    data-mapping="title"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="dark"
-    data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async
-  ></script>
+  ></div>
 </div>
 
 <style>
   .giscus-container {
-    max-width: 100%;
+    margin-top: var(--sp-7);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--border);
+  }
+  .giscus-container h3 {
+    font-size: 19px;
+    margin-bottom: var(--sp-4);
   }
 </style>
+
+<script>
+  // load giscus with the active theme, and follow the site toggle
+  const slot = document.getElementById("giscus-slot");
+  if (slot) {
+    const theme = () => (document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+    const s = document.createElement("script");
+    s.src = "https://giscus.app/client.js";
+    s.async = true;
+    s.crossOrigin = "anonymous";
+    const cfg: Record<string, string> = {
+      "data-repo": slot.dataset.repo || "",
+      "data-repo-id": slot.dataset.repoId || "",
+      "data-category": slot.dataset.category || "",
+      "data-category-id": slot.dataset.categoryId || "",
+      "data-mapping": "title",
+      "data-strict": "0",
+      "data-reactions-enabled": "1",
+      "data-emit-metadata": "0",
+      "data-input-position": "top",
+      "data-theme": theme(),
+      "data-lang": "en",
+      "data-loading": "lazy",
+    };
+    for (const [k, v] of Object.entries(cfg)) s.setAttribute(k, v);
+    slot.appendChild(s);
+
+    document.addEventListener("themechange", () => {
+      const frame = document.querySelector<HTMLIFrameElement>("iframe.giscus-frame");
+      frame?.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme: theme() } } },
+        "https://giscus.app"
+      );
+    });
+  }
+</script>

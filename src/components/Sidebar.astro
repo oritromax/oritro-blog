@@ -1,0 +1,151 @@
+---
+import { KNOWN_CATEGORIES, categoryVar, hasCategory } from '../lib/category';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+
+// only the nine color-mapped categories appear here, sorted by count desc
+const categoryRows = KNOWN_CATEGORIES
+  .map((name) => ({
+    name,
+    color: categoryVar(name),
+    count: posts.filter((p) => hasCategory(p.data.categories, name)).length,
+  }))
+  .filter((c) => c.count > 0)
+  .sort((a, b) => b.count - a.count);
+---
+
+<aside class="sidebar">
+  <div class="sidebar-avatar">
+    <img src="/blog-avatar-final.jpg" alt="Nidal Siddique Oritro" class="avatar" width="220" height="220" />
+    <span class="status-dot" aria-hidden="true"></span>
+  </div>
+
+  <h1 class="sidebar-role">Software Engineer / Manager</h1>
+  <p class="sidebar-bio">
+    Software Engineer turned Engineering Manager, helping teams build better
+    software and solve complex problems. I write about software engineering,
+    homelab, self-hosting, and building high-performing teams.
+  </p>
+
+  <a href="/portfolio" class="btn btn-solid btn-block">View portfolio</a>
+
+  <div class="sidebar-social">
+    <a href="https://www.linkedin.com/in/oritromax/" class="icon-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </a>
+    <a href="https://github.com/oritromax" class="icon-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+    </a>
+  </div>
+
+  <div class="sidebar-cats">
+    <div class="section-head">
+      <h2>Categories</h2>
+    </div>
+    <ul class="cat-list">
+      {categoryRows.map(({ name, color, count }) => (
+        <li style={`--cat: ${color}`}>
+          <a href={`/category/${encodeURIComponent(name)}`} aria-label={`View all posts in ${name}`}>
+            <span class="cat-dot" aria-hidden="true"></span>
+            <span class="cat-name">{name}</span>
+            <span class="cat-count">{count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a href="/categories" class="cat-all">All categories →</a>
+  </div>
+</aside>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: calc(var(--topbar) + 28px);
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+  .sidebar-avatar {
+    position: relative;
+    width: 220px;
+    max-width: 100%;
+  }
+  .sidebar-avatar .avatar {
+    width: 100%;
+    aspect-ratio: 1;
+  }
+  .sidebar-avatar .status-dot {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: block;
+  }
+  .sidebar-role {
+    font-size: 21px;
+    margin-top: var(--sp-2);
+  }
+  .sidebar-bio {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .sidebar-social {
+    display: flex;
+    gap: var(--sp-2);
+  }
+  .sidebar-cats { margin-top: var(--sp-4); }
+  .sidebar-cats .section-head { margin-bottom: 0; }
+  .sidebar-cats h2 { font-size: 16px; }
+
+  .cat-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .cat-list li { border-bottom: 1px solid var(--border); }
+  .cat-list a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 2px;
+    text-decoration: none;
+    color: var(--text-body);
+    font-size: 13.5px;
+    transition: color var(--t-fast);
+  }
+  .cat-list a:hover { color: var(--cat); }
+  .cat-dot {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    border-radius: var(--r-full);
+    background: var(--cat);
+  }
+  .cat-name { flex: 1; }
+  .cat-count {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+  }
+  .cat-all {
+    display: inline-block;
+    margin-top: var(--sp-3);
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color var(--t-fast);
+  }
+  .cat-all:hover { color: var(--accent); }
+
+  @media (max-width: 899px) {
+    .sidebar { position: static; }
+  }
+</style>

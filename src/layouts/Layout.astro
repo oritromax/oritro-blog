@@ -9,14 +9,21 @@ interface Props {
   type?: "website" | "article";
   publishedTime?: string;
   noindex?: boolean;
+  /** CSS value for the page-level category channel, e.g. "var(--c-ai)" */
+  cat?: string;
 }
 
-const { title, description = "Blog and portfolio of Nidal Siddique Oritro — Software Engineer, Engineering Manager. Writing about software, homelab, and building teams and training and Using AI", image, canonicalUrl, type = "website", publishedTime, noindex = false } = Astro.props;
+const { title, description = "Blog and portfolio of Nidal Siddique Oritro — Software Engineer, Engineering Manager. Writing about software, homelab, and building teams and training and Using AI", image, canonicalUrl, type = "website", publishedTime, noindex = false, cat } = Astro.props;
 
 const site = import.meta.env.SITE || "https://ioritro.com";
 const url = canonicalUrl || new URL(Astro.url.pathname, site).href;
 const ogImage = image?.startsWith("http") ? image : image ? new URL(image, site).href : `${site}/blog-avatar-finalized.jpg`;
 const metaDescription = description.slice(0, 160);
+
+const path = Astro.url.pathname;
+const isHome = path === "/" || path.startsWith("/page/") || path.startsWith("/blog/") || path.startsWith("/category/") || path.startsWith("/tag/") || path === "/categories" || path === "/categories/";
+const isPortfolio = path === "/portfolio" || path === "/portfolio/";
+const isContact = path === "/contact" || path === "/contact/";
 ---
 
 <!doctype html>
@@ -24,6 +31,11 @@ const metaDescription = description.slice(0, 160);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      const saved = localStorage.getItem("theme");
+      const sys = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = saved || sys;
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -33,7 +45,8 @@ const metaDescription = description.slice(0, 160);
     <meta name="author" content="Nidal Siddique Oritro" />
     <link rel="canonical" href={url} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <meta name="theme-color" content="#111827" />
+    <meta name="theme-color" content="#F5F4EF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14151A" media="(prefers-color-scheme: dark)" />
     <!-- Open Graph -->
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Oritro's Blog" />
@@ -50,297 +63,167 @@ const metaDescription = description.slice(0, 160);
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:creator" content="@oritromax" />
   </head>
-  <body class="min-h-screen bg-gray-900 text-white">
-    <div class="min-h-screen flex flex-col lg:flex-row">
-      <!-- Left Sidebar -->
-      <div
-        class="lg:w-[400px] border-b lg:border-b-0 lg:border-r border-gray-800 p-4 lg:p-8 flex flex-col"
-      >
-        <div class="flex items-center gap-2 mb-4 lg:mb-8">
-          <div class="w-6 h-6 rounded-full border-2 border-white rotate-45">
-          </div>
-          <span class="font-medium text-sm lg:text-base"
-            >NIDAL SIDDIQUE ORITRO</span
-          >
-        </div>
-
-        <div
-          class="relative mb-4 lg:mb-8 aspect-square w-[200px] lg:w-[250px] mx-auto"
-        >
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-purple-400/20 rounded-2xl -rotate-2"
-          >
-          </div>
-          <div
-            class="absolute inset-0 border-2 border-white/10 rounded-2xl rotate-2"
-          >
-          </div>
-          <img
-            src="/blog-avatar-final.jpg"
-            alt="Nidal Siddique Oritro"
-            class="relative w-full h-full object-cover object-center rounded-2xl"
-          />
-          <div
-            class="absolute bottom-3 right-3 w-3 h-3 bg-emerald-400 rounded-full"
-          >
-            <div
-              class="absolute inset-0 bg-emerald-400 rounded-full animate-ping"
-            >
-            </div>
-          </div>
-        </div>
-
-        <div class="mb-4 lg:mb-8 text-center lg:text-left">
-          <h1 class="text-xl lg:text-2xl font-bold mb-2 lg:mb-4">
-            Software Engineer / Manager
-          </h1>
-          <p class="text-gray-400">
-            Software Engineer turned into Engineering Manager, helping teams to
-            build better software and solve complex problems. I am passionate
-            about building high-performing teams and creating a culture of
-            continuous improvement.
-          </p>
-        </div>
-
-        <div class="mb-4 lg:mb-8 text-center lg:text-left">
-          <h2 class="text-lg font-semibold mb-2 lg:mb-4">Who Am i?</h2>
-          <p class="text-gray-400 text-sm">
-            I started writing code as a profession early 2013 and i never
-            stopped. My 15+ years of industry experience is helping me bring
-            structure and value to my team. My 2025 goal is to build digital
-            automation that helps team work more effortlessly. <br /><br />
-
-            This is my personal blog, portfolio, whatever floats your boat. I
-            write about software engineering, homelab, self hosting, my journey
-            into becoming a manager, my experience in helping teams build a
-            better software and my experience in building high-performing teams.<br
-            /><br />
-
-            I am a novice 3d model desiger, love 3d printing, creating complex
-            homelab server ( that i probably don't need), working with LLM and
-            AI models.
-          </p>
-          <div class="relative mt-6">
-            <div
-              class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-purple-400/20 rounded-xl -rotate-1"
-            >
-            </div>
-            <div
-              class="absolute inset-0 border-2 border-white/10 rounded-xl rotate-1"
-            >
-            </div>
-            <a
-              href="/portfolio"
-              class="relative w-full py-3 px-6 bg-gray-800 hover:bg-gray-700 rounded-xl font-medium transition-all hover:scale-[1.02] block text-center"
-              aria-label="View Portfolio"
-            >
-              View Portfolio
-            </a>
-          </div>
-
-          <div
-            class="flex items-center gap-4 justify-center lg:justify-start mt-6"
-          >
-            <a
-              href="https://www.linkedin.com/in/oritromax/"
-              class="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-500 transition-colors"
-              target="_blank"
-              aria-label="LinkedIn Profile"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-5 h-5"
-                ><path
-                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-                ></path><rect x="2" y="9" width="4" height="12"></rect><circle
-                  cx="4"
-                  cy="4"
-                  r="2"></circle></svg
-              >
-            </a>
-            <a
-              href="https://github.com/oritromax"
-              class="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-500 transition-colors"
-              target="_blank"
-              aria-label="GitHub"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-5 h-5"
-                ><path
-                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                ></path></svg
-              >
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Content -->
-      <div class="flex-1">
-        <!-- Navigation -->
-        <nav class="border-b border-gray-800 px-4 lg:px-8 py-4 lg:py-6">
-          <div class="flex items-center justify-between mx-auto">
-            <!-- Mobile menu button -->
-            <button
-              id="mobile-menu-button"
-              class="lg:hidden relative z-50 text-white hover:text-emerald-400 transition-colors"
-              aria-label="Mobile Menu"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                id="menu-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-6 h-6"
-                ><line x1="4" x2="20" y1="12" y2="12"></line><line
-                  x1="4"
-                  x2="20"
-                  y1="6"
-                  y2="6"></line><line x1="4" x2="20" y1="18" y2="18"
-                ></line></svg
-              >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                id="close-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-6 h-6 hidden"
-                ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
-              >
-            </button>
-
-            <!-- Desktop menu -->
-            <div class="hidden lg:flex items-center gap-8">
-              <a
-                href="/"
-                class={Astro.url.pathname === "/" || Astro.url.pathname.startsWith("/page/") || Astro.url.pathname.startsWith("/blog/") || Astro.url.pathname.startsWith("/category/") || Astro.url.pathname.startsWith("/tag/")
-                  ? "font-medium text-white"
-                  : "text-gray-400 hover:text-white transition-colors"}
-                aria-label="Homepage">Home</a>
-              <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a
-                href="/portfolio"
-                class={Astro.url.pathname === "/portfolio"
-                  ? "font-medium text-white"
-                  : "text-gray-400 hover:text-white transition-colors"}
-                aria-label="Portfolio Page"
-                >Portfolio</a
-              >
-              <div class="w-[2px] h-4 bg-emerald-400/30"></div>
-              <a
-                href="/contact"
-                class={Astro.url.pathname === "/contact"
-                  ? "font-medium text-white"
-                  : "text-gray-400 hover:text-white transition-colors"}
-                aria-label="Contact Page"
-                >Contact</a
-              >
-            </div>
-
-            <!-- Mobile menu overlay -->
-            <div
-              id="mobile-menu"
-              class="fixed inset-0 bg-gray-900/95 z-40 lg:hidden transform -translate-x-full transition-transform duration-300"
-            >
-              <div
-                class="flex flex-col items-center justify-center h-full space-y-8"
-              >
-                <a
-                  href="/"
-                  class={Astro.url.pathname === "/" || Astro.url.pathname.startsWith("/page/") || Astro.url.pathname.startsWith("/blog/") || Astro.url.pathname.startsWith("/category/") || Astro.url.pathname.startsWith("/tag/")
-                    ? "text-2xl font-medium text-white"
-                    : "text-2xl text-gray-400 hover:text-white transition-colors"}
-                  >Home</a
-                >
-                <a
-                  href="/portfolio"
-                  class={Astro.url.pathname === "/portfolio"
-                    ? "text-2xl font-medium text-white"
-                    : "text-2xl text-gray-400 hover:text-white transition-colors"}
-                  aria-label="Portfolio Page"
-                  >Portfolio</a
-                >
-                <a
-                  href="/contact"
-                  class={Astro.url.pathname === "/contact"
-                    ? "text-2xl font-medium text-white"
-                    : "text-2xl text-gray-400 hover:text-white transition-colors"}
-                  aria-label="Contact Page"
-                  >Contact</a
-                >
-              </div>
-            </div>
-
-          </div>
+  <body style={cat ? `--cat: ${cat}` : undefined}>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="/" class="brand" aria-label="Homepage">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Nidal Siddique Oritro</span>
+        </a>
+        <nav class="topnav" aria-label="Main">
+          <a href="/" class:list={["topnav-link", { active: isHome }]}>Home</a>
+          <a href="/portfolio" class:list={["topnav-link", { active: isPortfolio }]}>Portfolio</a>
+          <a href="/contact" class:list={["topnav-link", { active: isContact }]}>Contact</a>
+          <button id="theme-toggle" class="icon-btn icon-btn-sm" aria-label="Switch to dark theme">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </button>
         </nav>
-
-        <main>
-          <slot />
-        </main>
-
-        <footer class="py-8 px-4 border-t border-gray-800 mt-auto">
-          <div
-            class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center"
-          >
-            <p class="text-gray-400 text-sm">
-              &copy; 2013 - {new Date().getFullYear()} Nidal Siddique Oritro. Built
-              with Astro.
-            </p>
-            <div class="flex space-x-4 mt-4 md:mt-0">
-              <a
-                href="/contact"
-                class="text-gray-400 hover:text-white transition-colors"
-                aria-label="Contact Page">Contact</a
-              >
-            </div>
-          </div>
-        </footer>
       </div>
-    </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <p class="mono-meta">
+          &copy; 2013 – {new Date().getFullYear()} Nidal Siddique Oritro. Built with Astro.
+        </p>
+        <div class="site-footer-links">
+          <a href="/portfolio">Portfolio</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        height: var(--topbar);
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+      }
+      .topbar-inner {
+        max-width: var(--shell);
+        height: 100%;
+        margin: 0 auto;
+        padding: 0 var(--sp-5);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--sp-4);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        text-decoration: none;
+        min-width: 0;
+      }
+      .brand-mark {
+        width: 16px;
+        height: 16px;
+        flex: none;
+        background: var(--accent);
+        border-radius: 3px;
+        transform: rotate(45deg);
+      }
+      .brand-name {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 16px;
+        letter-spacing: -.015em;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .topnav {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-5);
+      }
+      .topnav-link {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--text-muted);
+        transition: color var(--t-fast);
+      }
+      .topnav-link:hover { color: var(--text); }
+      .topnav-link.active { color: var(--accent); }
+
+      .site-footer {
+        margin-top: var(--sp-8);
+        background: var(--surface-alt);
+        border-top: 1px solid var(--border);
+      }
+      .site-footer-inner {
+        max-width: var(--shell);
+        margin: 0 auto;
+        padding: var(--sp-5);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--sp-3) var(--sp-5);
+        align-items: center;
+        justify-content: space-between;
+      }
+      .site-footer-links {
+        display: flex;
+        gap: var(--sp-4);
+      }
+      .site-footer-links a {
+        font-size: 12px;
+        text-decoration: none;
+        color: var(--text-muted);
+        transition: color var(--t-fast);
+      }
+      .site-footer-links a:hover { color: var(--accent); }
+
+      /* theme toggle shows the icon for the theme you'd switch TO */
+      #theme-toggle .icon-sun { display: none; }
+      :global([data-theme="dark"]) #theme-toggle .icon-sun { display: block; }
+      :global([data-theme="dark"]) #theme-toggle .icon-moon { display: none; }
+
+      @media (max-width: 480px) {
+        .brand-name { font-size: 14px; max-width: 44vw; }
+        .topnav { gap: var(--sp-4); }
+      }
+    </style>
 
     <script>
-      // Mobile menu toggle
-      const mobileMenuButton = document.getElementById("mobile-menu-button");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const menuIcon = document.getElementById("menu-icon");
-      const closeIcon = document.getElementById("close-icon");
+      // theme toggle: persist + announce (Giscus listens for themechange)
+      const toggle = document.getElementById("theme-toggle");
+      const applyLabel = () => {
+        const dark = document.documentElement.dataset.theme === "dark";
+        toggle?.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+      };
+      applyLabel();
+      toggle?.addEventListener("click", () => {
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem("theme", next);
+        applyLabel();
+        document.dispatchEvent(new CustomEvent("themechange", { detail: { theme: next } }));
+      });
 
-      if (mobileMenuButton && mobileMenu && menuIcon && closeIcon) {
-        mobileMenuButton.addEventListener("click", () => {
-          mobileMenu.classList.toggle("-translate-x-full");
-          menuIcon.classList.toggle("hidden");
-          closeIcon.classList.toggle("hidden");
+      // code block copy buttons (markup injected by rehype-code)
+      document.addEventListener("click", (e) => {
+        const btn = (e.target as HTMLElement).closest?.(".code-copy") as HTMLButtonElement | null;
+        if (!btn) return;
+        const pre = btn.closest(".code")?.querySelector("pre");
+        if (!pre) return;
+        navigator.clipboard.writeText(pre.textContent || "").then(() => {
+          btn.textContent = "Copied";
+          setTimeout(() => { btn.textContent = "Copy"; }, 1600);
         });
-      }
+      });
     </script>
 
     <!-- Google tag (gtag.js) -->
