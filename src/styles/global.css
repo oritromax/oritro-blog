@@ -375,7 +375,8 @@ a.tag:hover { border-color: var(--cat); color: var(--cat); }
   opacity: .55;
 }
 
-.prose ol { margin: 0 0 22px; padding-left: 24px; }
+/* Tailwind preflight strips list-style from ol — restore the numbers */
+.prose ol { list-style: decimal; margin: 0 0 22px; padding-left: 24px; }
 .prose ol li { margin-bottom: 9px; padding-left: 4px; }
 .prose ol li::marker {
   font-family: var(--font-mono);
