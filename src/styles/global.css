@@ -498,11 +498,22 @@ a.tag:hover { border-color: var(--cat); color: var(--cat); }
   padding: 7px 14px;
 }
 .code-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--code-dim);
+}
+/* per-language color dot; unmapped languages get the dim default */
+.code-lang::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--lang-color, var(--code-dim));
 }
 .code-copy {
   background: transparent;
@@ -519,7 +530,9 @@ a.tag:hover { border-color: var(--cat); color: var(--cat); }
   transition: color var(--t-fast);
 }
 .code-copy:hover { color: var(--code-text); }
-.code pre {
+/* .prose pre is the fallback for any block the wrapper missed */
+.code pre,
+.prose pre {
   margin: 0;
   background: var(--code-bg) !important;
   color: var(--code-text);
@@ -530,6 +543,33 @@ a.tag:hover { border-color: var(--cat); color: var(--cat); }
   line-height: 1.75;
   tab-size: 2;
 }
+.prose pre {
+  margin: 28px 0;
+  border-radius: var(--r-md);
+  border: 1px solid var(--code-border);
+}
+.code pre {
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+
+/* line numbers (CSS counters over Shiki's .line spans; excluded from copy) */
+.code pre code {
+  display: block;
+  counter-reset: line;
+}
+.code pre .line { counter-increment: line; }
+.code pre .line::before {
+  content: counter(line);
+  display: inline-block;
+  width: 3ch;
+  margin-right: 14px;
+  text-align: right;
+  color: var(--code-dim);
+  user-select: none;
+}
+.code pre .line:last-child:empty::before { content: none; }
 
 /* mono meta text everywhere: dates, counts, repo stats */
 .mono-meta {

@@ -26,12 +26,29 @@ function langOf(pre) {
   return lang === 'plaintext' ? 'text' : lang;
 }
 
+/* language → category-color token for the bar's identity dot;
+   unmapped languages fall back to the dim default in CSS */
+const LANG_COLORS = {
+  bash: 'work', sh: 'work', shell: 'work', zsh: 'work', console: 'work',
+  js: 'homelab', javascript: 'homelab', jsx: 'homelab',
+  ts: 'selfhost', typescript: 'selfhost', tsx: 'selfhost',
+  go: 'codebox', python: 'codebox', py: 'codebox',
+  yaml: 'lecture', yml: 'lecture', json: 'lecture', toml: 'lecture', ini: 'lecture', nginx: 'lecture', conf: 'lecture',
+  css: 'llm', scss: 'llm', php: 'llm',
+  html: 'linux', xml: 'linux', astro: 'linux', vue: 'linux', svelte: 'linux',
+  sql: 'ai',
+};
+
 function wrap(pre) {
   const lang = langOf(pre);
+  const colorKey = LANG_COLORS[lang.toLowerCase()];
   return {
     type: 'element',
     tagName: 'div',
-    properties: { className: ['code'] },
+    properties: {
+      className: ['code'],
+      ...(colorKey ? { style: `--lang-color: var(--c-${colorKey})` } : {}),
+    },
     children: [
       {
         type: 'element',
