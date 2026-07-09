@@ -1,15 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import { categoryVar } from '../lib/category';
+import { categoryVar, categoryHref, categorySlug } from '../lib/category';
 
 const allPosts = await getCollection('blog');
-const categories = [...new Set(allPosts.flatMap(post => post.data.categories || ['Uncategorized']))];
 
-const categoryCounts = categories.map(category => {
-  const count = allPosts.filter(post => post.data.categories?.includes(category)).length;
-  return { category, count };
-}).sort((a, b) => b.count - a.count);
+// group by canonical slug so case/whitespace/normalization variants merge
+const bySlug = new Map<string, { category: string; count: number }>();
+for (const post of allPosts) {
+  for (const raw of post.data.categories ?? ['Uncategorized']) {
+    const slug = categorySlug(raw);
+    const entry = bySlug.get(slug) ?? { category: raw.trim(), count: 0 };
+    entry.count += 1;
+    bySlug.set(slug, entry);
+  }
+}
+const categoryCounts = [...bySlug.values()].sort((a, b) => b.count - a.count);
 ---
 
 <Layout title="All Categories">
@@ -27,7 +33,7 @@ const categoryCounts = categories.map(category => {
     <ul class="all-cats">
       {categoryCounts.map(({ category, count }) => (
         <li style={`--cat: ${categoryVar(category)}`}>
-          <a href={`/category/${encodeURIComponent(category)}`}>
+          <a href={categoryHref(category)}>
             <span class="cat-dot" aria-hidden="true"></span>
             <span class="all-cats-name">{category}</span>
             <span class="mono-meta">{count} post{count === 1 ? '' : 's'}</span>

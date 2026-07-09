@@ -44,3 +44,20 @@ export function postCatVar(categories?: string[]): string {
 export function hasCategory(categories: string[] | undefined, name: string): boolean {
   return !!categories?.some((c) => c.trim().toLowerCase() === name.trim().toLowerCase());
 }
+
+/*
+ * Canonical URL slugs. Some legacy Bengali frontmatter is stored in NFD
+ * Unicode; Astro NFC-normalizes the directories it writes, so hrefs must be
+ * NFC too or they 404 byte-wise on static hosting. Categories additionally
+ * lowercase (routes are built lowercased) and merge trailing-space variants.
+ */
+const norm = (s: string) => s.trim().normalize('NFC');
+
+export const categorySlug = (c: string) => norm(c).toLowerCase();
+export const categoryHref = (c: string) => `/category/${encodeURIComponent(categorySlug(c))}`;
+
+export const tagSlug = (t: string) => norm(t);
+
+/** Astro writes output dirs NFC-normalized, but slugs from NFD filenames stay NFD. */
+export const postHref = (slug: string) => `/blog/${slug.normalize('NFC')}`;
+export const tagHref = (t: string) => `/tag/${encodeURIComponent(tagSlug(t))}`;

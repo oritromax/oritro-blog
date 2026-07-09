@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Giscus from '../../components/Giscus.astro';
-import { categoryVar, postCatVar, primaryCategory, hasCategory } from '../../lib/category';
+import { categoryVar, postCatVar, primaryCategory, hasCategory, categoryHref, tagHref, postHref } from '../../lib/category';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -39,7 +39,7 @@ const sameCategory = primary ? others.filter((p) => hasCategory(p.data.categorie
 const related = [...sameCategory, ...others.filter((p) => !sameCategory.includes(p))].slice(0, 3);
 
 const site = import.meta.env.SITE || 'https://ioritro.com';
-const canonicalUrl = `${site}/blog/${entry.slug}/`;
+const canonicalUrl = `${site}${postHref(entry.slug)}/`;
 const publishedTime = entry.data.date instanceof Date
   ? entry.data.date.toISOString()
   : new Date(entry.data.date).toISOString();
@@ -73,14 +73,14 @@ const publishedTime = entry.data.date instanceof Date
       <nav class="post-hero-crumbs" aria-label="Breadcrumb">
         <a href="/">Home</a>
         {primary && <span>/</span>}
-        {primary && <a href={`/category/${encodeURIComponent(primary)}`}>{primary}</a>}
+        {primary && <a href={categoryHref(primary)}>{primary}</a>}
       </nav>
 
       <h1 class="post-hero-title">{entry.data.title}</h1>
 
       <div class="post-hero-meta">
         {categories.map((category) => (
-          <a href={`/category/${encodeURIComponent(category)}`} class="chip chip-inverse">{category}</a>
+          <a href={categoryHref(category)} class="chip chip-inverse">{category}</a>
         ))}
         <span class="post-hero-dot" aria-hidden="true">·</span>
         <span>{readingTime} min read</span>
@@ -128,11 +128,11 @@ const publishedTime = entry.data.date instanceof Date
         {(categories.length > 0 || tags.length > 0) && (
           <div class="token-row">
             {categories.map((category) => (
-              <a href={`/category/${encodeURIComponent(category)}`} class="chip" style={`--cat: ${categoryVar(category)}`}>{category}</a>
+              <a href={categoryHref(category)} class="chip" style={`--cat: ${categoryVar(category)}`}>{category}</a>
             ))}
             {categories.length > 0 && tags.length > 0 && <span class="token-sep"></span>}
             {tags.map((tag) => (
-              <a href={`/tag/${encodeURIComponent(tag)}`} class="tag">{tag}</a>
+              <a href={tagHref(tag)} class="tag">{tag}</a>
             ))}
           </div>
         )}
@@ -160,7 +160,7 @@ const publishedTime = entry.data.date instanceof Date
         </div>
         <div class="related-grid">
           {related.map((p) => (
-            <a href={`/blog/${p.slug}`} class="card card-link related-card" style={`--cat: ${postCatVar(p.data.categories)}`}>
+            <a href={postHref(p.slug)} class="card card-link related-card" style={`--cat: ${postCatVar(p.data.categories)}`}>
               <span class="mono-meta">{p.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' })}</span>
               <h3>{p.data.title}</h3>
               {p.data.description && <p>{p.data.description}</p>}

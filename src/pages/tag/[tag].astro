@@ -2,27 +2,32 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PostRow from '../../components/PostRow.astro';
+import { tagSlug } from '../../lib/category';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
 
-  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+  // key routes on the canonical slug (trim + NFC) so Unicode-normalization
+  // variants of the same tag share one page
+  const bySlug = new Map<string, { name: string; posts: typeof allPosts }>();
+  for (const post of allPosts) {
+    for (const raw of post.data.tags ?? []) {
+      const slug = tagSlug(raw);
+      const entry = bySlug.get(slug) ?? { name: raw.trim(), posts: [] };
+      entry.posts.push(post);
+      bySlug.set(slug, entry);
+    }
+  }
 
-  return uniqueTags.map(tag => {
-    const filteredPosts = allPosts.filter(post =>
-      post.data.tags?.includes(tag)
-    );
-
-    return {
-      params: { tag },
-      props: {
-        posts: filteredPosts.sort(
-          (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-        ),
-        tag
-      }
-    };
-  });
+  return [...bySlug.entries()].map(([slug, { name, posts }]) => ({
+    params: { tag: slug },
+    props: {
+      posts: [...new Set(posts)].sort(
+        (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+      ),
+      tag: name
+    }
+  }));
 }
 
 const { posts, tag } = Astro.props;

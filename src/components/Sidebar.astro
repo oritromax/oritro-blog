@@ -1,5 +1,5 @@
 ---
-import { KNOWN_CATEGORIES, categoryVar, hasCategory } from '../lib/category';
+import { KNOWN_CATEGORIES, categoryVar, hasCategory, categoryHref } from '../lib/category';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -20,7 +20,7 @@ const categoryRows = KNOWN_CATEGORIES
 ---
 
 <aside class="sidebar">
-  <div class="sidebar-avatar">
+  <div class="sidebar-avatar photo-frame">
     <img src="/blog-avatar-final.jpg" alt="Nidal Siddique Oritro" class="avatar" width="220" height="275" />
     <span class="status-dot" aria-hidden="true"></span>
   </div>
@@ -63,7 +63,7 @@ const categoryRows = KNOWN_CATEGORIES
     <ul class="cat-list">
       {categoryRows.map(({ name, color, count }) => (
         <li style={`--cat: ${color}`}>
-          <a href={`/category/${encodeURIComponent(name)}`} aria-label={`View all posts in ${name}`}>
+          <a href={categoryHref(name)} aria-label={`View all posts in ${name}`}>
             <span class="cat-dot" aria-hidden="true"></span>
             <span class="cat-name">{name}</span>
             <span class="cat-count">{count}</span>

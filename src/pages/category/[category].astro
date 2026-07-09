@@ -2,30 +2,32 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PostRow from '../../components/PostRow.astro';
-import { categoryVar } from '../../lib/category';
+import { categoryVar, categorySlug } from '../../lib/category';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
 
-  const uniqueCategories = [...new Set(allPosts.flatMap(post =>
-    post.data.categories || ['Uncategorized']
-  ))];
+  // key routes on the canonical slug so case, trailing-space, and Unicode
+  // normalization variants of the same category share one page
+  const bySlug = new Map<string, { name: string; posts: typeof allPosts }>();
+  for (const post of allPosts) {
+    for (const raw of post.data.categories ?? ['Uncategorized']) {
+      const slug = categorySlug(raw);
+      const entry = bySlug.get(slug) ?? { name: raw.trim(), posts: [] };
+      entry.posts.push(post);
+      bySlug.set(slug, entry);
+    }
+  }
 
-  return uniqueCategories.map(category => {
-    const filteredPosts = allPosts.filter(post =>
-      post.data.categories?.some(cat => cat.toLowerCase() === category.toLowerCase())
-    );
-
-    return {
-      params: { category: category.toLowerCase() },
-      props: {
-        posts: filteredPosts.sort(
-          (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-        ),
-        category
-      }
-    };
-  });
+  return [...bySlug.entries()].map(([slug, { name, posts }]) => ({
+    params: { category: slug },
+    props: {
+      posts: [...new Set(posts)].sort(
+        (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+      ),
+      category: name
+    }
+  }));
 }
 
 const { posts, category } = Astro.props;

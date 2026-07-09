@@ -239,6 +239,34 @@ a.tag:hover { border-color: var(--cat); color: var(--cat); }
 .section-head.bare { border-bottom: none; padding-bottom: 0; }
 .section-head h2 { font-size: 22px; }
 
+/* .photo-frame — the offset rotated frames behind portrait photos,
+   carried over from the old identity, recolored with tokens */
+.photo-frame { position: relative; }
+.photo-frame::before,
+.photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-lg);
+  pointer-events: none;
+}
+.photo-frame::before {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent) 24%, transparent),
+    color-mix(in srgb, var(--c-ai) 24%, transparent)
+  );
+  transform: rotate(-2deg);
+}
+.photo-frame::after {
+  border: 1px solid var(--border-strong);
+  transform: rotate(2deg);
+}
+.photo-frame > .avatar {
+  position: relative;
+  z-index: 1;
+}
+
 /* avatar + status */
 .avatar {
   border-radius: var(--r-lg);

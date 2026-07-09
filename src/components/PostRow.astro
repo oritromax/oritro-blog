@@ -1,5 +1,5 @@
 ---
-import { categoryVar, postCatVar } from '../lib/category';
+import { categoryVar, postCatVar, categoryHref, tagHref, postHref } from '../lib/category';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -20,19 +20,19 @@ const tags = post.data.tags ?? [];
   <time class="post-row-date mono-meta" datetime={post.data.date.toISOString()}>{date}</time>
   <div class="post-row-body">
     <h2 class="post-row-title">
-      <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+      <a href={postHref(post.slug)}>{post.data.title}</a>
     </h2>
     {post.data.description && <p class="post-row-excerpt">{post.data.description}</p>}
     {(categories.length > 0 || tags.length > 0) && (
       <div class="token-row">
         {categories.map((category) => (
-          <a href={`/category/${encodeURIComponent(category)}`} class="chip" style={`--cat: ${categoryVar(category)}`} aria-label={`View all posts in ${category}`}>
+          <a href={categoryHref(category)} class="chip" style={`--cat: ${categoryVar(category)}`} aria-label={`View all posts in ${category}`}>
             {category}
           </a>
         ))}
         {categories.length > 0 && tags.length > 0 && <span class="token-sep"></span>}
         {tags.map((tag) => (
-          <a href={`/tag/${encodeURIComponent(tag)}`} class="tag" aria-label={`View all posts tagged with ${tag}`}>
+          <a href={tagHref(tag)} class="tag" aria-label={`View all posts tagged with ${tag}`}>
             {tag}
           </a>
         ))}
