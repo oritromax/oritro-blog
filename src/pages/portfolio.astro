@@ -232,7 +232,7 @@ const now = [
             <h3>{group.group}</h3>
             <div class="token-row">
               {group.items.map((item) => (
-                <span class="tag">{item}</span>
+                <span class="chip">{item}</span>
               ))}
             </div>
           </div>
@@ -487,6 +487,11 @@ const now = [
     padding-bottom: 8px;
     border-bottom: 1px solid var(--border);
     margin-bottom: var(--sp-3);
+  }
+  /* tech chips read a touch larger than the 10px taxonomy chips */
+  .stack-group :global(.chip) {
+    font-size: 11px;
+    padding: 4px 9px;
   }
 
   /* talks: hairline rows */
