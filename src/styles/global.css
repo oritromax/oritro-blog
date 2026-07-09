@@ -307,6 +307,7 @@ a.tag:hover { border-color: var(--cat); color: var(--cat); }
   font-size: 16px;
   line-height: 1.7;
   color: var(--text-body);
+  overflow-wrap: break-word; /* long URLs/identifiers must not force horizontal scroll */
 }
 .prose > p { margin: 0 0 22px; }
 
@@ -419,8 +420,11 @@ a.tag:hover { border-color: var(--cat); color: var(--cat); }
   margin: 40px 0;
 }
 
+/* wide tables scroll inside their own box instead of stretching the page */
 .prose table {
+  display: block;
   width: 100%;
+  overflow-x: auto;
   border-collapse: collapse;
   margin: 28px 0;
   font-size: 14px;

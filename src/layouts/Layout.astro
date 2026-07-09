@@ -68,7 +68,10 @@ const isContact = path === "/contact" || path === "/contact/";
       <div class="topbar-inner">
         <a href="/" class="brand" aria-label="Homepage">
           <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-name">Nidal Siddique Oritro</span>
+          <span class="brand-name">
+            <span class="brand-full">Nidal Siddique Oritro</span>
+            <span class="brand-short" aria-hidden="true">Oritro</span>
+          </span>
         </a>
         <nav class="topnav" aria-label="Main">
           <a href="/" class:list={["topnav-link", { active: isHome }]}>Home</a>
@@ -191,9 +194,14 @@ const isContact = path === "/contact" || path === "/contact/";
       :global([data-theme="dark"]) #theme-toggle .icon-sun { display: block; }
       :global([data-theme="dark"]) #theme-toggle .icon-moon { display: none; }
 
-      @media (max-width: 480px) {
-        .brand-name { font-size: 14px; max-width: 44vw; }
-        .topnav { gap: var(--sp-4); }
+      .brand-short { display: none; }
+
+      @media (max-width: 560px) {
+        .topbar-inner { padding: 0 var(--sp-4); }
+        .brand-full { display: none; }
+        .brand-short { display: inline; }
+        .topnav { gap: var(--sp-3); }
+        .topnav-link { font-size: 10px; letter-spacing: .06em; }
       }
     </style>
 

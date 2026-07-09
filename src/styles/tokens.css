@@ -47,7 +47,7 @@
   --sp-5: 22px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
 
   /* ── layout */
-  --shell:   1180px;  /* max page width */
+  --shell:   1400px;  /* max page width — fluid below this, like the old full-width layout */
   --measure:  680px;  /* article text column */
   --topbar:    64px;
 
