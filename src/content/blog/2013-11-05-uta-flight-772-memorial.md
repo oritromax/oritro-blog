@@ -4,7 +4,7 @@ author: Oritro Ahmed
 type: post
 date: 2013-11-05T12:31:30+00:00
 url: /302/uta-flight-772-memorial/
-featured_image: /wp-content/uploads/2013/11/20131105122803372.jpeg
+featured_image: /static/2013/11/20131105122803372.jpeg
 categories:
   - জীবনের গল্প
 tags:

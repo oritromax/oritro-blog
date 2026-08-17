@@ -1,9 +1,27 @@
 ---
 // src/pages/blog/index.astro
-import { getCollection } from 'astro:content';
-
-
-// Redirect to the homepage since the blog is now the homepage
-Astro.response.status = 301;
-Astro.response.headers.set('Location', '/');
+//
+// The blog listing lives at the homepage now. This route only exists to catch
+// the old /blog/ URL.
+//
+// `Astro.response.status` / `Location` do nothing in a static build — there is
+// no server to send them, so the emitted file is what the visitor gets. A
+// meta refresh plus a canonical link is the redirect a static host can honour.
+const target = '/';
 ---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <meta name="robots" content="noindex, follow" />
+    <title>Redirecting to the blog</title>
+    <link rel="canonical" href={new URL(target, import.meta.env.SITE || 'https://ioritro.com').href} />
+  </head>
+  <body>
+    <p>This page has moved. <a href={target}>Continue to the blog</a>.</p>
+    <script is:inline>location.replace('/');</script>
+  </body>
+</html>

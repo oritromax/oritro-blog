@@ -4,7 +4,7 @@ author: Oritro Ahmed
 type: post
 date: 2013-09-25T22:39:42+00:00
 url: /174/testing-chromium-os-virtualbox/
-featured_image: /wp-content/uploads/2013/09/chromium.jpg
+featured_image: /static/2013/09/chromium.jpg
 categories:
   - Project Line
 tags:

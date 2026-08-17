@@ -12,7 +12,10 @@ import shikiTheme from './src/lib/shiki-theme.mjs';
 // https://astro.build/config
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss()],
+    /* astro pins vite 6.x while @tailwindcss/vite pulls 7.x, so the two Plugin
+       types are nominally different despite being interchangeable at runtime.
+       Drop the cast once both land on the same major. */
+    plugins: [/** @type {any} */ (tailwindcss())],
     server: {
       fs: {
         allow: ['..']

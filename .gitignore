@@ -24,3 +24,8 @@ pnpm-debug.log*
 .idea/
 cli/blog-post
 .claude/
+
+# test artifacts
+coverage/
+playwright-report/
+test-results/

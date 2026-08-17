@@ -18,6 +18,12 @@ This is my personal blog where I write about software engineering, web developme
 ## Blog Posts
 
 ### 2026
+- **The rulebook of a good software engineer in 2026** - July 9, 2026
+- **Card Compare | Using Machine learning to build the largest database of credit card comparison website in Bangladesh** - June 22, 2026
+- **Fixing the Elgato Wave 3 on CachyOS + KDE** - May 18, 2026
+- **How I built the ultimate internal AI for a whole company** - April 14, 2026
+- **Stop Prompting, Start Architecting: The "Spec-Driven" Guide to AI Coding** - March 13, 2026
+- **I founded Rajshahi Professionals Network** - March 6, 2026
 - **Custom Glance Dashboard Widgets for Sonarr, Radarr, Portainer, and OctoPrint** - February 15, 2026
 - **Grafana Alloy setup in Podman** - January 27, 2026
 
@@ -96,6 +102,18 @@ npm run build
 # Preview production build
 npm run preview
 ```
+
+## Testing
+
+```bash
+# unit + build-output tests — run this before committing
+npm test
+
+# browser tests (desktop + mobile) against a production build
+npm run test:e2e
+```
+
+See [tests/README.md](tests/README.md) for what each layer covers.
 
 ## License
 

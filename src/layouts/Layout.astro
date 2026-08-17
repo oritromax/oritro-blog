@@ -236,7 +236,8 @@ const isContact = path === "/contact" || path === "/contact/";
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D93EVG8RJ8"></script>
-    <script>
+    <!-- is:inline so Astro ships Google's snippet verbatim instead of type-checking it -->
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());

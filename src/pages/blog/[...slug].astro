@@ -23,7 +23,9 @@ const formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
-const words = entry.body.split(/\s+/).filter(Boolean).length;
+/* a frontmatter-only post has no `body` at all — don't take the build down
+   over it; the content test flags the empty post separately */
+const words = (entry.body ?? '').split(/\s+/).filter(Boolean).length;
 const readingTime = Math.max(1, Math.round(words / 200));
 
 const categories = (entry.data.categories ?? []).map((c) => c.trim());

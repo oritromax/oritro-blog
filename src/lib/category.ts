@@ -22,17 +22,21 @@ const CATEGORY_COLORS = {
 /** The nine categories that get a color and a sidebar row. */
 export const KNOWN_CATEGORIES = Object.keys(CATEGORY_COLORS);
 
+/* frontmatter is arbitrary text, so lookups must be own-property only —
+   a category literally named "toString" would otherwise resolve to garbage */
+const isKnown = (cat: string) => Object.hasOwn(CATEGORY_COLORS, cat);
+
 /** Returns a CSS custom-property reference. Unknown categories fall back to gray. */
 export function categoryVar(cat?: string): string {
-  const key = CATEGORY_COLORS[cat?.trim().toLowerCase() as keyof typeof CATEGORY_COLORS];
-  return `var(--c-${key ?? 'life'})`;
+  const key = cat?.trim().toLowerCase() ?? '';
+  return `var(--c-${isKnown(key) ? CATEGORY_COLORS[key as keyof typeof CATEGORY_COLORS] : 'life'})`;
 }
 
 /** First category of a post that maps to a known color — drives the page-level --cat. */
 export function primaryCategory(categories?: string[]): string | undefined {
   return categories
     ?.map((c) => c.trim())
-    .find((c) => c.toLowerCase() in CATEGORY_COLORS);
+    .find((c) => isKnown(c.toLowerCase()));
 }
 
 /** Page-level --cat value for a post: primary category's color, else gray. */
