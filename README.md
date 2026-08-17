@@ -18,6 +18,7 @@ This is my personal blog where I write about software engineering, web developme
 ## Blog Posts
 
 ### 2026
+- **The definitive guide on buying used iPhones** - August 18, 2026
 - **The rulebook of a good software engineer in 2026** - July 9, 2026
 - **Card Compare | Using Machine learning to build the largest database of credit card comparison website in Bangladesh** - June 22, 2026
 - **Fixing the Elgato Wave 3 on CachyOS + KDE** - May 18, 2026
