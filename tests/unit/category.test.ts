@@ -27,11 +27,16 @@ describe('KNOWN_CATEGORIES', () => {
     ]);
   });
 
-  it('maps every known category to a distinct, non-fallback token', () => {
+  it('maps every known category to a distinct token', () => {
     const vars = KNOWN_CATEGORIES.map((c) => categoryVar(c));
     expect(new Set(vars).size).toBe(KNOWN_CATEGORIES.length);
-    // `lifelesson` is the only one that legitimately resolves to --c-life
-    expect(vars.filter((v) => v === 'var(--c-life)')).toEqual(['var(--c-life)']);
+  });
+
+  /* --c-life is the uncategorized fallback, not a category colour. A real
+     category resolving to it means that category has no colour of its own —
+     which is exactly what `lifelesson` used to do. */
+  it('never gives a known category the uncategorized fallback colour', () => {
+    expect(KNOWN_CATEGORIES.filter((c) => categoryVar(c) === 'var(--c-life)')).toEqual([]);
   });
 });
 
@@ -41,8 +46,8 @@ describe('categoryVar', () => {
     expect(categoryVar('homelab')).toBe('var(--c-homelab)');
   });
 
-  it('maps lifelesson onto the life channel', () => {
-    expect(categoryVar('lifelesson')).toBe('var(--c-life)');
+  it('gives lifelesson its own rose channel, not the gray fallback', () => {
+    expect(categoryVar('lifelesson')).toBe('var(--c-lifelesson)');
   });
 
   it('is case-insensitive', () => {

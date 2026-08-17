@@ -16,7 +16,7 @@ const CATEGORY_COLORS = {
   linux: 'linux',
   work: 'work',
   lecture: 'lecture',
-  lifelesson: 'life',
+  lifelesson: 'lifelesson',
 } as const;
 
 /** The nine categories that get a color and a sidebar row. */

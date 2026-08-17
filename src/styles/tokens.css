@@ -23,7 +23,8 @@
   --c-linux:    #E05252;
   --c-work:     #0F9D6E;
   --c-lecture:  #3DAF8F;
-  --c-life:     #8A8A93;  /* also the fallback for uncategorized */
+  --c-lifelesson: #D6417F;  /* rose — the only warm-pink in the set */
+  --c-life:     #8A8A93;  /* NOT a category: the fallback for uncategorized */
 
   /* ── code surface (dark in BOTH themes, deliberately) */
   --code-bg:     #1B1E26;
@@ -88,6 +89,7 @@
   --c-linux:    #F06B6B;
   --c-work:     #34D6A0;
   --c-lecture:  #58C7A6;
+  --c-lifelesson: #FF7FB0;
   --c-life:     #9096A3;
 
   --code-bg:     #12141A;
