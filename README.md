@@ -18,6 +18,7 @@ This is my personal blog where I write about software engineering, web developme
 ## Blog Posts
 
 ### 2026
+- **I don't understand this world anymore** - September 6, 2026
 - **Tailscale said everything was fine: it wasn't.** - August 21, 2026
 - **The definitive guide on buying used iPhones** - August 18, 2026
 - **The rulebook of a good software engineer in 2026** - July 9, 2026
