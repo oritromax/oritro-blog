@@ -17,9 +17,10 @@ const CATEGORY_COLORS = {
   work: 'work',
   lecture: 'lecture',
   lifelesson: 'lifelesson',
+  reflection: 'reflection',
 } as const;
 
-/** The nine categories that get a color and a sidebar row. */
+/** The ten categories that get a color and a sidebar row. */
 export const KNOWN_CATEGORIES = Object.keys(CATEGORY_COLORS);
 
 /* frontmatter is arbitrary text, so lookups must be own-property only —

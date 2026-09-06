@@ -13,7 +13,7 @@ import {
 } from '../../src/lib/category';
 
 describe('KNOWN_CATEGORIES', () => {
-  it('is the nine color-mapped categories', () => {
+  it('is the ten color-mapped categories', () => {
     expect(KNOWN_CATEGORIES).toEqual([
       'ai',
       'llm',
@@ -24,6 +24,7 @@ describe('KNOWN_CATEGORIES', () => {
       'work',
       'lecture',
       'lifelesson',
+      'reflection',
     ]);
   });
 
