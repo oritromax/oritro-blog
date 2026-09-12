@@ -226,7 +226,7 @@ So i counted everything the slow way:
 
 The calculations were wrong because of the corrupt index. The 232 messages that seemed lost, they never existed.
 
-Even worse, when i read the two report files side by side, the wrong thing was backward. On the first attempt, where it lost everything, it recorded `loss_detected: true` and the second run, where it didn't lose anything, recorded `loss_detected: false`. When the logs, which are supposed to be deterministic, give you incorrect facts, it becomes infuriating.
+Even worse, when i read the two report files side by side, the wrong thing was backward. On the first attempt, where it lost everything, it recorded `loss_detected: false` and the second run, where it didn't lose anything, recorded `loss_detected: true`. When the logs, which are supposed to be deterministic, give you incorrect facts, it becomes infuriating.
 
 Judging the output on its own terms is the only thing that made sense: full `integrity_check` returning ok, `count(*)` equal to `count(*) NOT INDEXED` on both tables, zero foreign-key violations, and `messages_fts MATCH 'the'` returning rows.
 
