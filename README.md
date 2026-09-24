@@ -18,8 +18,9 @@ This is my personal blog where I write about software engineering, web developme
 ## Blog Posts
 
 ### 2026
+- **The Saga of Brother DCP-T530DW Printer on Linux** - September 24, 2026
 - **Time to audit your hermes agent** - September 22, 2026
-- **The phantom row** - September 12, 2026
+- **Hermes Database Corruption: The phantom row** - September 12, 2026
 - **I don't understand this world anymore** - September 6, 2026
 - **Tailscale said everything was fine: it wasn't.** - August 21, 2026
 - **The definitive guide on buying used iPhones** - August 18, 2026
