@@ -10,6 +10,10 @@ categories:
     - homelab
 
 ---
+> Update: Oct 11, 2026
+>
+> The build script has been updated. The old one no longer exports cleanly with newer torch and onnx-simplifier releases. Jump to the [new solution](#solution--october-2026).
+
 I’ve been using Frigate as my security camera recorder and viewer (aka NVR) for quite a while now. Initially, I ran a single instance that monitored cameras from two different locations. Later, I split them into separate instances—one for remote and one for home.  
 
 I had been running ***0.15.x*** on the following hardware setup:
@@ -60,7 +64,7 @@ I chose YOLOv9 because YOLO-NAS is far more advanced than I need for my setup.
 
 
 
-## Actual Solution
+## Solution ( pre 2026 )
 
 The documentation shows how to build/convert YOLOv9 locally using Docker:
 
@@ -126,7 +130,43 @@ I went with the `C` size model, which is fairly large. If you don’t need that 
 
 
 
+## Solution ( October 2026 )
+
+The pre 2026 script stopped working for me when i went back to export the `M` and `E` models. Two things changed underneath it.
+
+- `torch` 2.9 and newer switched `torch.onnx.export` to a new exporter by default. It needs `onnxscript` and breaks YOLOv9's opset 12 export with `No module named 'onnxscript'`.
+- Newer `onnx-simplifier` needs `ml_dtypes`. Without it, the simplify step fails quietly and you still get a model, just an unsimplified one.
+
+The fix is to pin `torch` 2.8.0 and add `ml_dtypes`. I also switched to the CPU only `torch` build. The export runs on CPU anyway, and this skips around 2 GB of CUDA packages. The NumPy pin from the Feb update is included.
+
+```
+docker build . --build-arg MODEL_SIZE=c --build-arg IMG_SIZE=640 --output . -f- <<'EOF'
+FROM python:3.11 AS build
+RUN apt-get update && apt-get install --no-install-recommends -y git libgl1 && rm -rf /var/lib/apt/lists/*
+COPY --from=ghcr.io/astral-sh/uv:0.8.0 /uv /bin/
+WORKDIR /yolov9
+RUN git clone https://github.com/WongKinYiu/yolov9.git .
+RUN uv pip install --system --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+RUN uv pip install --system -r requirements.txt "numpy<2" torch==2.8.0 torchvision==0.23.0 --extra-index-url https://download.pytorch.org/whl/cpu --index-strategy unsafe-best-match
+RUN uv pip install --system onnx==1.18.0 onnxruntime "onnx-simplifier>=0.4.1" ml_dtypes
+ARG MODEL_SIZE
+ARG IMG_SIZE
+ADD https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-${MODEL_SIZE}-converted.pt yolov9-${MODEL_SIZE}.pt
+RUN sed -i "s/ckpt = torch.load(attempt_download(w), map_location='cpu')/ckpt = torch.load(attempt_download(w), map_location='cpu', weights_only=False)/g" models/experimental.py
+RUN python3 export.py --weights ./yolov9-${MODEL_SIZE}.pt --imgsz ${IMG_SIZE} --simplify --include onnx
+FROM scratch
+ARG MODEL_SIZE
+ARG IMG_SIZE
+COPY --from=build /yolov9/yolov9-${MODEL_SIZE}.onnx /yolov9-${MODEL_SIZE}-${IMG_SIZE}.onnx
+EOF
+```
+
+Swap `MODEL_SIZE` for `t`, `s`, `m`, `c` or `e`. In the build log, check for `ONNX: simplifying with onnx-simplifier` followed by `export success`. If you see `simplifier failure`, the model is not simplified.
+
+
+
 ## Caution
+
 
 - This build creates the model file in whatever folder you run it from. I created a dedicated folder that I mounted into both my Frigate instances.  
   ```
