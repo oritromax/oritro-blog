@@ -66,28 +66,43 @@ const talks = [
 
 const openSourceProjects = [
   {
+    title: 'Card Compare Bangladesh',
+    kind: 'Live product',
+    description: 'The largest credit card comparison database in Bangladesh — 257 cards from 42 banks across 74 features, built on a machine-learning extraction pipeline.',
+    tech: ['Python', 'LLM pipeline', 'Data'],
+    link: 'https://cardcompare.bd'
+  },
+  {
     title: 'React Portfolio',
     description: 'A modern react portfolio for those engineers who could not find time to build one.',
     tech: ['React', 'Tailwind'],
     stars: 15,
-    forks: 7,
+    forks: 5,
     link: 'https://github.com/oritromax/react-portfolio'
+  },
+  {
+    title: 'YOLOv9 ONNX for Frigate',
+    description: 'YOLOv9 object detection models exported to ONNX for the Frigate NVR, so a GPU does the detection instead of the CPU.',
+    tech: ['ONNX', 'Frigate', 'Computer vision'],
+    stars: 6,
+    forks: 1,
+    link: 'https://github.com/oritromax/YOLOv9-onnx'
   },
   {
     title: 'Folder 2 Text',
     description: 'A CLI tool to turn your project into digestible context for LLMs',
     tech: ['NodeJS', 'Javascript', 'CLI'],
-    stars: 4,
-    forks: 2,
+    stars: 6,
+    forks: 3,
     link: 'https://github.com/oritromax/folder2text'
   },
   {
-    title: 'Discord Antispam Bot',
-    description: 'An extremely resource-efficient Discord bot to protect your server from spam and malicious users',
-    tech: ['Go', 'Discord'],
+    title: 'DeployList',
+    description: 'A project readiness checklist for your coding agent, across multiple stacks and languages.',
+    tech: ['Javascript', 'AI agents'],
     stars: 3,
-    forks: 1,
-    link: 'https://github.com/oritromax/antispam-bot'
+    forks: 0,
+    link: 'https://github.com/oritromax/deploylist'
   }
 ];
 
@@ -267,14 +282,16 @@ const now = [
     <!-- Open source -->
     <section class="pf-section">
       <div class="section-head">
-        <h2>Open source</h2>
+        <h2>Projects &amp; open source</h2>
       </div>
       <div class="repos">
         {openSourceProjects.map((project) => (
           <a href={project.link} target="_blank" rel="noopener noreferrer" class="card card-link repo">
             <div class="repo-head">
               <h3>{project.title}</h3>
-              <span class="mono-meta">★ {project.stars} · ⑂ {project.forks}</span>
+              {project.kind
+                ? <span class="mono-meta">{project.kind}</span>
+                : <span class="mono-meta">★ {project.stars} · ⑂ {project.forks}</span>}
             </div>
             <p>{project.description}</p>
             <div class="token-row">
