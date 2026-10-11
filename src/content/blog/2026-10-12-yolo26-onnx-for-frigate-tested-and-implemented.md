@@ -9,6 +9,7 @@ tags:
     - ai
 categories:
     - homelab
+featured_image: https://img.sglab.ioritro.com/image/0545d65a-dbaf-4027-9b71-2556dbeced96.png
 description: YOLO26 doesn't work in Frigate out of the box. Here is why, how i exported it so it does, and how all 10 models did against YOLOv9 on a real recording.
 ---
 
