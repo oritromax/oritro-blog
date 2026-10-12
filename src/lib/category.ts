@@ -55,13 +55,15 @@ export function hasCategory(categories: string[] | undefined, name: string): boo
  * Unicode; Astro NFC-normalizes the directories it writes, so hrefs must be
  * NFC too or they 404 byte-wise on static hosting. Categories additionally
  * lowercase (routes are built lowercased) and merge trailing-space variants.
+ * Tags lowercase too and hyphenate whitespace runs, so "AI"/"ai" and
+ * "Name server"/"name-server" share one page instead of splitting it.
  */
 const norm = (s: string) => s.trim().normalize('NFC');
 
 export const categorySlug = (c: string) => norm(c).toLowerCase();
 export const categoryHref = (c: string) => `/category/${encodeURIComponent(categorySlug(c))}`;
 
-export const tagSlug = (t: string) => norm(t);
+export const tagSlug = (t: string) => norm(t).toLowerCase().replace(/\s+/g, '-');
 
 /** Astro writes output dirs NFC-normalized, but slugs from NFD filenames stay NFD. */
 export const postHref = (slug: string) => `/blog/${slug.normalize('NFC')}`;

@@ -56,8 +56,8 @@ describe('pagination', () => {
     expect(resolveRoute(`/page/${expectedPages + 1}/`, files)).toBeNull();
   });
 
-  it('builds /page/1 only if the route exists at all (page 1 lives at /)', () => {
-    // Astro's route only starts at 1, so /page/1 may exist; / must always work
+  it('does not build /page/1 — page 1 lives at /', () => {
+    expect(resolveRoute('/page/1/', files)).toBeNull();
     expect(resolveRoute('/', files)).toBe('index.html');
   });
 });
@@ -106,23 +106,64 @@ describe('tag routes', () => {
       .filter((s) => !known.has(s));
     expect(orphans).toEqual([]);
   });
+
+  /* case and spacing variants ("AI"/"ai", "Name server"/"name-server") must
+     land on one page, not split it */
+  it('builds lowercase, whitespace-free directories only', () => {
+    const bad = [...files]
+      .filter((f) => f.startsWith('tag/'))
+      .map((f) => f.slice('tag/'.length).split('/')[0])
+      .filter((d) => d !== d.toLowerCase() || /\s/.test(d));
+    expect(bad).toEqual([]);
+  });
 });
 
 describe('assets and sitemap', () => {
+  const sitemapXml = () =>
+    [...files]
+      .filter((f) => /^sitemap-\d+\.xml$/.test(f))
+      .map(readDist)
+      .join('');
+  const sitemapLocs = () => [...sitemapXml().matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+
   it('emits the sitemap index and at least one sitemap', () => {
     expect(files.has('sitemap-index.xml')).toBe(true);
     expect([...files].some((f) => /^sitemap-\d+\.xml$/.test(f))).toBe(true);
   });
 
   it('lists every post in the sitemap under the production origin', () => {
-    const xml = [...files]
-      .filter((f) => /^sitemap-\d+\.xml$/.test(f))
-      .map(readDist)
-      .join('');
+    const xml = sitemapXml();
     const missing = posts.filter((p) => !xml.includes(`/blog/${encodeURI(p.slug)}/`));
     expect(missing.map((p) => p.slug)).toEqual([]);
-    expect(xml).toContain('https://ioritro.com/');
+    expect(xml).toContain('<loc>https://ioritro.com/</loc>');
     expect(xml).not.toContain('localhost');
+  });
+
+  /* tag and pagination pages are noindex, /blog/ is a redirect stub —
+     listing them would ask crawlers to index what the pages say not to */
+  it('leaves tag pages, pagination pages, and the /blog/ stub out of the sitemap', () => {
+    const paths = sitemapLocs().map((loc) => new URL(loc).pathname);
+    expect(paths.filter((p) => p.startsWith('/tag/'))).toEqual([]);
+    expect(paths.filter((p) => p.startsWith('/page/'))).toEqual([]);
+    expect(paths).not.toContain('/blog/');
+  });
+
+  it('still lists the category pages', () => {
+    expect(sitemapLocs().some((loc) => new URL(loc).pathname.startsWith('/category/'))).toBe(true);
+  });
+
+  it('stamps each post with its frontmatter date as lastmod, and nothing else', () => {
+    const entries = [...sitemapXml().matchAll(/<url>(.*?)<\/url>/gs)].map((m) => ({
+      path: decodeURI(new URL(m[1].match(/<loc>([^<]+)<\/loc>/)![1]).pathname).normalize('NFC'),
+      lastmod: m[1].match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
+    }));
+    for (const post of posts) {
+      const entry = entries.find((e) => e.path === `/blog/${post.slug}/`);
+      expect(entry?.lastmod, `${post.slug} has the wrong lastmod`).toBe(
+        new Date(post.data.date).toISOString()
+      );
+    }
+    expect(entries.filter((e) => e.lastmod && !e.path.startsWith('/blog/'))).toEqual([]);
   });
 
   it('ships the avatar and favicon referenced by the layout', () => {
@@ -132,6 +173,68 @@ describe('assets and sitemap', () => {
 
   it('builds a reasonable number of pages', () => {
     expect(htmlPages().length).toBeGreaterThan(posts.length);
+  });
+});
+
+describe('discovery files', () => {
+  it('ships a robots.txt that allows crawling and points at the sitemap', () => {
+    expect(files.has('robots.txt')).toBe(true);
+    const robots = readDist('robots.txt');
+    expect(robots).toMatch(/^User-agent: \*\nAllow: \/$/m);
+    expect(robots).toMatch(/^Sitemap: https:\/\/ioritro\.com\/sitemap-index\.xml$/m);
+    expect(robots).not.toMatch(/^Disallow: \S/m);
+  });
+
+  it.each(['GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended'])(
+    'explicitly allows %s in robots.txt',
+    (bot) => {
+      expect(readDist('robots.txt')).toContain(`User-agent: ${bot}\nAllow: /`);
+    }
+  );
+
+  it('ships an RSS feed with one item per post, newest first', () => {
+    expect(files.has('rss.xml')).toBe(true);
+    const xml = readDist('rss.xml');
+    expect(xml.match(/<item>/g) ?? []).toHaveLength(posts.length);
+
+    const dates = [...xml.matchAll(/<pubDate>([^<]+)<\/pubDate>/g)].map((m) => Date.parse(m[1]));
+    expect(dates).toHaveLength(posts.length);
+    expect(dates).toEqual([...dates].sort((a, b) => b - a));
+  });
+
+  it('links every RSS item to a built post, by its canonical trailing-slash URL', () => {
+    const links = [...readDist('rss.xml').matchAll(/<item>.*?<link>([^<]+)<\/link>/gs)].map((m) => m[1]);
+    expect(links).toHaveLength(posts.length);
+    const bad = links.filter(
+      (l) =>
+        !l.startsWith('https://ioritro.com/blog/') ||
+        !l.endsWith('/') ||
+        !resolveRoute(new URL(l).pathname, files)
+    );
+    expect(bad).toEqual([]);
+  });
+
+  it('does not emit the feed or llms.txt as an HTML page', () => {
+    expect(htmlPages().filter((p) => /rss|llms/.test(p.route))).toEqual([]);
+  });
+
+  it('ships an llms.txt whose links are all absolute production URLs that resolve', () => {
+    expect(files.has('llms.txt')).toBe(true);
+    const txt = readDist('llms.txt');
+    expect(txt).toMatch(/^# \S/);
+    expect(txt).toContain('\n## Posts\n');
+    expect(txt).toContain('\n## Pages\n');
+
+    const links = [...txt.matchAll(/\]\(([^)]+)\)/g)].map((m) => m[1]);
+    expect(links).toHaveLength(Math.min(15, posts.length) + 4);
+    expect(links.filter((l) => !l.startsWith('https://ioritro.com/'))).toEqual([]);
+    expect(links.filter((l) => !resolveRoute(new URL(l).pathname, files))).toEqual([]);
+  });
+
+  it('ships the IndexNow key file, containing exactly the key', () => {
+    const key = '567ae7b1a53a724d5f793cf4bdac5c34';
+    expect(files.has(`${key}.txt`)).toBe(true);
+    expect(readDist(`${key}.txt`)).toBe(key);
   });
 });
 

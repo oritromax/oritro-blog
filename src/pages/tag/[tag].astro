@@ -5,10 +5,14 @@ import PostRow from '../../components/PostRow.astro';
 import { tagSlug } from '../../lib/category';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog');
+  // newest first, so the display name of a merged tag is its most recent spelling
+  const allPosts = (await getCollection('blog')).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
 
-  // key routes on the canonical slug (trim + NFC) so Unicode-normalization
-  // variants of the same tag share one page
+  // key routes on the canonical slug (trim + NFC + lowercase + hyphenated
+  // whitespace) so case, spacing, and Unicode-normalization variants of the
+  // same tag share one page
   const bySlug = new Map<string, { name: string; posts: typeof allPosts }>();
   for (const post of allPosts) {
     for (const raw of post.data.tags ?? []) {
@@ -33,7 +37,7 @@ export async function getStaticPaths() {
 const { posts, tag } = Astro.props;
 ---
 
-<Layout title={`Posts tagged with ${tag}`}>
+<Layout title={`Posts tagged with ${tag}`} noindex>
   <div class="listing-shell">
     <nav class="listing-crumbs" aria-label="Breadcrumb">
       <a href="/">Home</a>

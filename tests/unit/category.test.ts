@@ -167,18 +167,31 @@ describe('categoryHref', () => {
 });
 
 describe('tagSlug / tagHref', () => {
-  it('preserves case (routes are built case-sensitively for tags)', () => {
-    expect(tagSlug('Docker')).toBe('Docker');
+  it('lowercases, so case variants share one page', () => {
+    expect(tagSlug('Docker')).toBe('docker');
+    expect(tagSlug('AI')).toBe(tagSlug('ai'));
+    expect(tagSlug('Ubuntu')).toBe(tagSlug('ubuntu'));
   });
 
-  it('trims and NFC-normalizes', () => {
-    expect(tagSlug(' Docker ')).toBe('Docker');
+  it('hyphenates whitespace runs, so spaced and hyphenated spellings merge', () => {
+    expect(tagSlug('Name server')).toBe('name-server');
+    expect(tagSlug('Name server')).toBe(tagSlug('name-server'));
+    expect(tagSlug('home \t  lab')).toBe('home-lab');
+  });
+
+  it('trims before hyphenating, so edge whitespace never becomes a hyphen', () => {
+    expect(tagSlug(' Docker ')).toBe('docker');
+  });
+
+  it('NFC-normalizes and keeps Bengali intact', () => {
     const word = 'ভ্রমন';
     expect(tagSlug(word.normalize('NFD'))).toBe(word.normalize('NFC'));
+    expect(tagSlug('বগা লেক')).toBe('বগা-লেক');
   });
 
   it('builds an encoded /tag/ URL', () => {
-    expect(tagHref('Docker')).toBe('/tag/Docker');
+    expect(tagHref('Docker')).toBe('/tag/docker');
+    expect(tagHref('Name server')).toBe('/tag/name-server');
     expect(decodeURIComponent(tagHref('ভ্রমন').slice('/tag/'.length))).toBe(
       'ভ্রমন'.normalize('NFC')
     );

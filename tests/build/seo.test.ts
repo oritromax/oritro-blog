@@ -89,6 +89,15 @@ describe('every built page', () => {
     expect(bad.map((p) => p.route)).toEqual([]);
   });
 
+  it('advertises the RSS feed', () => {
+    const bad = pages.filter(
+      ({ doc }) =>
+        doc.querySelector('link[rel="alternate"][type="application/rss+xml"]')?.getAttribute('href') !==
+        '/rss.xml'
+    );
+    expect(bad.map((p) => p.route)).toEqual([]);
+  });
+
   it('links the sitemap', () => {
     const bad = pages.filter(({ doc }) => !doc.querySelector('link[rel="sitemap"]'));
     expect(bad.map((p) => p.route)).toEqual([]);
@@ -158,6 +167,33 @@ describe('the /blog/ redirect stub', () => {
       'noindex'
     );
     expect(stub().querySelector('link[rel="canonical"]')!.getAttribute('href')).toBe(`${SITE}/`);
+  });
+});
+
+/* Tag and pagination pages are thin listings: kept out of the index, but
+   `follow` so crawlers still reach the posts through them. Categories are
+   deliberately left indexable for now. */
+describe('index policy', () => {
+  const isNoindexRoute = (route: string) => route.startsWith('/tag/') || route.startsWith('/page/');
+
+  it('marks every tag and pagination page "noindex, follow"', () => {
+    const listings = pages.filter(({ route }) => isNoindexRoute(route));
+    expect(listings.some(({ route }) => route.startsWith('/tag/'))).toBe(true);
+    expect(listings.some(({ route }) => route.startsWith('/page/'))).toBe(true);
+    const bad = listings.filter(({ doc }) => meta(doc, 'meta[name="robots"]') !== 'noindex, follow');
+    expect(bad.map((p) => p.route)).toEqual([]);
+  });
+
+  it('leaves every other page indexable', () => {
+    const bad = pages.filter(
+      ({ route, doc }) => !isNoindexRoute(route) && doc.querySelector('meta[name="robots"]') !== null
+    );
+    expect(bad.map((p) => p.route)).toEqual([]);
+  });
+
+  it('never tells crawlers to stop following links', () => {
+    const bad = allPages.filter(({ doc }) => meta(doc, 'meta[name="robots"]')?.includes('nofollow'));
+    expect(bad.map((p) => p.route)).toEqual([]);
   });
 });
 

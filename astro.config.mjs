@@ -8,6 +8,9 @@ import remarkDirective from 'remark-directive';
 import remarkAside from './src/lib/remark-aside.mjs';
 import rehypeCode from './src/lib/rehype-code.mjs';
 import shikiTheme from './src/lib/shiki-theme.mjs';
+import { sitemapFilter, readPostDates, withPostLastmod } from './src/lib/sitemap.mjs';
+
+const postDates = readPostDates(new URL('./src/content/blog/', import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,7 +29,13 @@ export default defineConfig({
     }
   },
   site: 'https://ioritro.com',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // tag and pagination pages are noindex; /blog/ is a redirect stub
+      filter: sitemapFilter,
+      serialize: (item) => withPostLastmod(item, postDates),
+    }),
+  ],
   markdown: {
     // code surfaces stay dark in both themes — custom theme matches tokens.css
     shikiConfig: { theme: shikiTheme },
