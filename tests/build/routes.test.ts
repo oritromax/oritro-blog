@@ -180,21 +180,65 @@ describe('assets and sitemap', () => {
   });
 });
 
+/* Content Signals (contentsignals.org): search and AI answers may use the
+   content, model training may not. Training crawlers get no group of their
+   own — an explicit Allow would contradict ai-train=no, and `*` covers them. */
+const CONTENT_SIGNAL = 'Content-Signal: ai-train=no, search=yes, ai-input=yes';
+const SEARCH_BOTS = ['OAI-SearchBot', 'Claude-SearchBot', 'PerplexityBot'];
+const TRAINING_BOTS = ['GPTBot', 'ClaudeBot', 'Google-Extended'];
+
+/** robots.txt groups, keyed by user agent, each holding its rule lines. */
+function robotsGroups(robots: string): Map<string, string[]> {
+  const groups = new Map<string, string[]>();
+  let rules: string[] | undefined;
+  for (const raw of robots.split('\n')) {
+    const line = raw.replace(/#.*$/, '').trim();
+    const agent = line.match(/^User-agent:\s*(.+)$/i);
+    if (agent) {
+      rules = [];
+      groups.set(agent[1], rules);
+    } else if (/^Sitemap:/i.test(line)) {
+      rules = undefined;
+    } else if (line && rules) {
+      rules.push(line);
+    }
+  }
+  return groups;
+}
+
 describe('discovery files', () => {
   it('ships a robots.txt that allows crawling and points at the sitemap', () => {
     expect(files.has('robots.txt')).toBe(true);
     const robots = readDist('robots.txt');
-    expect(robots).toMatch(/^User-agent: \*\nAllow: \/$/m);
+    expect(robotsGroups(robots).get('*')).toContain('Allow: /');
     expect(robots).toMatch(/^Sitemap: https:\/\/ioritro\.com\/sitemap-index\.xml$/m);
+    expect(robots.trimEnd().split('\n').at(-1)).toBe('Sitemap: https://ioritro.com/sitemap-index.xml');
     expect(robots).not.toMatch(/^Disallow: \S/m);
   });
 
-  it.each(['GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended'])(
-    'explicitly allows %s in robots.txt',
-    (bot) => {
-      expect(readDist('robots.txt')).toContain(`User-agent: ${bot}\nAllow: /`);
-    }
-  );
+  it('declares its Content Signals in the * group of robots.txt', () => {
+    const robots = readDist('robots.txt');
+    expect(robots).toMatch(/^User-agent: \*\nContent-Signal: ai-train=no, search=yes, ai-input=yes\nAllow: \/$/m);
+    expect(robotsGroups(robots).get('*')).toEqual([CONTENT_SIGNAL, 'Allow: /']);
+  });
+
+  it.each(SEARCH_BOTS)('explicitly allows %s in robots.txt, under the same signals', (bot) => {
+    const robots = readDist('robots.txt');
+    expect(robots).toContain(`User-agent: ${bot}\n${CONTENT_SIGNAL}\nAllow: /`);
+    expect(robotsGroups(robots).get(bot)).toEqual([CONTENT_SIGNAL, 'Allow: /']);
+  });
+
+  it('never states a Content-Signal other than the site policy', () => {
+    const signals = readDist('robots.txt').match(/^Content-Signal:.*$/gim) ?? [];
+    expect(signals).toHaveLength(SEARCH_BOTS.length + 1);
+    expect(signals.filter((s) => s !== CONTENT_SIGNAL)).toEqual([]);
+  });
+
+  it.each(TRAINING_BOTS)('gives the training crawler %s no group of its own in robots.txt', (bot) => {
+    const robots = readDist('robots.txt');
+    expect(robotsGroups(robots).has(bot)).toBe(false);
+    expect(robots).not.toMatch(new RegExp(`^User-agent:\\s*${bot}\\s*$`, 'im'));
+  });
 
   it('ships an RSS feed with one item per post, newest first', () => {
     expect(files.has('rss.xml')).toBe(true);

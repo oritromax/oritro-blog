@@ -54,8 +54,9 @@ already have, set `PW_SKIP_BUILD=1`.
 
 - `routes.test.ts` — one page per post, per category, per tag; no orphans;
   NFC-normalized directories; sitemap coverage and exclusions (`/archive/` is
-  in, tags and pagination are out); `robots.txt`, `rss.xml`, `llms.txt` (no
-  doubled slashes), and the IndexNow key file.
+  in, tags and pagination are out); `robots.txt` (Content Signals: search and
+  AI answers yes, training no, and no group for a training crawler), `rss.xml`,
+  `llms.txt` (no doubled slashes), and the IndexNow key file.
 - `links.test.ts` — crawls every built page and resolves every internal
   `href`/`src` the way a static host would. This is the 404 net. Template links
   to posts, categories, and tags must also use the canonical trailing-slash URL.

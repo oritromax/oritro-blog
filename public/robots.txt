@@ -1,23 +1,23 @@
+# Content Signals (https://contentsignals.org): how this site's content may be
+# used once it has been crawled.
+#   search=yes    index it and link back from search results
+#   ai-input=yes  use it to ground AI answers (retrieval, citations)
+#   ai-train=no   do not use it to train or fine-tune AI models
 User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 
-# AI crawlers and answer engines are welcome
-User-agent: GPTBot
-Allow: /
-
+# Search and answer-engine crawlers are welcome, under the same signals
 User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ClaudeBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 
 User-agent: Claude-SearchBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 
 User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 
 Sitemap: https://ioritro.com/sitemap-index.xml
