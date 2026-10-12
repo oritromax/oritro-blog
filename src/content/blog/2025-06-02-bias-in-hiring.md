@@ -8,10 +8,11 @@ tags:
 categories: 
     - lifelesson 
     - work
+description: Everyone is biased, me included. How affinity bias creeps into hiring, and what to do about it, like structured interviews and diverse panels.
 
 ---
 
-When someone tells you, “You are biased”, our obvious knee-jerk reaction is, of course,e I am not. You wanna vigorously defend yourself, about the notion of bias.
+When someone tells you, “You are biased”, our obvious knee-jerk reaction is, of course I am not. You wanna vigorously defend yourself, about the notion of bias.
 
 The thing is, you are Biased. And not just you, everyone around you, everyone you ever knew, everyone you never knew, we all have biases. Sounds odd, but it is true.
 

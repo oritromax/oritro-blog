@@ -29,7 +29,7 @@ This is my personal blog where I write about software engineering, web developme
 - **Card Compare | Using Machine learning to build the largest database of credit card comparison website in Bangladesh** - June 22, 2026
 - **Fixing the Elgato Wave 3 on CachyOS + KDE** - May 18, 2026
 - **How I built the ultimate internal AI for a whole company** - April 14, 2026
-- **Stop Prompting, Start Architecting: The "Spec-Driven" Guide to AI Coding** - March 13, 2026
+- **Stop Prompting, Start Architecting: Spec-Driven AI Coding** - March 13, 2026
 - **I founded Rajshahi Professionals Network** - March 6, 2026
 - **Custom Glance Dashboard Widgets for Sonarr, Radarr, Portainer, and OctoPrint** - February 15, 2026
 - **Grafana Alloy setup in Podman** - January 27, 2026
@@ -45,7 +45,7 @@ This is my personal blog where I write about software engineering, web developme
 - **Bias in Hiring - A retrospective** - June 2, 2025
 - **You need to prepare for a Corporate World as a Engineer** - May 2, 2025
 - **AI won't take your job - Don't Panic** - May 2, 2025
-- **Building a Homelab - Part 3 - Advanced Operations** - April 2, 2025
+- **Building a Homelab - Part 3 - Advanced Operations** - April 3, 2025
 - **Building a Homelab - Part 2 - Foundation Architecture** - April 2, 2025
 - **Building a Homelab - Part 1 - Decade long journey** - April 1, 2025
 

@@ -1,6 +1,6 @@
 ---
 title: Building a Homelab - Part 3 - Advanced Operations
-date: 2025-04-02 14:43:11
+date: 2025-04-03 14:43:11
 tags:
     - homelab
     - docker
@@ -9,14 +9,12 @@ tags:
     - nas
 categories: 
     - homelab 
-description: This post is a part of 3 posts sharing my experience in building my own homelab ecosystem. 
+description: Keeping a homelab running for years. Monitoring with Homepage, Dozzle and NTFY, backups, updates and security. Part 3 of 3.
 
 ---
 
 
-# Homelab Operational Excellence: Keeping Your Infrastructure Running Smoothly
-
-In Parts 1 and 2, we explored the services ecosystem and the foundational architecture that makes everything work seamlessly. But here's what nobody tells you when you're getting started with homelab infrastructure: the real challenge isn't getting services running—it's keeping them running reliably over months and years.
+In [Part 1](/blog/2025-04-01-my-homelab-part-1/) and [Part 2](/blog/2025-04-02-my-homelab-part-2/), we explored the services ecosystem and the foundational architecture that makes everything work seamlessly. But here's what nobody tells you when you're getting started with homelab infrastructure: the real challenge isn't getting services running—it's keeping them running reliably over months and years.
 
 After a decade of running increasingly complex setups, I've learned that operational excellence is what separates a hobby project from something your family depends on daily. There's nothing quite like your spouse asking why the photos aren't loading or why the smart home automations stopped working to teach you about the importance of monitoring, backups, and systematic maintenance.
 
@@ -411,7 +409,9 @@ The journey from a single Plex server to this comprehensive infrastructure has b
 
 Building reliable infrastructure takes time, patience, and willingness to learn from failures. But once you have systems that run themselves, automatically recover from common problems, and provide clear visibility into their health, you realize you've built something genuinely useful—a digital foundation that enhances daily life rather than creating constant maintenance overhead.
 
-This series will unfold across three detailed posts:
+## The full series
+
+This series is three posts:
 
 1. [**Part 1: The Service Ecosystem**](https://ioritro.com/blog/2025-04-01-my-homelab-part-1/)  - Understanding what runs and why
 2. [**Part 2: Foundation Architecture**](https://ioritro.com/blog/2025-04-02-my-homelab-part-2/)  - Networking, security, and service discovery 
