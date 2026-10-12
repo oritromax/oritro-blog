@@ -8,6 +8,7 @@ tags:
 categories: 
     - lifelesson 
     - ai
+description: LLMs can write code, but they can't own context, judgment or the outcome. After almost 15 years in software, here is why i am not panicking.
 
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: 'Stop Prompting, Start Architecting: The "Spec-Driven" Guide to AI Coding'
+title: "Stop Prompting, Start Architecting: Spec-Driven AI Coding"
+description: "Vague prompts get vague code. How to write a spec the AI can't misread: a tech stack anchor, a no-fly list, data flow and a definition of done."
 date: 2026-03-13 10:53:59
 tags:
     - llm
@@ -11,14 +12,14 @@ categories:
 
 ---
 
-### The "Magic Trick" vs. The Reality
+## The "Magic Trick" vs. The Reality
 Most people treat AI coding like a magic trick. They think if they find the "perfect prompt," they’ll get perfect code. They buy courses and "prompt libraries" hoping for a shortcut.
 
 ![Prompting VS Engineering](https://img.sglab.ioritro.com/i/CGB0HRV0)
 
 But there’s a shorter way: Understand how it actually works. Instead of "fishing" for the right answer every time, you need to learn the "What-How-Why" of AI-assisted development.
 
-##  The #1 Enemy: Ambiguity
+## The #1 Enemy: Ambiguity
 
 
 The most common mistake isn't using the wrong AI; it’s being vague.
@@ -69,7 +70,7 @@ Even the best models have a limit. The longer you chat, the "foggier" the AI get
 
 A common failure point is when the AI suggests a library that doesn't exist or uses a syntax that was deprecated two years ago. To prevent this, your spec.md needs to act as a set of guardrails.
 
-### **The Tech Stack "Anchor"**
+### The Tech Stack "Anchor"
 
 Don't just list the language; list the Environment. This prevents the AI from mixing up Node.js logic with Edge Runtime logic.
 

@@ -9,14 +9,12 @@ tags:
     - nas
 categories: 
     - homelab 
-description: This post is a part of 3 posts sharing my experience in building my own homelab ecosystem. 
+description: How my homelab services get a real domain, SSL and one login. Nginx, Cloudflare DNS, Authelia and LLDAP. Part 2 of 3.
 
 ---
 
 
-# Building a Decade of Homelab Infrastructure: Part 2 - Foundation Architecture
-
-In Part 1, we explored the diverse ecosystem of services running in my homelab. But here's the thing - having 30+ services is meaningless if users have to remember URLs like `http://192.168.1.10:8989` for Sonarr and `https://192.168.1.10:9443` for Portainer. Even worse, imagine managing separate user accounts for each service, dealing with certificate warnings, and troubleshooting port conflicts every time you add something new.
+In [Part 1](/blog/2025-04-01-my-homelab-part-1/), we explored the diverse ecosystem of services running in my homelab. But here's the thing - having 30+ services is meaningless if users have to remember URLs like `http://192.168.1.10:8989` for Sonarr and `https://192.168.1.10:9443` for Portainer. Even worse, imagine managing separate user accounts for each service, dealing with certificate warnings, and troubleshooting port conflicts every time you add something new.
 
 This is where proper infrastructure architecture becomes crucial. Over the past decade, I've learned that the difference between a hobbyist setup and something that actually works long-term comes down to three foundational pillars: **intelligent networking**, **centralized authentication**, and **automated certificate management**.
 
@@ -266,9 +264,7 @@ When a user visits any service:
 
 No certificate generation, no user account creation, no port management—the infrastructure handles all of that automatically.
 
-## What's Coming Next
-
-This series will unfold across three detailed posts:
+## The full series
 
 This series will unfold across three detailed posts:
 

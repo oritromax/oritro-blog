@@ -9,11 +9,9 @@ tags:
     - nas
 categories: 
     - homelab 
-description: This post is a part of 3 posts sharing my experience in building my own homelab ecosystem. 
+description: Ten years of running a homelab. What runs on mine, how the services work together, and why each one earned its place. Part 1 of 3.
 
 ---
-
-# Building a Decade of Homelab Infrastructure: Part 1 - The Service Ecosystem
 
 Homelab has exploded in popularity since the pandemic hit, with people becoming increasingly interested in cutting the cord and keeping everything within their own network as much as possible. The current homelab ecosystem ranges from simply running a few basic services to almost industrial-looking setups, with everything imaginable in between.
 
@@ -77,7 +75,7 @@ After a decade of experimentation, my homelab has settled into running a diverse
 
 The beauty of this setup isn't just in the individual services, but in how they work together. Overseerr talks to the media services, Home Assistant triggers N8N workflows, and everything shares the same authentication system. It's become less of a collection of tools and more of an integrated digital ecosystem.
 
-In this first part, we'll explore how these services complement each other and why each one earned its place in my infrastructure. The foundational architecture – the networking, security, and orchestration that makes it all possible – will be the focus of part two, where we'll dig into the technical decisions that keep everything running smoothly.
+In this first part, we'll explore how these services complement each other and why each one earned its place in my infrastructure. The foundational architecture – the networking, security, and orchestration that makes it all possible – will be the focus of part two, where we'll dig into the technical decisions that keep everything running smoothly. The networking, SSL and single sign-on that make all of this usable are in [Part 2](/blog/2025-04-02-my-homelab-part-2/).
 
 ## What's Coming Next
 
