@@ -39,7 +39,7 @@ test.describe('post page', () => {
     expect(await related.count()).toBeLessThanOrEqual(3);
 
     const href = await related.first().getAttribute('href');
-    expect(href).not.toBe(new URL(RICH_POST, 'https://x').pathname.replace(/\/$/, ''));
+    expect(href).not.toBe(RICH_POST);
   });
 
   test('loads without console errors', async ({ page, consoleErrors }) => {

@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import { SITE_DESCRIPTION, metaDescription as clampDescription } from "../lib/description";
+import { serializeJsonLd } from "../lib/jsonld";
 
 interface Props {
   title: string;
@@ -9,21 +11,24 @@ interface Props {
   type?: "website" | "article";
   publishedTime?: string;
   noindex?: boolean;
+  /** schema.org object, emitted as a single application/ld+json block */
+  jsonLd?: Record<string, unknown>;
   /** CSS value for the page-level category channel, e.g. "var(--c-ai)" */
   cat?: string;
 }
 
-const { title, description = "Blog and portfolio of Nidal Siddique Oritro — Software Engineer, Engineering Manager. Writing about software, homelab, and building teams and training and Using AI", image, canonicalUrl, type = "website", publishedTime, noindex = false, cat } = Astro.props;
+const { title, description = SITE_DESCRIPTION, image, canonicalUrl, type = "website", publishedTime, noindex = false, jsonLd, cat } = Astro.props;
 
 const site = import.meta.env.SITE || "https://ioritro.com";
 const url = canonicalUrl || new URL(Astro.url.pathname, site).href;
 const ogImage = image?.startsWith("http") ? image : image ? new URL(image, site).href : `${site}/blog-avatar-finalized.jpg`;
-const metaDescription = description.slice(0, 160);
+const metaDescription = clampDescription(description);
 
 const path = Astro.url.pathname;
 const isHome = path === "/" || path.startsWith("/page/") || path.startsWith("/blog/") || path.startsWith("/category/") || path.startsWith("/tag/") || path === "/categories" || path === "/categories/";
 const isPortfolio = path === "/portfolio" || path === "/portfolio/";
 const isContact = path === "/contact" || path === "/contact/";
+const isArchive = path === "/archive" || path === "/archive/";
 ---
 
 <!doctype html>
@@ -63,6 +68,7 @@ const isContact = path === "/contact" || path === "/contact/";
     <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:creator" content="@oritromax" />
+    {jsonLd && <script is:inline type="application/ld+json" set:html={serializeJsonLd(jsonLd)} />}
   </head>
   <body style={cat ? `--cat: ${cat}` : undefined}>
     <header class="topbar">
@@ -76,6 +82,7 @@ const isContact = path === "/contact" || path === "/contact/";
         </a>
         <nav class="topnav" aria-label="Main">
           <a href="/" class:list={["topnav-link", { active: isHome }]}>Home</a>
+          <a href="/archive/" class:list={["topnav-link", "topnav-archive", { active: isArchive }]}>Archive</a>
           <a href="/portfolio" class:list={["topnav-link", { active: isPortfolio }]}>Portfolio</a>
           <a href="/contact" class:list={["topnav-link", { active: isContact }]}>Contact</a>
           <button id="theme-toggle" class="icon-btn icon-btn-sm" aria-label="Switch to dark theme">
@@ -96,6 +103,7 @@ const isContact = path === "/contact" || path === "/contact/";
           &copy; 2013 – {new Date().getFullYear()} Nidal Siddique Oritro. Built with Astro.
         </p>
         <div class="site-footer-links">
+          <a href="/archive/">Archive</a>
           <a href="/portfolio">Portfolio</a>
           <a href="/contact">Contact</a>
         </div>
@@ -203,6 +211,9 @@ const isContact = path === "/contact" || path === "/contact/";
         .brand-short { display: inline; }
         .topnav { gap: var(--sp-3); }
         .topnav-link { font-size: 10px; letter-spacing: .06em; }
+        /* a fourth link squeezes the brand name out of a phone-width bar;
+           the footer still carries the Archive link at this size */
+        .topnav-archive { display: none; }
       }
     </style>
 

@@ -1,12 +1,21 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { docOf, distFiles, requireDist } from '../helpers/dist';
-import { readPosts } from '../helpers/posts';
+import { readPosts, type RawPost } from '../helpers/posts';
+import { postHref } from '../../src/lib/category';
+import { relatedPosts, postNeighbors, chronological } from '../../src/lib/related';
 
 beforeAll(requireDist);
 
 const posts = readPosts();
 const files = new Set(distFiles());
 const pageOf = (slug: string) => docOf(`blog/${slug}/index.html`);
+
+/** gray-matter parses `date:` to a Date already — the shape src/lib/related reads. */
+const linkable = posts.map((p) => ({
+  ...p,
+  data: { ...p.data, date: new Date(p.data.date) } as RawPost['data'] & { date: Date },
+}));
+const linkableBySlug = new Map(linkable.map((p) => [p.slug, p]));
 
 /** A post with categories, tags, a description, code, and h2/h3 headings. */
 const RICH = '2026-05-18-fixing-the-elgato-wave-3-on-cachyos-kde';
@@ -69,9 +78,40 @@ describe('every post page', () => {
   it('links up to three related posts, never to itself', () => {
     const bad = docs.filter(([slug, doc]) => {
       const links = [...doc.querySelectorAll('.related-card')].map((a) => a.getAttribute('href'));
-      return links.length > 3 || links.includes(`/blog/${slug}`);
+      return links.length > 3 || links.includes(postHref(slug)) || links.includes(`/blog/${slug}`);
     });
     expect(bad.map(([slug]) => slug)).toEqual([]);
+  });
+
+  it('fills all three related slots, with three different posts', () => {
+    const want = Math.min(3, posts.length - 1);
+    const bad = docs.filter(([, doc]) => {
+      const links = [...doc.querySelectorAll('.related-card')].map((a) => a.getAttribute('href'));
+      return links.length !== want || new Set(links).size !== links.length;
+    });
+    expect(bad.map(([slug]) => slug)).toEqual([]);
+  });
+
+  /* the ranking itself is unit-tested; this checks the page is wired to it
+     rather than to "three newest" */
+  it('picks the related posts by relevance, in ranked order', () => {
+    const bad = docs.filter(([, doc, p]) => {
+      const links = [...doc.querySelectorAll('.related-card')].map((a) => a.getAttribute('href'));
+      const expected = relatedPosts(linkableBySlug.get(p.slug)!, linkable, 3).map((r) => postHref(r.slug));
+      return JSON.stringify(links) !== JSON.stringify(expected);
+    });
+    expect(bad.map(([slug]) => slug)).toEqual([]);
+  });
+
+  it('renders the summary box only for a frontmatter description, never a generated one', () => {
+    const bad = docs.filter(([, doc, p]) => {
+      const summary = doc.querySelector('.summary');
+      const real = typeof p.data.description === 'string' && p.data.description.trim() !== '';
+      if (!real) return summary !== null;
+      return !summary?.textContent?.includes(p.data.description.trim());
+    });
+    expect(bad.map(([slug]) => slug)).toEqual([]);
+    expect(docs.some(([, doc]) => doc.querySelector('.summary') === null)).toBe(true);
   });
 
   it('never renders an empty chip or tag', () => {
@@ -79,6 +119,68 @@ describe('every post page', () => {
       [...doc.querySelectorAll('.chip, .tag')].some((el) => !el.textContent!.trim())
     );
     expect(bad.map(([slug]) => slug)).toEqual([]);
+  });
+});
+
+describe('prev/next navigation', () => {
+  const navOf = (slug: string) => pageOf(slug).querySelector('nav[aria-label="Posts navigation"]');
+  const link = (slug: string, rel: 'prev' | 'next') =>
+    navOf(slug)?.querySelector(`a[rel="${rel}"]`) ?? null;
+  const built = linkable.filter((p) => files.has(`blog/${p.slug}/index.html`));
+  const ordered = chronological(built);
+
+  it('renders one labelled nav on every post', () => {
+    const bad = built.filter(
+      (p) => pageOf(p.slug).querySelectorAll('nav[aria-label="Posts navigation"]').length !== 1
+    );
+    expect(bad.map((p) => p.slug)).toEqual([]);
+  });
+
+  it('links the older and newer post by date, titled with the neighbour title', () => {
+    const bad: string[] = [];
+    for (const p of built) {
+      const { older, newer } = postNeighbors(p, built);
+      for (const [rel, neighbour] of [['prev', older], ['next', newer]] as const) {
+        const a = link(p.slug, rel);
+        if (!neighbour) {
+          if (a) bad.push(`${p.slug}: unexpected ${rel} link`);
+          continue;
+        }
+        if (a?.getAttribute('href') !== postHref(neighbour.slug)) {
+          bad.push(`${p.slug}: ${rel} → ${a?.getAttribute('href')}, expected ${postHref(neighbour.slug)}`);
+        } else if (a.querySelector('.post-nav-title')?.textContent !== String(neighbour.data.title)) {
+          bad.push(`${p.slug}: ${rel} link is not titled "${neighbour.data.title}"`);
+        }
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('gives the oldest post no prev link and the newest no next link', () => {
+    const oldest = ordered[0].slug;
+    const newest = ordered.at(-1)!.slug;
+    expect(link(oldest, 'prev')).toBeNull();
+    expect(link(oldest, 'next')).not.toBeNull();
+    expect(link(newest, 'next')).toBeNull();
+    expect(link(newest, 'prev')).not.toBeNull();
+  });
+
+  it('chains every post into one walk from oldest to newest', () => {
+    const walked: string[] = [];
+    let slug: string | undefined = ordered[0].slug;
+    while (slug && walked.length <= ordered.length) {
+      walked.push(slug);
+      const next: string | null | undefined = link(slug, 'next')?.getAttribute('href');
+      slug = next ? decodeURI(next).slice('/blog/'.length, -1) : undefined;
+    }
+    expect(walked).toEqual(ordered.map((p) => p.slug));
+  });
+
+  it('never links a post to itself', () => {
+    const bad = built.filter((p) =>
+      [...(navOf(p.slug)?.querySelectorAll('a') ?? [])].some((a) => a.getAttribute('href') === postHref(p.slug))
+    );
+    expect(bad.map((p) => p.slug)).toEqual([]);
   });
 });
 

@@ -15,6 +15,7 @@ const ROUTES: [name: string, path: string][] = [
   ['post', RICH_POST],
   ['category', '/category/homelab/'],
   ['categories', '/categories/'],
+  ['archive', '/archive/'],
   ['portfolio', '/portfolio/'],
   ['contact', '/contact/'],
   ['page-2', '/page/2/'],

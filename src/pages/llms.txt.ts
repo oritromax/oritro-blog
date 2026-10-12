@@ -23,7 +23,7 @@ export const GET: APIRoute = async ({ site }) => {
     '## Posts',
     '',
     ...posts.map((post) => {
-      const link = `- [${oneLine(post.data.title)}](${abs(`${postHref(post.slug)}/`)})`;
+      const link = `- [${oneLine(post.data.title)}](${abs(postHref(post.slug))})`;
       return post.data.description ? `${link}: ${oneLine(post.data.description)}` : link;
     }),
     '',

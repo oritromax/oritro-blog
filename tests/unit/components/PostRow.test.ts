@@ -33,7 +33,7 @@ describe('PostRow', () => {
   it('links the title to the post', async () => {
     const doc = await render(entry({ slug: 'my-homelab-part-1', title: 'Building a Homelab' }));
     const link = doc.querySelector('.post-row-title a')!;
-    expect(link.getAttribute('href')).toBe('/blog/my-homelab-part-1');
+    expect(link.getAttribute('href')).toBe('/blog/my-homelab-part-1/');
     expect(link.textContent).toBe('Building a Homelab');
   });
 
@@ -41,7 +41,7 @@ describe('PostRow', () => {
     const slug = 'বগা-লেক';
     const doc = await render(entry({ slug: slug.normalize('NFD') }));
     expect(doc.querySelector('.post-row-title a')!.getAttribute('href')).toBe(
-      `/blog/${slug.normalize('NFC')}`
+      `/blog/${slug.normalize('NFC')}/`
     );
   });
 
@@ -85,8 +85,8 @@ describe('PostRow', () => {
       const chips = [...doc.querySelectorAll('a.chip')];
       expect(chips.map((c) => c.textContent!.trim())).toEqual(['homelab', 'linux']);
       expect(chips.map((c) => c.getAttribute('href'))).toEqual([
-        '/category/homelab',
-        '/category/linux',
+        '/category/homelab/',
+        '/category/linux/',
       ]);
       expect(chips.map((c) => c.getAttribute('style'))).toEqual([
         '--cat: var(--c-homelab)',
@@ -98,22 +98,22 @@ describe('PostRow', () => {
       const doc = await render(entry({ categories: ['homelab '] }));
       const chip = doc.querySelector('a.chip')!;
       expect(chip.textContent!.trim()).toBe('homelab');
-      expect(chip.getAttribute('href')).toBe('/category/homelab');
+      expect(chip.getAttribute('href')).toBe('/category/homelab/');
     });
 
     it('renders one linked tag per tag', async () => {
       const doc = await render(entry({ tags: ['docker', 'podman'] }));
       const tags = [...doc.querySelectorAll('a.tag')];
       expect(tags.map((t) => t.textContent!.trim())).toEqual(['docker', 'podman']);
-      expect(tags.map((t) => t.getAttribute('href'))).toEqual(['/tag/docker', '/tag/podman']);
+      expect(tags.map((t) => t.getAttribute('href'))).toEqual(['/tag/docker/', '/tag/podman/']);
     });
 
     it('percent-encodes non-ASCII category and tag hrefs', async () => {
       const doc = await render(entry({ categories: ['ভ্রমন'], tags: ['বাংলা'] }));
       const chip = doc.querySelector('a.chip')!.getAttribute('href')!;
       const tag = doc.querySelector('a.tag')!.getAttribute('href')!;
-      expect(decodeURIComponent(chip.slice('/category/'.length))).toBe('ভ্রমন'.normalize('NFC'));
-      expect(decodeURIComponent(tag.slice('/tag/'.length))).toBe('বাংলা'.normalize('NFC'));
+      expect(decodeURIComponent(chip.slice('/category/'.length, -1))).toBe('ভ্রমন'.normalize('NFC'));
+      expect(decodeURIComponent(tag.slice('/tag/'.length, -1))).toBe('বাংলা'.normalize('NFC'));
     });
 
     it('separates chips from tags only when both are present', async () => {

@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import { postCatVar, postHref } from '../lib/category';
+import { chronological } from '../lib/related';
+
+// every post on one indexable page — tag and pagination listings are noindex,
+// so this is the crawl path to the older posts
+const posts = chronological(await getCollection('blog')).reverse();
+
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+  const year = post.data.date.getFullYear();
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
+const years = [...byYear.entries()];
+const firstYear = years.at(-1)?.[0];
+const lastYear = years[0]?.[0];
+---
+
+<Layout
+  title="Archive: every post by Nidal Siddique Oritro"
+  description={`All ${posts.length} posts on ioritro.com from ${firstYear} to ${lastYear}, newest first and grouped by year: software engineering, homelab, self-hosting, AI, and engineering management.`}
+>
+  <div class="listing-shell">
+    <nav class="listing-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span>Archive</span>
+    </nav>
+    <div class="section-head">
+      <h1 class="listing-title">Archive</h1>
+      <span class="eyebrow">{posts.length} posts</span>
+    </div>
+
+    {years.map(([year, yearPosts]) => (
+      <section class="archive-year" aria-labelledby={`year-${year}`}>
+        <div class="section-head bare">
+          <h2 id={`year-${year}`}>{year}</h2>
+          <span class="eyebrow">{yearPosts.length} post{yearPosts.length === 1 ? '' : 's'}</span>
+        </div>
+        <ul class="archive-list">
+          {yearPosts.map((post) => (
+            <li style={`--cat: ${postCatVar(post.data.categories)}`}>
+              <a href={postHref(post.slug)}>
+                <time class="mono-meta" datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
+                </time>
+                <span class="archive-title">{post.data.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .listing-shell {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: var(--sp-6) var(--sp-5);
+  }
+  .listing-crumbs {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--sp-4);
+  }
+  .listing-crumbs a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--t-fast);
+  }
+  .listing-crumbs a:hover { color: var(--accent); }
+  .listing-title { font-size: 26px; }
+
+  .archive-year { margin-top: var(--sp-6); }
+  .archive-year .section-head { margin-bottom: var(--sp-2); }
+  .archive-year h2 { font-size: 20px; }
+
+  .archive-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+  .archive-list li { border-bottom: 1px solid var(--border); }
+  .archive-list a {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: var(--sp-4);
+    align-items: baseline;
+    padding: 12px 2px;
+    text-decoration: none;
+    color: var(--text-body);
+    font-size: 14.5px;
+    line-height: 1.45;
+    transition: color var(--t-fast);
+  }
+  .archive-list a:hover { color: var(--cat); }
+  .archive-title { overflow-wrap: anywhere; }
+
+  @media (max-width: 560px) {
+    .archive-list a {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2px;
+    }
+  }
+</style>
