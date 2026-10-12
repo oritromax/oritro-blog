@@ -152,17 +152,18 @@ describe('categorySlug', () => {
 
 describe('categoryHref', () => {
   it('builds a /category/ URL from the canonical slug', () => {
-    expect(categoryHref('HomeLab ')).toBe('/category/homelab');
+    expect(categoryHref('HomeLab ')).toBe('/category/homelab/');
   });
 
   it('percent-encodes non-ASCII slugs', () => {
     const href = categoryHref('ভ্রমন');
     expect(href.startsWith('/category/%')).toBe(true);
-    expect(decodeURIComponent(href.slice('/category/'.length))).toBe('ভ্রমন'.normalize('NFC'));
+    expect(href.endsWith('/')).toBe(true);
+    expect(decodeURIComponent(href.slice('/category/'.length, -1))).toBe('ভ্রমন'.normalize('NFC'));
   });
 
   it('encodes characters that would otherwise break the path', () => {
-    expect(categoryHref('c/c++')).toBe('/category/c%2Fc%2B%2B');
+    expect(categoryHref('c/c++')).toBe('/category/c%2Fc%2B%2B/');
   });
 });
 
@@ -190,22 +191,38 @@ describe('tagSlug / tagHref', () => {
   });
 
   it('builds an encoded /tag/ URL', () => {
-    expect(tagHref('Docker')).toBe('/tag/docker');
-    expect(tagHref('Name server')).toBe('/tag/name-server');
-    expect(decodeURIComponent(tagHref('ভ্রমন').slice('/tag/'.length))).toBe(
+    expect(tagHref('Docker')).toBe('/tag/docker/');
+    expect(tagHref('Name server')).toBe('/tag/name-server/');
+    expect(decodeURIComponent(tagHref('ভ্রমন').slice('/tag/'.length, -1))).toBe(
       'ভ্রমন'.normalize('NFC')
     );
   });
 });
 
+/* canonical tags and the sitemap use the trailing-slash form; an href without
+   it sends crawlers to a non-canonical variant of every internal link */
+describe('trailing slashes', () => {
+  it('ends every generated href in exactly one slash', () => {
+    const hrefs = [
+      postHref('a-post'),
+      postHref('বগা-লেক'),
+      categoryHref('homelab '),
+      categoryHref('ভ্রমন'),
+      tagHref('Name server'),
+      tagHref('বাংলা'),
+    ];
+    for (const href of hrefs) expect(href).toMatch(/[^/]\/$/);
+  });
+});
+
 describe('postHref', () => {
   it('builds a /blog/ URL', () => {
-    expect(postHref('my-homelab-part-1')).toBe('/blog/my-homelab-part-1');
+    expect(postHref('my-homelab-part-1')).toBe('/blog/my-homelab-part-1/');
   });
 
   it('NFC-normalizes slugs that came from NFD filenames', () => {
     const slug = 'একটি-থ্রিজি-গল্প';
-    expect(postHref(slug.normalize('NFD'))).toBe(`/blog/${slug.normalize('NFC')}`);
+    expect(postHref(slug.normalize('NFD'))).toBe(`/blog/${slug.normalize('NFC')}/`);
   });
 
   it('produces byte-identical hrefs for NFD and NFC spellings', () => {

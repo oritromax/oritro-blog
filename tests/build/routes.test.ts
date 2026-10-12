@@ -10,7 +10,7 @@ const files = new Set(distFiles());
 const POSTS_PER_PAGE = 10;
 
 describe('static pages', () => {
-  it.each(['/', '/portfolio', '/contact', '/consultation', '/categories', '/blog'])(
+  it.each(['/', '/portfolio', '/contact', '/consultation', '/categories', '/archive', '/blog'])(
     'builds %s',
     (route) => {
       expect(resolveRoute(route, files), `${route} did not build`).not.toBeNull();
@@ -148,6 +148,10 @@ describe('assets and sitemap', () => {
     expect(paths).not.toContain('/blog/');
   });
 
+  it('lists the archive page', () => {
+    expect(sitemapLocs()).toContain('https://ioritro.com/archive/');
+  });
+
   it('still lists the category pages', () => {
     expect(sitemapLocs().some((loc) => new URL(loc).pathname.startsWith('/category/'))).toBe(true);
   });
@@ -212,6 +216,17 @@ describe('discovery files', () => {
         !resolveRoute(new URL(l).pathname, files)
     );
     expect(bad).toEqual([]);
+  });
+
+  /* postHref already ends in a slash — an endpoint appending its own would
+     emit `/blog/x//`, which still resolves on most hosts and so hides well */
+  it('never doubles a slash in an RSS or llms.txt link', () => {
+    const rss = [...readDist('rss.xml').matchAll(/<link>([^<]+)<\/link>/g)].map((m) => m[1]);
+    const llms = [...readDist('llms.txt').matchAll(/\]\(([^)]+)\)/g)].map((m) => m[1]);
+    expect(rss.length).toBeGreaterThan(posts.length);
+    expect(llms.length).toBeGreaterThan(0);
+    expect([...rss, ...llms].filter((l) => new URL(l).pathname.includes('//'))).toEqual([]);
+    expect(llms.filter((l) => !l.endsWith('/'))).toEqual([]);
   });
 
   it('does not emit the feed or llms.txt as an HTML page', () => {

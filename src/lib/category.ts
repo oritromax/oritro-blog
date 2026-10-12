@@ -57,14 +57,18 @@ export function hasCategory(categories: string[] | undefined, name: string): boo
  * lowercase (routes are built lowercased) and merge trailing-space variants.
  * Tags lowercase too and hyphenate whitespace runs, so "AI"/"ai" and
  * "Name server"/"name-server" share one page instead of splitting it.
+ *
+ * Every href ends in a slash: that is the form the canonical tags and the
+ * sitemap use, so internal links point at the canonical URL directly instead
+ * of at a variant the host has to redirect.
  */
 const norm = (s: string) => s.trim().normalize('NFC');
 
 export const categorySlug = (c: string) => norm(c).toLowerCase();
-export const categoryHref = (c: string) => `/category/${encodeURIComponent(categorySlug(c))}`;
+export const categoryHref = (c: string) => `/category/${encodeURIComponent(categorySlug(c))}/`;
 
 export const tagSlug = (t: string) => norm(t).toLowerCase().replace(/\s+/g, '-');
 
 /** Astro writes output dirs NFC-normalized, but slugs from NFD filenames stay NFD. */
-export const postHref = (slug: string) => `/blog/${slug.normalize('NFC')}`;
-export const tagHref = (t: string) => `/tag/${encodeURIComponent(tagSlug(t))}`;
+export const postHref = (slug: string) => `/blog/${slug.normalize('NFC')}/`;
+export const tagHref = (t: string) => `/tag/${encodeURIComponent(tagSlug(t))}/`;

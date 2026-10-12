@@ -31,6 +31,41 @@ describe('internal link integrity', () => {
   });
 });
 
+/* Canonical tags and the sitemap use the trailing-slash URL. Template links
+   must point at that exact form; post prose is hand-written content and is
+   checked for resolution only. */
+describe('canonical link form', () => {
+  it('links to posts, categories, and tags with a trailing slash', () => {
+    const bad: string[] = [];
+    for (const { file, route } of pages) {
+      for (const a of docOf(file).querySelectorAll('a[href]')) {
+        if (a.closest('.prose')) continue;
+        const href = a.getAttribute('href')!.split('#')[0].split('?')[0];
+        if (/^\/(blog|category|tag)\/./.test(href) && !/[^/]\/$/.test(href)) {
+          bad.push(`${route}: ${href}`);
+        }
+      }
+    }
+    expect([...new Set(bad)]).toEqual([]);
+  });
+
+  it('never links a post anywhere but its canonical URL', () => {
+    const bad: string[] = [];
+    for (const { file, route } of pages) {
+      for (const a of docOf(file).querySelectorAll('a[href^="/blog/"]')) {
+        if (a.closest('.prose')) continue;
+        const target = resolveRoute(a.getAttribute('href')!, files);
+        if (!target) continue; // the 404 net above reports these
+        const canonical = docOf(target).querySelector('link[rel="canonical"]')!.getAttribute('href')!;
+        if (decodeURI(new URL(canonical).pathname) !== decodeURI(a.getAttribute('href')!)) {
+          bad.push(`${route}: ${a.getAttribute('href')} ≠ ${canonical}`);
+        }
+      }
+    }
+    expect([...new Set(bad)]).toEqual([]);
+  });
+});
+
 describe('link hygiene', () => {
   it('leaves no href empty or set to a bare "#"', () => {
     const bad: string[] = [];

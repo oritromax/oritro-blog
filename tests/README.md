@@ -29,7 +29,13 @@ already have, set `PW_SKIP_BUILD=1`.
 **`tests/unit`** — no I/O beyond reading files off disk.
 
 - `category.test.ts` — the slug/href/colour rules, including the trailing-space,
-  case, and NFC/NFD hazards that have caused 404s before.
+  case, and NFC/NFD hazards that have caused 404s before. Every href ends in a
+  slash, matching the canonical tags and the sitemap.
+- `related.test.ts` — the "Keep reading" ranking (shared tags, then a shared
+  category, then nearest date) and the chronological prev/next neighbours.
+- `description.test.ts` — the body-derived meta description: markdown/HTML
+  stripping, skipped code fences, the word-boundary cut, and the fallbacks.
+- `jsonld.test.ts` — the `BlogPosting` object and the `<`-escaping serializer.
 - `remark-aside.test.ts` / `rehype-code.test.ts` — the two custom markdown
   plugins, driven through a real unified pipeline in the same order as
   `astro.config.mjs`.
@@ -47,13 +53,20 @@ already have, set `PW_SKIP_BUILD=1`.
 **`tests/build`** — runs against `dist/`.
 
 - `routes.test.ts` — one page per post, per category, per tag; no orphans;
-  NFC-normalized directories; sitemap coverage and exclusions; `robots.txt`,
-  `rss.xml`, `llms.txt`, and the IndexNow key file.
+  NFC-normalized directories; sitemap coverage and exclusions (`/archive/` is
+  in, tags and pagination are out); `robots.txt`, `rss.xml`, `llms.txt` (no
+  doubled slashes), and the IndexNow key file.
 - `links.test.ts` — crawls every built page and resolves every internal
-  `href`/`src` the way a static host would. This is the 404 net.
-- `post-page.test.ts` — hero, TOC, code frames, asides, related posts.
+  `href`/`src` the way a static host would. This is the 404 net. Template links
+  to posts, categories, and tags must also use the canonical trailing-slash URL.
+- `post-page.test.ts` — hero, TOC, code frames, asides, related posts picked by
+  relevance, the prev/next chain from oldest post to newest, and the Summary box
+  appearing only for a frontmatter description.
 - `seo.test.ts` — title, description, canonical, OG/Twitter tags, one `h1`,
-  listing page sizes, the noindex policy, and the `/blog/` redirect stub.
+  listing page sizes, the noindex policy, and the `/blog/` redirect stub; the
+  description fallback for posts without one; exactly one `BlogPosting` JSON-LD
+  block per post (and none elsewhere) whose URL is the canonical; the `/archive/`
+  page — indexable, every post once, newest first, one `h2` per year.
 
 **`tests/e2e`** — Playwright, `desktop` (Chrome) and `mobile` (Pixel 5).
 
@@ -62,7 +75,7 @@ already have, set `PW_SKIP_BUILD=1`.
   share, taxonomy navigation, Bengali slugs.
 - `theme.spec.ts` — toggle, persistence, OS preference, contrast in both themes.
 - `a11y.spec.ts` — landmarks, keyboard reachability, accessible names.
-- `visual.spec.ts` — screenshots of every key route in both themes, attached to
+- `visual.spec.ts` — screenshots of every key route (archive included) in both themes, attached to
   the HTML report (AGENTS.md rule 1), plus layout-overflow assertions.
 
 Third-party scripts (Google Analytics, the stats endpoint, Giscus) are blocked

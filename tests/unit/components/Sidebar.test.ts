@@ -61,9 +61,9 @@ describe('Sidebar', () => {
         post(['homelab']),
       ]);
       expect(rows(doc)).toEqual([
-        { name: 'ai', count: 2, href: '/category/ai', color: '--cat: var(--c-ai)' },
-        { name: 'llm', count: 1, href: '/category/llm', color: '--cat: var(--c-llm)' },
-        { name: 'homelab', count: 1, href: '/category/homelab', color: '--cat: var(--c-homelab)' },
+        { name: 'ai', count: 2, href: '/category/ai/', color: '--cat: var(--c-ai)' },
+        { name: 'llm', count: 1, href: '/category/llm/', color: '--cat: var(--c-llm)' },
+        { name: 'homelab', count: 1, href: '/category/homelab/', color: '--cat: var(--c-homelab)' },
       ]);
     });
 
@@ -89,7 +89,7 @@ describe('Sidebar', () => {
     it('counts case- and whitespace-variant categories as one', async () => {
       const doc = await render([post(['homelab']), post(['HomeLab ']), post(['  HOMELAB'])]);
       expect(rows(doc)).toEqual([
-        { name: 'homelab', count: 3, href: '/category/homelab', color: '--cat: var(--c-homelab)' },
+        { name: 'homelab', count: 3, href: '/category/homelab/', color: '--cat: var(--c-homelab)' },
       ]);
     });
 

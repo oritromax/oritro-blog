@@ -17,7 +17,7 @@ export async function GET(context) {
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,
-      link: `${postHref(post.slug)}/`,
+      link: postHref(post.slug),
     })),
   });
 }
