@@ -6,7 +6,14 @@ const experience = [
     period: 'Jan 2025 — Now',
     role: 'Senior Engineering Manager',
     company: 'Cheq, A 365 Retail Market platform',
-    description: 'Leading some of the best software minds to build highly scalable and extremely resilient software solutions serving millions of customers.',
+    description: 'Senior Engineering Manager of the Core team — leading the engineers, the releases, the internal AI and the platform documentation.',
+    highlights: [
+      { label: 'Leadership', text: 'Lead the Core engineering team — a sizeable group of engineers — delivering platform features that serve millions of customers across multiple verticals. Beyond managing and guiding the team, own the release process end to end and work directly with product managers and designers to get the right outcome shipped.' },
+      { label: 'AI engineering', text: 'Built the company\'s internal AI platform — first a fine-tuned open-weight model as a front-line Q&A system, then an agentic system grounded on a code-verified product map with live tool access. Introduced agentic development practices to the team. Authored, from the ground up, the behavioural specification of the entire platform — 30 product areas, ~200 documents — now the source of truth for engineers and the grounding corpus for the AI. Initiated and ran an agent-driven documentation-drift audit across the whole engineering department.' },
+      { label: 'Platform architecture', text: 'Designed a scalable audit-log platform for investigating system events — redaction, PII handling, dead-letter queue, domain-specific emitters. Led development and delivery of two of the largest feature releases of recent years. Drove several engineering-improvement initiatives to cut technical debt and raise reliability.' },
+      { label: 'Reporting and data', text: 'Led the overhaul of analytical reporting — the single largest source of support load — and the data-warehouse programme that replaced the legacy reporting pipeline. Currently leading the build of an in-house reporting engine to reduce external dependency.' },
+      { label: 'Process', text: 'Redesigned the engineering workflow for the AI era on proven agile practice, and wrote the team\'s guidelines for investigations, tech support and retrospectives.' },
+    ],
     current: true
   },
   {
@@ -14,36 +21,58 @@ const experience = [
     role: 'Lead Software Engineer',
     company: 'Montex Marketing LLC',
     description: 'Led a team of engineers to build and maintain CRM and eCommerce logistics solutions for a wide range of eCommerce verticals.',
+    highlights: [
+      { label: 'Affiliate management', text: 'Built an affiliate management system handling millions of impressions and conversions every day — tracking, attribution and payouts in one platform.' },
+      { label: 'Quick sale', text: 'Built a consumer-facing, multi-tenant quick-sale system that lets anyone list a product and start selling in minutes.' },
+      { label: 'Payments', text: 'Built a Shopify integration that reconciles PayPal payments against orders automatically, closing the gap between storefront and ledger.' },
+    ],
   },
   {
     period: 'Feb 2020 — Sep 2020',
     role: 'Engineering Solution Consultant',
     company: 'ResponseCRM',
-    description: "Consulted and actively participated in the development of 3D Secure Payment Gateway and PCI Compliance for ResponseCRM's 200K+ customers."
+    description: "Consulted and actively participated in the development of 3D Secure Payment Gateway and PCI Compliance for ResponseCRM's 200K+ customers.",
+    highlights: [
+      { label: 'Payments', text: "Improved the payment pipeline for ResponseCRM's payment processor — the path that carries every transaction on the platform." },
+      { label: 'Integrations', text: 'Built custom ResponseCRM integrations for third-party consumers, and provided hands-on engineering support to customers wiring ResponseCRM into their own products.' },
+    ],
   },
   {
     period: 'Mar 2019 — Feb 2020',
     role: 'Senior Software Engineer',
     company: 'MonsterAds',
-    description: 'Developed a custom CRM for affiliate marketing and lead generation with advanced reporting and analytics features.'
+    description: 'Developed a custom CRM for affiliate marketing and lead generation with advanced reporting and analytics features.',
+    highlights: [
+      { label: 'Affiliate CRM', text: 'Developed a custom CRM implementation on top of HubSpot to manage the affiliate network end to end.' },
+    ],
   },
   {
     period: 'Dec 2015 — Dec 2018',
     role: 'Head of Development Operation',
     company: 'United States Transit Funding, Inc',
-    description: 'Led the team to develop a neural network based solution for fleet optimization, cost management, market analysis and route optimization.'
+    description: 'Led the team to develop a neural network based solution for fleet optimization, cost management, market analysis and route optimization.',
+    highlights: [
+      { label: 'Fleet optimisation', text: 'Led the build of a neural-network-based solution for fleet optimisation, cost analysis and route optimisation — turning the fleet data platform into a decision tool.' },
+    ],
   },
   {
     period: 'Jan 2014 — Dec 2015',
     role: 'Senior Software Engineer',
     company: 'United States Transit Funding, Inc',
-    description: 'Developed fleet data integration and reporting systems for large scale fleet management.'
+    description: 'Developed fleet data integration and reporting systems for large scale fleet management.',
+    highlights: [
+      { label: 'Data pipeline', text: 'Developed the data integration pipeline feeding the fleet management reporting system, built on Apache Spark.' },
+      { label: 'Ticketing', text: 'Built a complete ticket management system covering both single-use fares and corporate travel management.' },
+    ],
   },
   {
     period: 'Feb 2013 — Jan 2014',
     role: 'Junior Software Engineer',
     company: 'United States Transit Funding, Inc',
-    description: 'Helped develop a large scale fleet tracking system with fuel management and route optimization.'
+    description: 'Helped develop a large scale fleet tracking system with fuel management and route optimization.',
+    highlights: [
+      { label: 'Fleet management', text: 'Built a fleet management system for a large-scale bus operator in the United States — tracking, fuel management and route optimisation.' },
+    ],
   }
 ];
 
@@ -233,6 +262,13 @@ const now = [
             </h3>
             <p class="role-org">{job.company}</p>
             <p class="role-desc">{job.description}</p>
+            {job.highlights && (
+              <ul class="role-highlights">
+                {job.highlights.map((h) => (
+                  <li><strong>{h.label}.</strong> {h.text}</li>
+                ))}
+              </ul>
+            )}
           </div>
         ))}
       </div>
@@ -486,6 +522,25 @@ const now = [
     margin: 3px 0 0;
     font-size: 14px;
     color: var(--accent);
+  }
+  .role-highlights {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    max-width: 68ch;
+  }
+  .role-highlights li {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text-body);
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+  }
+  .role-highlights strong {
+    color: var(--text);
+    font-weight: 600;
   }
   .role-desc {
     margin: 8px 0 0;
