@@ -122,6 +122,24 @@ npm run test:e2e
 
 See [tests/README.md](tests/README.md) for what each layer covers.
 
+## SEO / discovery
+
+- **Index policy** — tag pages (`/tag/…`) and pagination pages (`/page/N`) carry `noindex, follow`: kept out of search indexes, but crawlers still follow them through to the posts. Posts, the homepage, categories, contact, and consultation stay indexable. Page 1 of the listing is the homepage; `/page/1/` is not built.
+- **Tag URLs** are lowercase with whitespace hyphenated, so `AI`/`ai` or `Name server`/`name-server` share one page.
+- **Sitemap** — `/sitemap-index.xml` lists indexable pages only (no `/tag/`, `/page/`, or the `/blog/` redirect stub). Posts get a `lastmod` from their frontmatter `date`.
+- **`robots.txt`** — allows everything, names the AI crawlers explicitly (GPTBot, OAI-SearchBot, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended), and points at the sitemap.
+- **RSS** — `/rss.xml`, every post, newest first.
+- **`llms.txt`** — `/llms.txt`, a markdown summary of the site with the 15 most recent posts and the main pages.
+- **IndexNow** — tells Bing & co. about new URLs. Not part of CI; run it by hand once a deploy is live:
+
+  ```bash
+  npm run build && npm run indexnow          # submit URLs in dist/ that the live sitemap lacks
+  npm run indexnow -- --dry-run              # print what would be sent, POST nothing
+  npm run indexnow -- https://ioritro.com/blog/<slug>/   # submit specific URLs
+  ```
+
+  The diff is against the live `sitemap-0.xml`, so once the deploy has replaced that file there is nothing left to diff — pass the URLs explicitly in that case. The key lives in `public/567ae7b1a53a724d5f793cf4bdac5c34.txt`.
+
 ## License
 
 © 2013-2025 Nidal Siddique Oritro. All rights reserved.

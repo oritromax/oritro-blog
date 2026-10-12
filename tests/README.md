@@ -39,18 +39,21 @@ already have, set `PW_SKIP_BUILD=1`.
   (`src/lib/content-schema.ts`, the one `src/content/config.ts` uses).
 - `readme-sync.test.ts` — enforces AGENTS.md rule 3: every post listed in the
   README, under the right year, newest first.
+- `sitemap.test.ts` — the sitemap filter and the frontmatter-date `lastmod`.
+- `indexnow.test.ts` — the sitemap diff behind `npm run indexnow`.
 - `components/` — `Pagination`, `PostRow`, and `Sidebar` rendered through
   Astro's Container API and asserted against a real DOM.
 
 **`tests/build`** — runs against `dist/`.
 
 - `routes.test.ts` — one page per post, per category, per tag; no orphans;
-  NFC-normalized directories; sitemap coverage.
+  NFC-normalized directories; sitemap coverage and exclusions; `robots.txt`,
+  `rss.xml`, `llms.txt`, and the IndexNow key file.
 - `links.test.ts` — crawls every built page and resolves every internal
   `href`/`src` the way a static host would. This is the 404 net.
 - `post-page.test.ts` — hero, TOC, code frames, asides, related posts.
 - `seo.test.ts` — title, description, canonical, OG/Twitter tags, one `h1`,
-  listing page sizes, and the `/blog/` redirect stub.
+  listing page sizes, the noindex policy, and the `/blog/` redirect stub.
 
 **`tests/e2e`** — Playwright, `desktop` (Chrome) and `mobile` (Pixel 5).
 

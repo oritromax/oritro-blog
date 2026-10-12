@@ -16,9 +16,11 @@
     "test:all": "npm run test:unit && npm run test:build && PW_SKIP_BUILD=1 playwright test",
     "test:coverage": "vitest run tests/unit --coverage",
     "typecheck": "astro check && tsc -p tests/tsconfig.json --noEmit",
-    "report": "playwright show-report"
+    "report": "playwright show-report",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.5.1",
     "@fontsource/fraunces": "^5.2.9",
     "@fontsource/jetbrains-mono": "^5.2.8",

@@ -14,9 +14,10 @@ export async function getStaticPaths() {
   const postsPerPage = 10;
   const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
-  return Array.from({ length: totalPages }).map((_, i) => {
-    const page = i + 1;
-    const start = i * postsPerPage;
+  // page 1 is the homepage — building /page/1/ too would duplicate it
+  return Array.from({ length: Math.max(0, totalPages - 1) }).map((_, i) => {
+    const page = i + 2;
+    const start = (page - 1) * postsPerPage;
     const end = start + postsPerPage;
 
     return {
@@ -34,7 +35,7 @@ export async function getStaticPaths() {
 const { posts, currentPage, totalPages, allPosts } = Astro.props;
 ---
 
-<Layout title={`Posts - Page ${currentPage} - Nidal Siddique Oritro`}>
+<Layout title={`Posts - Page ${currentPage} - Nidal Siddique Oritro`} noindex>
   <div class="home-shell">
     <Sidebar posts={allPosts} />
     <div class="home-main">
