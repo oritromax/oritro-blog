@@ -18,6 +18,7 @@ This is my personal blog where I write about software engineering, web developme
 ## Blog Posts
 
 ### 2026
+- **PHP2Shell - The PHP-Apocalypse in the language itself** - October 22, 2026
 - **Yolo26 Onnx For Frigate - Tested and Implemented** - October 12, 2026
 - **The Saga of Brother DCP-T530DW Printer on Linux** - September 24, 2026
 - **Time to audit your hermes agent** - September 22, 2026
