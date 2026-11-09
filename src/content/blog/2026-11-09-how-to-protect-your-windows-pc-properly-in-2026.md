@@ -9,6 +9,7 @@ tags:
     - guide
 categories:
     - lifelesson
+featured_image: https://share.ioritro.com/knyA3qKrjQ/ZmtUrkZH6mpKa6apcjmyN_yNmWlA2R.png
 description: Windows still gets infected in 2026 because the protection is there and switched off. The basics anyone can do in 15 minutes, and the Defender settings that actually stop malware.
 ---
 
