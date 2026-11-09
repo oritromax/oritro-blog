@@ -52,9 +52,9 @@ If it says "Microsoft Defender Antivirus" is on, you're good. If it shows anothe
 
 Ads are not just annoying. Fake "Download" buttons, fake "your PC is infected" pop-ups and malicious ads are one of the most common ways people end up running something they shouldn't. A good blocker removes most of them before you ever see them.
 
-- **Firefox:** uBlock Origin.
-- **Chrome and Edge:** uBlock Origin Lite. The full uBlock Origin doesn't work on Chrome anymore — Google switched it off in 2025 and removed it from the store in August 2026, and Edge is doing the same by the end of 2026. Lite is the version that still works there.
-- **Optional extra layer:** Malwarebytes Browser Guard, or Bitdefender Web Sage ( it used to be called TrafficLight ). These focus on scam and phishing sites rather than ads.
+- **Firefox:** [uBlock Origin](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/).
+- **Chrome and Edge:** uBlock Origin Lite ( [Chrome Web Store](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh), [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/ublock-origin-lite/cimighlppcgcoapaliogpjjdehbnofhn) ). The full uBlock Origin doesn't work on Chrome anymore — Google switched it off in 2025 and removed it from the store in August 2026, and Edge is doing the same by the end of 2026. Lite is the version that still works there.
+- **Optional extra layer:** [Malwarebytes Browser Guard](https://www.malwarebytes.com/browserguard), or [Bitdefender Web Sage](https://www.bitdefender.com/en-us/consumer/web-sage) ( it used to be called TrafficLight ). These focus on scam and phishing sites rather than ads.
 
 Only install extensions from the official store ( Chrome Web Store, Edge Add-ons, Firefox Add-ons ). Fake copies of popular ad blockers exist, and they are malware.
 
@@ -158,7 +158,7 @@ When Defender sees a file it isn't sure about, it asks Microsoft's cloud. By def
 Set-MpPreference -CloudBlockLevel High
 ```
 
-There are two stricter levels above this ( HighPlus and ZeroTolerance ). They catch more but also block more legit, less-known software. High is the sweet spot for home use.
+There are two stricter levels above this ( HighPlus and ZeroTolerance ). They catch more but also block more legit, less-known software. High is the sweet spot for home use. ( [Microsoft: cloud protection levels](https://learn.microsoft.com/en-us/defender-endpoint/cloud-protection-configure) )
 
 ### Step 2: Turn on the three most useful "Attack Surface Reduction" rules
 
@@ -177,6 +177,8 @@ Add-MpPreference -AttackSurfaceReductionRules_Ids 01443614-cd74-433a-b99e-2ecdc0
 Add-MpPreference -AttackSurfaceReductionRules_Ids 5beb7efe-fd9a-4556-801d-275e5ffc04cc -AttackSurfaceReductionRules_Actions Enabled
 Add-MpPreference -AttackSurfaceReductionRules_Ids d3e037e1-3eb8-44c8-a917-57927947596d -AttackSurfaceReductionRules_Actions Enabled
 ```
+
+Microsoft's [ASR rules reference](https://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-reference) has the full list of rules and what each one does.
 
 Use `Add-MpPreference` exactly like above, not `Set-MpPreference`. `Set` **replaces** the whole list every time, so only the last rule would end up on.
 
@@ -252,3 +254,18 @@ You can't make a computer bulletproof. What you can do is stack enough layers th
 Don't download things when you don't know where they came from. Do the basics today. Do the advanced part when you have 10 minutes. And stop saving passwords in your browser.
 
 And if you're still pissed off about how often Windows gets hacked or infected, there is always Linux.
+
+## Sources
+
+Every PowerShell command in this post is from Microsoft's own documentation:
+
+- [Set-MpPreference](https://learn.microsoft.com/en-us/powershell/module/defender/set-mppreference) — the command behind most of the advanced part
+- [Configure cloud protection](https://learn.microsoft.com/en-us/defender-endpoint/cloud-protection-configure) — cloud block levels
+- [Attack surface reduction rules reference](https://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-reference) — what each ASR rule blocks
+- [Configure ASR rules and exclusions](https://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-configure) — why `Add` instead of `Set`, and how exclusions work
+- [Turn on network protection](https://learn.microsoft.com/en-us/defender-endpoint/enable-network-protection)
+- [Configure controlled folder access](https://learn.microsoft.com/en-us/defender-endpoint/controlled-folder-access-configure)
+
+:::aside{label="Disclaimer"}
+This post is up to date as of the day it was written ( November 9, 2026 ). Things might have changed if you are reading this long in the future — settings move, extensions get renamed, commands change. Please verify before applying.
+:::
