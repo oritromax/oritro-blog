@@ -18,6 +18,7 @@ This is my personal blog where I write about software engineering, web developme
 ## Blog Posts
 
 ### 2026
+- **Talking AI with Political Science Students at Varendra University** - November 28, 2026
 - **I built an AI harness that i will never release** - November 26, 2026
 - **The Rusted Future** - November 19, 2026
 - **How to Protect Your Windows PC - Properly In 2026** - November 9, 2026
